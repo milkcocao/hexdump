@@ -6,4 +6,12 @@ on:
   workflow_dispatch:
   schedule: [cron: "40 1 * * *"]
 
-permissi
+permissions:
+  contents: read
+
+env:
+  RUSTFLAGS: -Dwarnings
+
+jobs:
+  pre_ci:
+    uses: dtolnay/.gi
