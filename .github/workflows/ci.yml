@@ -22,4 +22,7 @@ jobs:
     if: needs.pre_ci.outputs.continue
     runs-on: ubuntu-latest
     strategy:
-     
+      fail-fast: false
+      matrix:
+        rust: [nightly, beta, stable, 1.60.0]
+    timeout-min
