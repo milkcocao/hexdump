@@ -25,4 +25,8 @@ jobs:
       fail-fast: false
       matrix:
         rust: [nightly, beta, stable, 1.60.0]
-    timeout-min
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@master
+  
