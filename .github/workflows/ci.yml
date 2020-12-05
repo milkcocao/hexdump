@@ -32,4 +32,6 @@ jobs:
         with:
           toolchain: ${{matrix.rust}}
           components: rust-src
-      - name: Enable typ
+      - name: Enable type layout randomization
+        run: echo RUSTFLAGS=${RUSTFLAGS}\ -Zrandomize-layout >> $GITHUB_ENV
+    
