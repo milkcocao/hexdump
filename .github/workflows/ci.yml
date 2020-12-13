@@ -41,4 +41,7 @@ jobs:
 
   build:
     name: Rust ${{matrix.rust}}
- 
+    needs: pre_ci
+    if: needs.pre_ci.outputs.continue
+    runs-on: ubuntu-latest
+   
