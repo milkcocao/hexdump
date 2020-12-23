@@ -55,4 +55,9 @@ jobs:
         with:
           toolchain: ${{matrix.rust}}
           components: rust-src
-      - run: 
+      - run: cargo check
+      - run: cargo check --no-default-features
+
+  windows:
+    name: Windows
+  
