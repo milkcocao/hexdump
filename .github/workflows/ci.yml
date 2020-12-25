@@ -60,4 +60,8 @@ jobs:
 
   windows:
     name: Windows
-  
+    needs: pre_ci
+    if: needs.pre_ci.outputs.continue
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps
