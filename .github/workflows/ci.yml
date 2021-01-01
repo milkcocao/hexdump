@@ -72,4 +72,8 @@ jobs:
       - run: cargo check --features backtrace
 
   clippy:
-    name: 
+    name: Clippy
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+    timeout-minutes: 45
+  
