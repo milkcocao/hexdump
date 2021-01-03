@@ -86,4 +86,8 @@ jobs:
   miri:
     name: Miri
     needs: pre_ci
-    if: needs.pre_ci.outputs.c
+    if: needs.pre_ci.outputs.continue
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/c
