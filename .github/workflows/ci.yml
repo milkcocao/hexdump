@@ -99,3 +99,7 @@ jobs:
   outdated:
     name: Outdated
     runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+    timeout-minutes: 45
+    steps:
+      - uses: actions
