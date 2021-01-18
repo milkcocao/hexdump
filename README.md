@@ -43,3 +43,91 @@ anyhow = "1.0"
   things went wrong. A low-level error like "No such file or directory" can be
   annoying to debug without more context about what higher level step the
   application was in the middle of.
+
+  ```rust
+  use anyhow::{Context, Result};
+
+  fn main() -> Result<()> {
+      ...
+      it.detach().context("Failed to detach the important thing")?;
+
+      let content = std::fs::read(path)
+          .with_context(|| format!("Failed to read instrs from {}", path))?;
+      ...
+  }
+  ```
+
+  ```console
+  Error: Failed to read instrs from ./path/to/instrs.json
+
+  Caused by:
+      No such file or directory (os error 2)
+  ```
+
+- Downcasting is supported and can be by value, by shared reference, or by
+  mutable reference as needed.
+
+  ```rust
+  // If the error was caused by redaction, then return a
+  // tombstone instead of the content.
+  match root_cause.downcast_ref::<DataStoreError>() {
+      Some(DataStoreError::Censored(_)) => Ok(Poll::Ready(REDACTED_CONTENT)),
+      None => Err(error),
+  }
+  ```
+
+- If using the nightly channel, or stable with `features = ["backtrace"]`, a
+  backtrace is captured and printed with the error if the underlying error type
+  does not already provide its own. In order to see backtraces, they must be
+  enabled through the environment variables described in [`std::backtrace`]:
+
+  - If you want panics and errors to both have backtraces, set
+    `RUST_BACKTRACE=1`;
+  - If you want only errors to have backtraces, set `RUST_LIB_BACKTRACE=1`;
+  - If you want only panics to have backtraces, set `RUST_BACKTRACE=1` and
+    `RUST_LIB_BACKTRACE=0`.
+
+  The tracking issue for this feature is [rust-lang/rust#53487].
+
+  [`std::backtrace`]: https://doc.rust-lang.org/std/backtrace/index.html#environment-variables
+  [rust-lang/rust#53487]: https://github.com/rust-lang/rust/issues/53487
+
+- Anyhow works with any error type that has an impl of `std::error::Error`,
+  including ones defined in your crate. We do not bundle a `derive(Error)` macro
+  but you can write the impls yourself or use a standalone macro like
+  [thiserror].
+
+  ```rust
+  use thiserror::Error;
+
+  #[derive(Error, Debug)]
+  pub enum FormatError {
+      #[error("Invalid header (expected {expected:?}, got {found:?})")]
+      InvalidHeader {
+          expected: String,
+          found: String,
+      },
+      #[error("Missing attribute: {0}")]
+      MissingAttribute(String),
+  }
+  ```
+
+- One-off error messages can be constructed using the `anyhow!` macro, which
+  supports string interpolation and produces an `anyhow::Error`.
+
+  ```rust
+  return Err(anyhow!("Missing attribute: {}", missing));
+  ```
+
+  A `bail!` macro is provided as a shorthand for the same early return.
+
+  ```rust
+  bail!("Missing attribute: {}", missing);
+  ```
+
+<br>
+
+## No-std support
+
+In no_std mode, the same API is almost all available and works the same way. To
+depend on Anyhow in no_std mode, disable our default enabled "std" feature in
