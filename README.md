@@ -131,3 +131,53 @@ anyhow = "1.0"
 
 In no_std mode, the same API is almost all available and works the same way. To
 depend on Anyhow in no_std mode, disable our default enabled "std" feature in
+Cargo.toml. A global allocator is required.
+
+```toml
+[dependencies]
+anyhow = { version = "1.0", default-features = false }
+```
+
+Since the `?`-based error conversions would normally rely on the
+`std::error::Error` trait which is only available through std, no_std mode will
+require an explicit `.map_err(Error::msg)` when working with a non-Anyhow error
+type inside a function that returns Anyhow's error type.
+
+<br>
+
+## Comparison to failure
+
+The `anyhow::Error` type works something like `failure::Error`, but unlike
+failure ours is built around the standard library's `std::error::Error` trait
+rather than a separate trait `failure::Fail`. The standard library has adopted
+the necessary improvements for this to be possible as part of [RFC 2504].
+
+[RFC 2504]: https://github.com/rust-lang/rfcs/blob/master/text/2504-fix-error.md
+
+<br>
+
+## Comparison to thiserror
+
+Use Anyhow if you don't care what error type your functions return, you just
+want it to be easy. This is common in application code. Use [thiserror] if you
+are a library that wants to design your own dedicated error type(s) so that on
+failures the caller gets exactly the information that you choose.
+
+[thiserror]: https://github.com/dtolnay/thiserror
+
+<br>
+
+#### License
+
+<sup>
+Licensed under either of <a href="LICENSE-APACHE">Apache License, Version
+2.0</a> or <a href="LICENSE-MIT">MIT license</a> at your option.
+</sup>
+
+<br>
+
+<sub>
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in this crate by you, as defined in the Apache-2.0 license, shall
+be dual licensed as above, without any additional terms or conditions.
+</sub>
