@@ -84,3 +84,97 @@ mod capture {
     enum Inner {
         Unsupported,
         Disabled,
+        Captured(LazilyResolvedCapture),
+    }
+
+    struct Capture {
+        actual_start: usize,
+        resolved: bool,
+        frames: Vec<BacktraceFrame>,
+    }
+
+    struct BacktraceFrame {
+        frame: Frame,
+        symbols: Vec<BacktraceSymbol>,
+    }
+
+    struct BacktraceSymbol {
+        name: Option<Vec<u8>>,
+        filename: Option<BytesOrWide>,
+        lineno: Option<u32>,
+        colno: Option<u32>,
+    }
+
+    enum BytesOrWide {
+        Bytes(Vec<u8>),
+        Wide(Vec<u16>),
+    }
+
+    impl Debug for Backtrace {
+        fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+            let capture = match &self.inner {
+                Inner::Unsupported => return fmt.write_str("<unsupported>"),
+                Inner::Disabled => return fmt.write_str("<disabled>"),
+                Inner::Captured(c) => c.force(),
+            };
+
+            let frames = &capture.frames[capture.actual_start..];
+
+            write!(fmt, "Backtrace ")?;
+
+            let mut dbg = fmt.debug_list();
+
+            for frame in frames {
+                if frame.frame.ip().is_null() {
+                    continue;
+                }
+
+                dbg.entries(&frame.symbols);
+            }
+
+            dbg.finish()
+        }
+    }
+
+    impl Debug for BacktraceFrame {
+        fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+            let mut dbg = fmt.debug_list();
+            dbg.entries(&self.symbols);
+            dbg.finish()
+        }
+    }
+
+    impl Debug for BacktraceSymbol {
+        fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+            write!(fmt, "{{ ")?;
+
+            if let Some(fn_name) = self.name.as_ref().map(|b| SymbolName::new(b)) {
+                write!(fmt, "fn: \"{:#}\"", fn_name)?;
+            } else {
+                write!(fmt, "fn: <unknown>")?;
+            }
+
+            if let Some(fname) = self.filename.as_ref() {
+                write!(fmt, ", file: \"{:?}\"", fname)?;
+            }
+
+            if let Some(line) = self.lineno {
+                write!(fmt, ", line: {:?}", line)?;
+            }
+
+            write!(fmt, " }}")
+        }
+    }
+
+    impl Debug for BytesOrWide {
+        fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+            output_filename(
+                fmt,
+                match self {
+                    BytesOrWide::Bytes(w) => BytesOrWideString::Bytes(w),
+                    BytesOrWide::Wide(w) => BytesOrWideString::Wide(w),
+                },
+                PrintFmt::Short,
+                env::current_dir().as_ref().ok(),
+            )
+        }
