@@ -178,3 +178,107 @@ mod capture {
                 env::current_dir().as_ref().ok(),
             )
         }
+    }
+
+    impl Backtrace {
+        fn enabled() -> bool {
+            static ENABLED: AtomicUsize = AtomicUsize::new(0);
+            match ENABLED.load(Ordering::Relaxed) {
+                0 => {}
+                1 => return false,
+                _ => return true,
+            }
+            let enabled = match env::var_os("RUST_LIB_BACKTRACE") {
+                Some(s) => s != "0",
+                None => match env::var_os("RUST_BACKTRACE") {
+                    Some(s) => s != "0",
+                    None => false,
+                },
+            };
+            ENABLED.store(enabled as usize + 1, Ordering::Relaxed);
+            enabled
+        }
+
+        #[inline(never)] // want to make sure there's a frame here to remove
+        pub(crate) fn capture() -> Backtrace {
+            if Backtrace::enabled() {
+                Backtrace::create(Backtrace::capture as usize)
+            } else {
+                let inner = Inner::Disabled;
+                Backtrace { inner }
+            }
+        }
+
+        // Capture a backtrace which starts just before the function addressed
+        // by `ip`
+        fn create(ip: usize) -> Backtrace {
+            let mut frames = Vec::new();
+            let mut actual_start = None;
+            backtrace::trace(|frame| {
+                frames.push(BacktraceFrame {
+                    frame: frame.clone(),
+                    symbols: Vec::new(),
+                });
+                if frame.symbol_address() as usize == ip && actual_start.is_none() {
+                    actual_start = Some(frames.len() + 1);
+                }
+                true
+            });
+
+            // If no frames came out assume that this is an unsupported platform
+            // since `backtrace` doesn't provide a way of learning this right
+            // now, and this should be a good enough approximation.
+            let inner = if frames.is_empty() {
+                Inner::Unsupported
+            } else {
+                Inner::Captured(LazilyResolvedCapture::new(Capture {
+                    actual_start: actual_start.unwrap_or(0),
+                    frames,
+                    resolved: false,
+                }))
+            };
+
+            Backtrace { inner }
+        }
+
+        pub(crate) fn status(&self) -> BacktraceStatus {
+            match self.inner {
+                Inner::Unsupported => BacktraceStatus::Unsupported,
+                Inner::Disabled => BacktraceStatus::Disabled,
+                Inner::Captured(_) => BacktraceStatus::Captured,
+            }
+        }
+    }
+
+    impl Display for Backtrace {
+        fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+            let capture = match &self.inner {
+                Inner::Unsupported => return fmt.write_str("unsupported backtrace"),
+                Inner::Disabled => return fmt.write_str("disabled backtrace"),
+                Inner::Captured(c) => c.force(),
+            };
+
+            let full = fmt.alternate();
+            let (frames, style) = if full {
+                (&capture.frames[..], PrintFmt::Full)
+            } else {
+                (&capture.frames[capture.actual_start..], PrintFmt::Short)
+            };
+
+            // When printing paths we try to strip the cwd if it exists,
+            // otherwise we just print the path as-is. Note that we also only do
+            // this for the short format, because if it's full we presumably
+            // want to print everything.
+            let cwd = env::current_dir();
+            let mut print_path = move |fmt: &mut fmt::Formatter, path: BytesOrWideString| {
+                output_filename(fmt, path, style, cwd.as_ref().ok())
+            };
+
+            let mut f = BacktraceFmt::new(fmt, style, &mut print_path);
+            f.add_context()?;
+            for frame in frames {
+                let mut f = f.frame();
+                if frame.symbols.is_empty() {
+                    f.print_raw(frame.frame.ip(), None, None, None)?;
+                } else {
+                    for symbol in frame.symbols.iter() {
