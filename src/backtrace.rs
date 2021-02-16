@@ -381,3 +381,22 @@ mod capture {
                 Cow::Owned(std::ffi::OsString::from_wide(wide).into())
             }
             #[cfg(not(windows))]
+            BytesOrWideString::Wide(_wide) => Path::new("<unknown>").into(),
+        };
+        if print_fmt == PrintFmt::Short && file.is_absolute() {
+            if let Some(cwd) = cwd {
+                if let Ok(stripped) = file.strip_prefix(&cwd) {
+                    if let Some(s) = stripped.to_str() {
+                        return write!(fmt, ".{}{}", path::MAIN_SEPARATOR, s);
+                    }
+                }
+            }
+        }
+        Display::fmt(&file.display(), fmt)
+    }
+}
+
+fn _assert_send_sync() {
+    fn _assert<T: Send + Sync>() {}
+    _assert::<Backtrace>();
+}
