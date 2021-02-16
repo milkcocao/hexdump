@@ -282,3 +282,102 @@ mod capture {
                     f.print_raw(frame.frame.ip(), None, None, None)?;
                 } else {
                     for symbol in frame.symbols.iter() {
+                        f.print_raw_with_column(
+                            frame.frame.ip(),
+                            symbol.name.as_ref().map(|b| SymbolName::new(b)),
+                            symbol.filename.as_ref().map(|b| match b {
+                                BytesOrWide::Bytes(w) => BytesOrWideString::Bytes(w),
+                                BytesOrWide::Wide(w) => BytesOrWideString::Wide(w),
+                            }),
+                            symbol.lineno,
+                            symbol.colno,
+                        )?;
+                    }
+                }
+            }
+            f.finish()?;
+            Ok(())
+        }
+    }
+
+    struct LazilyResolvedCapture {
+        sync: Once,
+        capture: UnsafeCell<Capture>,
+    }
+
+    impl LazilyResolvedCapture {
+        fn new(capture: Capture) -> Self {
+            LazilyResolvedCapture {
+                sync: Once::new(),
+                capture: UnsafeCell::new(capture),
+            }
+        }
+
+        fn force(&self) -> &Capture {
+            self.sync.call_once(|| {
+                // Safety: This exclusive reference can't overlap with any
+                // others. `Once` guarantees callers will block until this
+                // closure returns. `Once` also guarantees only a single caller
+                // will enter this closure.
+                unsafe { &mut *self.capture.get() }.resolve();
+            });
+
+            // Safety: This shared reference can't overlap with the exclusive
+            // reference above.
+            unsafe { &*self.capture.get() }
+        }
+    }
+
+    // Safety: Access to the inner value is synchronized using a thread-safe
+    // `Once`. So long as `Capture` is `Sync`, `LazilyResolvedCapture` is too
+    unsafe impl Sync for LazilyResolvedCapture where Capture: Sync {}
+
+    impl Capture {
+        fn resolve(&mut self) {
+            // If we're already resolved, nothing to do!
+            if self.resolved {
+                return;
+            }
+            self.resolved = true;
+
+            for frame in self.frames.iter_mut() {
+                let symbols = &mut frame.symbols;
+                let frame = &frame.frame;
+                backtrace::resolve_frame(frame, |symbol| {
+                    symbols.push(BacktraceSymbol {
+                        name: symbol.name().map(|m| m.as_bytes().to_vec()),
+                        filename: symbol.filename_raw().map(|b| match b {
+                            BytesOrWideString::Bytes(b) => BytesOrWide::Bytes(b.to_owned()),
+                            BytesOrWideString::Wide(b) => BytesOrWide::Wide(b.to_owned()),
+                        }),
+                        lineno: symbol.lineno(),
+                        colno: symbol.colno(),
+                    });
+                });
+            }
+        }
+    }
+
+    // Prints the filename of the backtrace frame.
+    fn output_filename(
+        fmt: &mut fmt::Formatter,
+        bows: BytesOrWideString,
+        print_fmt: PrintFmt,
+        cwd: Option<&PathBuf>,
+    ) -> fmt::Result {
+        let file: Cow<Path> = match bows {
+            #[cfg(unix)]
+            BytesOrWideString::Bytes(bytes) => {
+                use std::os::unix::ffi::OsStrExt;
+                Path::new(std::ffi::OsStr::from_bytes(bytes)).into()
+            }
+            #[cfg(not(unix))]
+            BytesOrWideString::Bytes(bytes) => {
+                Path::new(std::str::from_utf8(bytes).unwrap_or("<unknown>")).into()
+            }
+            #[cfg(windows)]
+            BytesOrWideString::Wide(wide) => {
+                use std::os::windows::ffi::OsStringExt;
+                Cow::Owned(std::ffi::OsString::from_wide(wide).into())
+            }
+            #[cfg(not(windows))]
