@@ -177,3 +177,18 @@ where
         Ok(())
     }
 }
+
+impl Write for Quoted<&mut fmt::Formatter<'_>> {
+    fn write_str(&mut self, s: &str) -> fmt::Result {
+        Display::fmt(&s.escape_debug(), self.0)
+    }
+}
+
+pub(crate) mod private {
+    use super::*;
+
+    pub trait Sealed {}
+
+    impl<T, E> Sealed for Result<T, E> where E: ext::StdError {}
+    impl<T> Sealed for Option<T> {}
+}
