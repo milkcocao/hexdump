@@ -78,3 +78,88 @@ impl Write for Buf {
         Ok(())
     }
 }
+
+fn render(msg: &'static str, lhs: &dyn Debug, rhs: &dyn Debug) -> Error {
+    let mut lhs_buf = Buf::new();
+    if fmt::write(&mut lhs_buf, format_args!("{:?}", lhs)).is_ok() {
+        let mut rhs_buf = Buf::new();
+        if fmt::write(&mut rhs_buf, format_args!("{:?}", rhs)).is_ok() {
+            let lhs_str = lhs_buf.as_str();
+            let rhs_str = rhs_buf.as_str();
+            // "{msg} ({lhs} vs {rhs})"
+            let len = msg.len() + 2 + lhs_str.len() + 4 + rhs_str.len() + 1;
+            let mut string = String::with_capacity(len);
+            string.push_str(msg);
+            string.push_str(" (");
+            string.push_str(lhs_str);
+            string.push_str(" vs ");
+            string.push_str(rhs_str);
+            string.push(')');
+            return Error::msg(string);
+        }
+    }
+    Error::msg(msg)
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __parse_ensure {
+    (atom () $bail:tt $fuel:tt {($($rhs:tt)+) ($($lhs:tt)+) $op:tt} $dup:tt $(,)?) => {
+        $crate::__fancy_ensure!($($lhs)+, $op, $($rhs)+)
+    };
+
+    // low precedence control flow constructs
+
+    (0 $stack:tt ($($bail:tt)*) $fuel:tt $parse:tt $dup:tt return $($rest:tt)*) => {
+        $crate::__fallback_ensure!($($bail)*)
+    };
+
+    (0 $stack:tt ($($bail:tt)*) $fuel:tt $parse:tt $dup:tt break $($rest:tt)*) => {
+        $crate::__fallback_ensure!($($bail)*)
+    };
+
+    (0 $stack:tt ($($bail:tt)*) $fuel:tt $parse:tt $dup:tt continue $($rest:tt)*) => {
+        $crate::__fallback_ensure!($($bail)*)
+    };
+
+    (0 $stack:tt ($($bail:tt)*) $fuel:tt $parse:tt $dup:tt yield $($rest:tt)*) => {
+        $crate::__fallback_ensure!($($bail)*)
+    };
+
+    (0 $stack:tt ($($bail:tt)*) $fuel:tt $parse:tt $dup:tt move $($rest:tt)*) => {
+        $crate::__fallback_ensure!($($bail)*)
+    };
+
+    // unary operators
+
+    (0 $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($deref:tt $($dup:tt)*) * $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 $stack $bail ($($fuel)*) {($($buf)* $deref) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (0 $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($not:tt $($dup:tt)*) ! $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 $stack $bail ($($fuel)*) {($($buf)* $not) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (0 $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($neg:tt $($dup:tt)*) - $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 $stack $bail ($($fuel)*) {($($buf)* $neg) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (0 $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($let:tt $($dup:tt)*) let $($rest:tt)*) => {
+        $crate::__parse_ensure!(pat $stack $bail ($($fuel)*) {($($buf)* $let) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (0 $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($life:tt $colon:tt $($dup:tt)*) $label:lifetime : $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 $stack $bail ($($fuel)*) {($($buf)* $life $colon) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (0 $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($and:tt $mut:tt $($dup:tt)*) &mut $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 $stack $bail ($($fuel)*) {($($buf)* $and $mut) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (0 $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($and:tt $($dup:tt)*) & $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 $stack $bail ($($fuel)*) {($($buf)* $and) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (0 $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($andand:tt $mut:tt $($dup:tt)*) &&mut $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 $stack $bail ($($fuel)*) {($($buf)* $andand $mut) $($parse)*} ($($rest)*) $($rest)*)
+    };
