@@ -73,3 +73,31 @@ impl DoubleEndedIterator for Chain<'_> {
         }
     }
 }
+
+impl ExactSizeIterator for Chain<'_> {
+    fn len(&self) -> usize {
+        match &self.state {
+            Linked { mut next } => {
+                let mut len = 0;
+                while let Some(cause) = next {
+                    next = cause.source();
+                    len += 1;
+                }
+                len
+            }
+            #[cfg(feature = "std")]
+            Buffered { rest } => rest.len(),
+        }
+    }
+}
+
+#[cfg(feature = "std")]
+impl Default for Chain<'_> {
+    fn default() -> Self {
+        Chain {
+            state: ChainState::Buffered {
+                rest: Vec::new().into_iter(),
+            },
+        }
+    }
+}
