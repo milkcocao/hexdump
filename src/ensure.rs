@@ -560,3 +560,92 @@ macro_rules! __parse_ensure {
     };
 
     // patterns
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($pipe:tt $($dup:tt)*) | $($rest:tt)*) => {
+        $crate::__parse_ensure!(pat $stack $bail ($($fuel)*) {($($buf)* $pipe) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($eq:tt $($dup:tt)*) = $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 $stack $bail ($($fuel)*) {($($buf)* $eq) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($in:tt $($dup:tt)*) in $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 $stack $bail ($($fuel)*) {($($buf)* $in) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($ref:tt $($dup:tt)*) ref $($rest:tt)*) => {
+        $crate::__parse_ensure!(pat $stack $bail ($($fuel)*) {($($buf)* $ref) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($mut:tt $($dup:tt)*) mut $($rest:tt)*) => {
+        $crate::__parse_ensure!(pat $stack $bail ($($fuel)*) {($($buf)* $mut) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($at:tt $($dup:tt)*) @ $($rest:tt)*) => {
+        $crate::__parse_ensure!(pat $stack $bail ($($fuel)*) {($($buf)* $at) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} $dup:tt $lit:literal $($rest:tt)*) => {
+        $crate::__parse_ensure!(pat $stack $bail ($($fuel)*) {($($buf)* $lit) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($range:tt $($dup:tt)*) .. $($rest:tt)*) => {
+        $crate::__parse_ensure!(pat $stack $bail ($($fuel)*) {($($buf)* $range) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($range:tt $($dup:tt)*) ..= $($rest:tt)*) => {
+        $crate::__parse_ensure!(pat $stack $bail ($($fuel)*) {($($buf)* $range) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($and:tt $($dup:tt)*) & $($rest:tt)*) => {
+        $crate::__parse_ensure!(pat $stack $bail ($($fuel)*) {($($buf)* $and) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($andand:tt $($dup:tt)*) && $($rest:tt)*) => {
+        $crate::__parse_ensure!(pat $stack $bail ($($fuel)*) {($($buf)* $andand) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($paren:tt $($dup:tt)*) ($($content:tt)*) $($rest:tt)*) => {
+        $crate::__parse_ensure!(pat $stack $bail ($($fuel)*) {($($buf)* $paren) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($bracket:tt $($dup:tt)*) [$($content:tt)*] $($rest:tt)*) => {
+        $crate::__parse_ensure!(pat $stack $bail ($($fuel)*) {($($buf)* $bracket) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($brace:tt $($dup:tt)*) {$($content:tt)*} $($rest:tt)*) => {
+        $crate::__parse_ensure!(pat $stack $bail ($($fuel)*) {($($buf)* $brace) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($wild:tt $($dup:tt)*) _ $($rest:tt)*) => {
+        $crate::__parse_ensure!(pat $stack $bail ($($fuel)*) {($($buf)* $wild) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($colons:tt $($dup:tt)*) :: $ident:ident $($rest:tt)*) => {
+        $crate::__parse_ensure!(epath (pat $stack) $bail ($($fuel)*) {($($buf)* $colons $ident) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} $dup:tt $ident:ident $($rest:tt)*) => {
+        $crate::__parse_ensure!(epath (pat $stack) $bail ($($fuel)*) {($($buf)* $ident) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (pat $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($langle:tt $($dup:tt)*) < $($rest:tt)*) => {
+        $crate::__parse_ensure!(type (qpath (epath (pat $stack))) $bail ($($fuel)*) {($($buf)* $langle) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    // high precedence binary operators
+
+    (atom $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($add:tt $($dup:tt)*) + $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 $stack $bail ($($fuel)*) {($($buf)* $add) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (atom $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($sub:tt $($dup:tt)*) - $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 $stack $bail ($($fuel)*) {($($buf)* $sub) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (atom $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($mul:tt $($dup:tt)*) * $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 $stack $bail ($($fuel)*) {($($buf)* $mul) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (atom $stack:tt $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($div:tt $($dup:tt)*) / $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 $stack $bail ($($fuel)*) {($($buf)* $div) $($parse)*} ($($rest)*) $($rest)*)
