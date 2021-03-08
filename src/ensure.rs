@@ -750,3 +750,85 @@ macro_rules! __parse_ensure {
     (atom ($($stack:tt)+) $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($muleq:tt $($dup:tt)*) *= $($rest:tt)*) => {
         $crate::__parse_ensure!(0 ($($stack)*) $bail ($($fuel)*) {($($buf)* $muleq) $($parse)*} ($($rest)*) $($rest)*)
     };
+
+    (atom ($($stack:tt)+) $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($diveq:tt $($dup:tt)*) /= $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 ($($stack)*) $bail ($($fuel)*) {($($buf)* $diveq) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (atom ($($stack:tt)+) $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($remeq:tt $($dup:tt)*) %= $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 ($($stack)*) $bail ($($fuel)*) {($($buf)* $remeq) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (atom ($($stack:tt)+) $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($bitxoreq:tt $($dup:tt)*) ^= $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 ($($stack)*) $bail ($($fuel)*) {($($buf)* $bitxoreq) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (atom ($($stack:tt)+) $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($bitandeq:tt $($dup:tt)*) &= $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 ($($stack)*) $bail ($($fuel)*) {($($buf)* $bitandeq) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (atom ($($stack:tt)+) $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($bitoreq:tt $($dup:tt)*) |= $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 ($($stack)*) $bail ($($fuel)*) {($($buf)* $bitoreq) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (atom ($($stack:tt)+) $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($shleq:tt $($dup:tt)*) <<= $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 ($($stack)*) $bail ($($fuel)*) {($($buf)* $shleq) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    (atom ($($stack:tt)+) $bail:tt (~$($fuel:tt)*) {($($buf:tt)*) $($parse:tt)*} ($shreq:tt $($dup:tt)*) >>= $($rest:tt)*) => {
+        $crate::__parse_ensure!(0 ($($stack)*) $bail ($($fuel)*) {($($buf)* $shreq) $($parse)*} ($($rest)*) $($rest)*)
+    };
+
+    // unrecognized expression
+
+    ($state:tt $stack:tt ($($bail:tt)*) $($rest:tt)*) => {
+        $crate::__fallback_ensure!($($bail)*)
+    };
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __fancy_ensure {
+    ($lhs:expr, $op:tt, $rhs:expr) => {
+        match (&$lhs, &$rhs) {
+            (lhs, rhs) => {
+                if !(lhs $op rhs) {
+                    #[allow(unused_imports)]
+                    use $crate::__private::{BothDebug, NotBothDebug};
+                    return Err((lhs, rhs).__dispatch_ensure(
+                        $crate::__private::concat!(
+                            "Condition failed: `",
+                            $crate::__private::stringify!($lhs),
+                            " ",
+                            $crate::__private::stringify!($op),
+                            " ",
+                            $crate::__private::stringify!($rhs),
+                            "`",
+                        ),
+                    ));
+                }
+            }
+        }
+    };
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __fallback_ensure {
+    ($cond:expr $(,)?) => {
+        if !$cond {
+            return $crate::__private::Err($crate::Error::msg(
+                $crate::__private::concat!("Condition failed: `", $crate::__private::stringify!($cond), "`")
+            ));
+        }
+    };
+    ($cond:expr, $msg:literal $(,)?) => {
+        if !$cond {
+            return $crate::__private::Err($crate::__anyhow!($msg));
+        }
+    };
+    ($cond:expr, $err:expr $(,)?) => {
+        if !$cond {
+            return $crate::__private::Err($crate::__anyhow!($err));
+        }
+    };
