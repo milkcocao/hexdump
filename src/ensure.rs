@@ -832,3 +832,9 @@ macro_rules! __fallback_ensure {
             return $crate::__private::Err($crate::__anyhow!($err));
         }
     };
+    ($cond:expr, $fmt:expr, $($arg:tt)*) => {
+        if !$cond {
+            return $crate::__private::Err($crate::__anyhow!($fmt, $($arg)*));
+        }
+    };
+}
