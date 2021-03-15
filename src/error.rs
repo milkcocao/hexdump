@@ -18,4 +18,6 @@ use core::ptr::NonNull;
 use core::ops::{Deref, DerefMut};
 
 impl Error {
- 
+    /// Create a new error object from any error type.
+    ///
+    /// The error type must b
