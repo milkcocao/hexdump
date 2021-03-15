@@ -8,4 +8,8 @@ use alloc::boxed::Box;
 #[cfg(backtrace)]
 use core::any::Demand;
 use core::any::TypeId;
-use core::fmt::{self, Debu
+use core::fmt::{self, Debug, Display};
+use core::mem::ManuallyDrop;
+#[cfg(not(anyhow_no_ptr_addr_of))]
+use core::ptr;
+us
