@@ -12,4 +12,10 @@ use core::fmt::{self, Debug, Display};
 use core::mem::ManuallyDrop;
 #[cfg(not(anyhow_no_ptr_addr_of))]
 use core::ptr;
-us
+use core::ptr::NonNull;
+
+#[cfg(feature = "std")]
+use core::ops::{Deref, DerefMut};
+
+impl Error {
+ 
