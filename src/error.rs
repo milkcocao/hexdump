@@ -23,4 +23,5 @@ impl Error {
     /// The error type must be threadsafe and `'static`, so that the `Error`
     /// will be as well.
     ///
-    /// If the error type d
+    /// If the error type does not provide a backtrace, a backtrace will be
+    /// created here to ensure 
