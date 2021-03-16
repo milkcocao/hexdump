@@ -20,4 +20,7 @@ use core::ops::{Deref, DerefMut};
 impl Error {
     /// Create a new error object from any error type.
     ///
-    /// The error type must b
+    /// The error type must be threadsafe and `'static`, so that the `Error`
+    /// will be as well.
+    ///
+    /// If the error type d
