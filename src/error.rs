@@ -34,4 +34,9 @@ impl Error {
         E: StdError + Send + Sync + 'static,
     {
         let backtrace = backtrace_if_absent!(&error);
-        Error::from_std(error, b
+        Error::from_std(error, backtrace)
+    }
+
+    /// Create a new error object from a printable error message.
+    ///
+  
