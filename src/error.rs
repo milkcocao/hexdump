@@ -39,4 +39,5 @@ impl Error {
 
     /// Create a new error object from a printable error message.
     ///
-  
+    /// If the argument implements std::error::Error, prefer `Error::new`
+    /// instead which preserves 
