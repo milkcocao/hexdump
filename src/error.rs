@@ -26,4 +26,9 @@ impl Error {
     /// If the error type does not provide a backtrace, a backtrace will be
     /// created here to ensure that a backtrace exists.
     #[cfg(feature = "std")]
-    #[cfg_attr(doc_cfg, doc(cfg(featu
+    #[cfg_attr(doc_cfg, doc(cfg(feature = "std")))]
+    #[cold]
+    #[must_use]
+    pub fn new<E>(error: E) -> Self
+    where
+        E: StdError + S
