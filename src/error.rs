@@ -31,4 +31,7 @@ impl Error {
     #[must_use]
     pub fn new<E>(error: E) -> Self
     where
-        E: StdError + S
+        E: StdError + Send + Sync + 'static,
+    {
+        let backtrace = backtrace_if_absent!(&error);
+        Error::from_std(error, b
