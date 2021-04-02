@@ -43,4 +43,6 @@ impl Error {
     /// instead which preserves the underlying error's cause chain and
     /// backtrace. If the argument may or may not implement std::error::Error
     /// now or in the future, use `anyhow!(err)` which handles either way
-    /// c
+    /// correctly.
+    ///
+    /// `Error::msg("...")` is equivalent to `anyhow!("...")` but occasion
