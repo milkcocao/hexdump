@@ -51,4 +51,6 @@ impl Error {
     ///
     /// ```
     /// # mod ffi {
-    /// #     pub struct Inpu
+    /// #     pub struct Input;
+    /// #     pub struct Output;
+    /// #     pub async fn do_some_work(_: Input) -> Result
