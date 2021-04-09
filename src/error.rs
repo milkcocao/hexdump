@@ -47,4 +47,8 @@ impl Error {
     ///
     /// `Error::msg("...")` is equivalent to `anyhow!("...")` but occasionally
     /// convenient in places where a function is preferable over a macro, such
-    /// as iterator or
+    /// as iterator or stream combinators:
+    ///
+    /// ```
+    /// # mod ffi {
+    /// #     pub struct Inpu
