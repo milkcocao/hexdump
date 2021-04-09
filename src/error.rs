@@ -45,4 +45,6 @@ impl Error {
     /// now or in the future, use `anyhow!(err)` which handles either way
     /// correctly.
     ///
-    /// `Error::msg("...")` is equivalent to `anyhow!("...")` but occasion
+    /// `Error::msg("...")` is equivalent to `anyhow!("...")` but occasionally
+    /// convenient in places where a function is preferable over a macro, such
+    /// as iterator or
