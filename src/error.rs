@@ -53,4 +53,8 @@ impl Error {
     /// # mod ffi {
     /// #     pub struct Input;
     /// #     pub struct Output;
-    /// #     pub async fn do_some_work(_: Input) -> Result
+    /// #     pub async fn do_some_work(_: Input) -> Result<Output, &'static str> {
+    /// #         unimplemented!()
+    /// #     }
+    /// # }
+    //
