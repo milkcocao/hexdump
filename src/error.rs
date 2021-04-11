@@ -57,4 +57,8 @@ impl Error {
     /// #         unimplemented!()
     /// #     }
     /// # }
-    //
+    /// #
+    /// # use ffi::{Input, Output};
+    /// #
+    /// use anyhow::{Error, Result};
+    /// us
