@@ -63,4 +63,7 @@ impl Error {
     /// use anyhow::{Error, Result};
     /// use futures::stream::{Stream, StreamExt, TryStreamExt};
     ///
-    /// async fn demo<S>(stream
+    /// async fn demo<S>(stream: S) -> Result<Vec<Output>>
+    /// where
+    ///     S: Stream<Item = Input>,
+    /// {
