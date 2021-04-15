@@ -61,4 +61,6 @@ impl Error {
     /// # use ffi::{Input, Output};
     /// #
     /// use anyhow::{Error, Result};
-    /// us
+    /// use futures::stream::{Stream, StreamExt, TryStreamExt};
+    ///
+    /// async fn demo<S>(stream
