@@ -67,3 +67,6 @@ impl Error {
     /// where
     ///     S: Stream<Item = Input>,
     /// {
+    ///     stream
+    ///         .then(ffi::do_some_work) // returns Result<Output, &str>
+    //
