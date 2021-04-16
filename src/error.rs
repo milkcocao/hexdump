@@ -73,4 +73,9 @@ impl Error {
     ///         .try_collect()
     ///         .await
     /// }
- 
+    /// ```
+    #[cold]
+    #[must_use]
+    pub fn msg<M>(message: M) -> Self
+    where
+        M: Display + Debug + 
