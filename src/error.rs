@@ -69,4 +69,8 @@ impl Error {
     /// {
     ///     stream
     ///         .then(ffi::do_some_work) // returns Result<Output, &str>
-    //
+    ///         .map_err(Error::msg)
+    ///         .try_collect()
+    ///         .await
+    /// }
+ 
