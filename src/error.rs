@@ -78,4 +78,7 @@ impl Error {
     #[must_use]
     pub fn msg<M>(message: M) -> Self
     where
-        M: Display + Debug + 
+        M: Display + Debug + Send + Sync + 'static,
+    {
+        Error::from_adhoc(message, backtrace!())
+   
