@@ -81,4 +81,8 @@ impl Error {
         M: Display + Debug + Send + Sync + 'static,
     {
         Error::from_adhoc(message, backtrace!())
-   
+    }
+
+    #[cfg(feature = "std")]
+    #[cold]
+    pub(crate) fn from_std<E>(error: E, backtrac
