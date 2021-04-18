@@ -85,4 +85,8 @@ impl Error {
 
     #[cfg(feature = "std")]
     #[cold]
-    pub(crate) fn from_std<E>(error: E, backtrac
+    pub(crate) fn from_std<E>(error: E, backtrace: Option<Backtrace>) -> Self
+    where
+        E: StdError + Send + Sync + 'static,
+    {
+        let vtable = &E
