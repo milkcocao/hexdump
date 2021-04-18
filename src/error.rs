@@ -89,4 +89,6 @@ impl Error {
     where
         E: StdError + Send + Sync + 'static,
     {
-        let vtable = &E
+        let vtable = &ErrorVTable {
+            object_drop: object_drop::<E>,
+            object_ref: o
