@@ -93,4 +93,7 @@ impl Error {
             object_drop: object_drop::<E>,
             object_ref: object_ref::<E>,
             #[cfg(anyhow_no_ptr_addr_of)]
-            object_mut: o
+            object_mut: object_mut::<E>,
+            object_boxed: object_boxed::<E>,
+            object_downcast: object_downcast::<E>,
+    
