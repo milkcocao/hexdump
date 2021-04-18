@@ -91,4 +91,6 @@ impl Error {
     {
         let vtable = &ErrorVTable {
             object_drop: object_drop::<E>,
-            object_ref: o
+            object_ref: object_ref::<E>,
+            #[cfg(anyhow_no_ptr_addr_of)]
+            object_mut: o
