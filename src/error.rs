@@ -96,4 +96,5 @@ impl Error {
             object_mut: object_mut::<E>,
             object_boxed: object_boxed::<E>,
             object_downcast: object_downcast::<E>,
-    
+            #[cfg(anyhow_no_ptr_addr_of)]
+            object_downcast_mut: object_downcast_mut::<E>,
