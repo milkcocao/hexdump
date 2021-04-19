@@ -99,4 +99,8 @@ impl Error {
             #[cfg(anyhow_no_ptr_addr_of)]
             object_downcast_mut: object_downcast_mut::<E>,
             object_drop_rest: object_drop_front::<E>,
-            #[cfg(all(not(backtrace), feature
+            #[cfg(all(not(backtrace), feature = "backtrace"))]
+            object_backtrace: no_backtrace,
+        };
+
+        // Safety: passing v
