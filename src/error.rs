@@ -104,4 +104,8 @@ impl Error {
         };
 
         // Safety: passing vtable that operates on the right type E.
-        unsafe { Error::construct(error, vta
+        unsafe { Error::construct(error, vtable, backtrace) }
+    }
+
+    #[cold]
+    pub(crate) fn from_adhoc<M>(message: M, backtrace:
