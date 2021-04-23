@@ -103,4 +103,5 @@ impl Error {
             object_backtrace: no_backtrace,
         };
 
-        // Safety: passing v
+        // Safety: passing vtable that operates on the right type E.
+        unsafe { Error::construct(error, vta
