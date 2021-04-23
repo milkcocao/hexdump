@@ -108,4 +108,8 @@ impl Error {
     }
 
     #[cold]
-    pub(crate) fn from_adhoc<M>(message: M, backtrace:
+    pub(crate) fn from_adhoc<M>(message: M, backtrace: Option<Backtrace>) -> Self
+    where
+        M: Display + Debug + Send + Sync + 'static,
+    {
+   
