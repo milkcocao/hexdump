@@ -112,4 +112,6 @@ impl Error {
     where
         M: Display + Debug + Send + Sync + 'static,
     {
-   
+        use crate::wrapper::MessageError;
+        let error: MessageError<M> = MessageError(message);
+  
