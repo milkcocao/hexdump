@@ -115,4 +115,6 @@ impl Error {
         use crate::wrapper::MessageError;
         let error: MessageError<M> = MessageError(message);
         let vtable = &ErrorVTable {
-            object_drop: object_drop::<MessageError<
+            object_drop: object_drop::<MessageError<M>>,
+            object_ref: object_ref::<MessageError<M>>,
+            #[cfg(all(feature = "std
