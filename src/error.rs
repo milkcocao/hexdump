@@ -114,4 +114,5 @@ impl Error {
     {
         use crate::wrapper::MessageError;
         let error: MessageError<M> = MessageError(message);
-  
+        let vtable = &ErrorVTable {
+            object_drop: object_drop::<MessageError<
