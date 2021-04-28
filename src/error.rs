@@ -117,4 +117,6 @@ impl Error {
         let vtable = &ErrorVTable {
             object_drop: object_drop::<MessageError<M>>,
             object_ref: object_ref::<MessageError<M>>,
-            #[cfg(all(feature = "std
+            #[cfg(all(feature = "std", anyhow_no_ptr_addr_of))]
+            object_mut: object_mut::<MessageError<M>>,
+           
