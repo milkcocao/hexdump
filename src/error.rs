@@ -121,4 +121,6 @@ impl Error {
             object_mut: object_mut::<MessageError<M>>,
             object_boxed: object_boxed::<MessageError<M>>,
             object_downcast: object_downcast::<M>,
-        
+            #[cfg(anyhow_no_ptr_addr_of)]
+            object_downcast_mut: object_downcast_mut::<M>,
+  
