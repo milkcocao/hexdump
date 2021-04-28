@@ -119,4 +119,6 @@ impl Error {
             object_ref: object_ref::<MessageError<M>>,
             #[cfg(all(feature = "std", anyhow_no_ptr_addr_of))]
             object_mut: object_mut::<MessageError<M>>,
-           
+            object_boxed: object_boxed::<MessageError<M>>,
+            object_downcast: object_downcast::<M>,
+        
