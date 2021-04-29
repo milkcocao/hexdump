@@ -128,4 +128,5 @@ impl Error {
             object_backtrace: no_backtrace,
         };
 
-      
+        // Safety: MessageError is repr(transparent) so it is okay for the
+        // vtable to allow castin
