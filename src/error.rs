@@ -129,4 +129,8 @@ impl Error {
         };
 
         // Safety: MessageError is repr(transparent) so it is okay for the
-        // vtable to allow castin
+        // vtable to allow casting the MessageError<M> to M.
+        unsafe { Error::construct(error, vtable, backtrace) }
+    }
+
+    #
