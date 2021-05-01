@@ -133,4 +133,6 @@ impl Error {
         unsafe { Error::construct(error, vtable, backtrace) }
     }
 
-    #
+    #[cold]
+    pub(crate) fn from_display<M>(message: M, backtrace: Option<Backtrace>) -> Self
+ 
