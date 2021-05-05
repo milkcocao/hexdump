@@ -140,4 +140,6 @@ impl Error {
     {
         use crate::wrapper::DisplayError;
         let error: DisplayError<M> = DisplayError(message);
-        let vtable = &Err
+        let vtable = &ErrorVTable {
+            object_drop: object_drop::<DisplayError<M>>,
+            object_ref: object_ref::<DisplayErr
