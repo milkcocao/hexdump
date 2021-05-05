@@ -135,4 +135,7 @@ impl Error {
 
     #[cold]
     pub(crate) fn from_display<M>(message: M, backtrace: Option<Backtrace>) -> Self
- 
+    where
+        M: Display + Send + Sync + 'static,
+    {
+        use crate::wrapper::DisplayErro
