@@ -138,4 +138,6 @@ impl Error {
     where
         M: Display + Send + Sync + 'static,
     {
-        use crate::wrapper::DisplayErro
+        use crate::wrapper::DisplayError;
+        let error: DisplayError<M> = DisplayError(message);
+        let vtable = &Err
