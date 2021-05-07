@@ -148,4 +148,6 @@ impl Error {
             object_boxed: object_boxed::<DisplayError<M>>,
             object_downcast: object_downcast::<M>,
             #[cfg(anyhow_no_ptr_addr_of)]
-            o
+            object_downcast_mut: object_downcast_mut::<M>,
+            object_drop_rest: object_drop_front::<M>,
+      
