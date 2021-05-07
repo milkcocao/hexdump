@@ -144,4 +144,6 @@ impl Error {
             object_drop: object_drop::<DisplayError<M>>,
             object_ref: object_ref::<DisplayError<M>>,
             #[cfg(all(feature = "std", anyhow_no_ptr_addr_of))]
-            object_mut: object_mut::<D
+            object_mut: object_mut::<DisplayError<M>>,
+            object_boxed: object_boxed::<DisplayError<M>>,
+           
