@@ -146,4 +146,6 @@ impl Error {
             #[cfg(all(feature = "std", anyhow_no_ptr_addr_of))]
             object_mut: object_mut::<DisplayError<M>>,
             object_boxed: object_boxed::<DisplayError<M>>,
-           
+            object_downcast: object_downcast::<M>,
+            #[cfg(anyhow_no_ptr_addr_of)]
+            o
