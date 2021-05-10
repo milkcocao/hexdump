@@ -156,4 +156,9 @@ impl Error {
 
         // Safety: DisplayError is repr(transparent) so it is okay for the
         // vtable to allow casting the DisplayError<M> to M.
-        unsafe { Error::construct(error, vtable, ba
+        unsafe { Error::construct(error, vtable, backtrace) }
+    }
+
+    #[cfg(feature = "std")]
+    #[cold]
+    pub(crate) fn from_context<C, E>(
