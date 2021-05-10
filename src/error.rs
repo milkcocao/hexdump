@@ -151,4 +151,8 @@ impl Error {
             object_downcast_mut: object_downcast_mut::<M>,
             object_drop_rest: object_drop_front::<M>,
             #[cfg(all(not(backtrace), feature = "backtrace"))]
-            object_backtrace: no_back
+            object_backtrace: no_backtrace,
+        };
+
+        // Safety: DisplayError is repr(transparent) so it is okay for the
+        
