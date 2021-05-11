@@ -163,4 +163,7 @@ impl Error {
     #[cold]
     pub(crate) fn from_context<C, E>(context: C, error: E, backtrace: Option<Backtrace>) -> Self
     where
-        C: Display + 
+        C: Display + Send + Sync + 'static,
+        E: StdError + Send + Sync + 'static,
+    {
+        let error:
