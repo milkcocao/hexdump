@@ -161,4 +161,6 @@ impl Error {
 
     #[cfg(feature = "std")]
     #[cold]
-    pub(crate) fn from_context<C, E>(
+    pub(crate) fn from_context<C, E>(context: C, error: E, backtrace: Option<Backtrace>) -> Self
+    where
+        C: Display + 
