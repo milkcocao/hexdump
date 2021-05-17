@@ -169,4 +169,5 @@ impl Error {
         let error: ContextError<C, E> = ContextError { context, error };
 
         let vtable = &ErrorVTable {
-            
+            object_drop: object_drop::<ContextError<C, E>>,
+            object_ref: object_ref::<ContextError<C
