@@ -166,4 +166,7 @@ impl Error {
         C: Display + Send + Sync + 'static,
         E: StdError + Send + Sync + 'static,
     {
-        let error:
+        let error: ContextError<C, E> = ContextError { context, error };
+
+        let vtable = &ErrorVTable {
+            
