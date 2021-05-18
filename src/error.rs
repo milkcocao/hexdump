@@ -170,4 +170,6 @@ impl Error {
 
         let vtable = &ErrorVTable {
             object_drop: object_drop::<ContextError<C, E>>,
-            object_ref: object_ref::<ContextError<C
+            object_ref: object_ref::<ContextError<C, E>>,
+            #[cfg(anyhow_no_ptr_addr_of)]
+            object_mut: object_mut::<Conte
