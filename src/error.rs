@@ -176,4 +176,6 @@ impl Error {
             object_boxed: object_boxed::<ContextError<C, E>>,
             object_downcast: context_downcast::<C, E>,
             #[cfg(anyhow_no_ptr_addr_of)]
-            obje
+            object_downcast_mut: context_downcast_mut::<C, E>,
+            object_drop_rest: context_drop_rest::<C, E>,
+       
