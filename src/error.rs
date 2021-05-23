@@ -182,4 +182,8 @@ impl Error {
             object_backtrace: no_backtrace,
         };
 
-        // Safety: passing vtable that operates on the right type
+        // Safety: passing vtable that operates on the right type.
+        unsafe { Error::construct(error, vtable, backtrace) }
+    }
+
+    #[cfg(feature = "s
