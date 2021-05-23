@@ -178,4 +178,5 @@ impl Error {
             #[cfg(anyhow_no_ptr_addr_of)]
             object_downcast_mut: context_downcast_mut::<C, E>,
             object_drop_rest: context_drop_rest::<C, E>,
-       
+            #[cfg(all(not(backtrace), feature = "backtrace"))]
+            o
