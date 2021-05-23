@@ -179,4 +179,7 @@ impl Error {
             object_downcast_mut: context_downcast_mut::<C, E>,
             object_drop_rest: context_drop_rest::<C, E>,
             #[cfg(all(not(backtrace), feature = "backtrace"))]
-            o
+            object_backtrace: no_backtrace,
+        };
+
+        // Safety: passing vtable that operates on the right type
