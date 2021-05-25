@@ -186,4 +186,8 @@ impl Error {
         unsafe { Error::construct(error, vtable, backtrace) }
     }
 
-    #[cfg(feature = "s
+    #[cfg(feature = "std")]
+    #[cold]
+    pub(crate) fn from_boxed(
+        error: Box<dyn StdError + Send + Sync>,
+ 
