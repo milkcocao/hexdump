@@ -190,4 +190,7 @@ impl Error {
     #[cold]
     pub(crate) fn from_boxed(
         error: Box<dyn StdError + Send + Sync>,
- 
+        backtrace: Option<Backtrace>,
+    ) -> Self {
+        use crate::wrapper::BoxedError;
+       
