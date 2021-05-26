@@ -193,4 +193,6 @@ impl Error {
         backtrace: Option<Backtrace>,
     ) -> Self {
         use crate::wrapper::BoxedError;
-       
+        let error = BoxedError(error);
+        let vtable = &ErrorVTable {
+            object_drop: object_dr
