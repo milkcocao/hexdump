@@ -195,4 +195,6 @@ impl Error {
         use crate::wrapper::BoxedError;
         let error = BoxedError(error);
         let vtable = &ErrorVTable {
-            object_drop: object_dr
+            object_drop: object_drop::<BoxedError>,
+            object_ref: object_ref::<BoxedError>,
+            #[cfg(anyhow_no_ptr_a
