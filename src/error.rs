@@ -197,4 +197,6 @@ impl Error {
         let vtable = &ErrorVTable {
             object_drop: object_drop::<BoxedError>,
             object_ref: object_ref::<BoxedError>,
-            #[cfg(anyhow_no_ptr_a
+            #[cfg(anyhow_no_ptr_addr_of)]
+            object_mut: object_mut::<BoxedError>,
+            object_boxed: object_boxed::<BoxedE
