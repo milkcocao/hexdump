@@ -202,4 +202,5 @@ impl Error {
             object_boxed: object_boxed::<BoxedError>,
             object_downcast: object_downcast::<Box<dyn StdError + Send + Sync>>,
             #[cfg(anyhow_no_ptr_addr_of)]
-            object_downcast_mut: object_downcast_mut::<Box<
+            object_downcast_mut: object_downcast_mut::<Box<dyn StdError + Send + Sync>>,
+            object_drop_rest: object_drop_front::<Box<dyn StdError + Se
