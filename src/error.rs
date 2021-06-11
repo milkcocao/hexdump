@@ -210,4 +210,7 @@ impl Error {
 
         // Safety: BoxedError is repr(transparent) so it is okay for the vtable
         // to allow casting to Box<dyn StdError + Send + Sync>.
-      
+        unsafe { Error::construct(error, vtable, backtrace) }
+    }
+
+    // Takes backtrace as
