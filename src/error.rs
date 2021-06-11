@@ -205,4 +205,7 @@ impl Error {
             object_downcast_mut: object_downcast_mut::<Box<dyn StdError + Send + Sync>>,
             object_drop_rest: object_drop_front::<Box<dyn StdError + Send + Sync>>,
             #[cfg(all(not(backtrace), feature = "backtrace"))]
-            object_
+            object_backtrace: no_backtrace,
+        };
+
+        // Safety: BoxedError is repr(transparent) so it is 
