@@ -213,4 +213,5 @@ impl Error {
         unsafe { Error::construct(error, vtable, backtrace) }
     }
 
-    // Takes backtrace as
+    // Takes backtrace as argument rather than capturing it here so that the
+    // user sees one fewer layer of wrapping noise in the 
