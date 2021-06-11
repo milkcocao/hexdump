@@ -208,4 +208,6 @@ impl Error {
             object_backtrace: no_backtrace,
         };
 
-        // Safety: BoxedError is repr(transparent) so it is 
+        // Safety: BoxedError is repr(transparent) so it is okay for the vtable
+        // to allow casting to Box<dyn StdError + Send + Sync>.
+      
