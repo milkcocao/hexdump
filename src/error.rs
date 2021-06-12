@@ -214,4 +214,6 @@ impl Error {
     }
 
     // Takes backtrace as argument rather than capturing it here so that the
-    // user sees one fewer layer of wrapping noise in the 
+    // user sees one fewer layer of wrapping noise in the backtrace.
+    //
+    // Unsafe because the given vtable must have sensible behav
