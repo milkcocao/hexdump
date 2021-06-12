@@ -216,4 +216,8 @@ impl Error {
     // Takes backtrace as argument rather than capturing it here so that the
     // user sees one fewer layer of wrapping noise in the backtrace.
     //
-    // Unsafe because the given vtable must have sensible behav
+    // Unsafe because the given vtable must have sensible behavior on the error
+    // value of type E.
+    #[cold]
+    unsafe fn construct<E>(
+        e
