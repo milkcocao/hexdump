@@ -224,4 +224,7 @@ impl Error {
         vtable: &'static ErrorVTable,
         backtrace: Option<Backtrace>,
     ) -> Self
- 
+    where
+        E: StdError + Send + Sync + 'static,
+    {
+        let inner: Box<ErrorImpl<E>> = 
