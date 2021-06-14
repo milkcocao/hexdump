@@ -227,4 +227,8 @@ impl Error {
     where
         E: StdError + Send + Sync + 'static,
     {
-        let inner: Box<ErrorImpl<E>> = 
+        let inner: Box<ErrorImpl<E>> = Box::new(ErrorImpl {
+            vtable,
+            backtrace,
+            _object: error,
+        })
