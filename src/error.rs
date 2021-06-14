@@ -220,4 +220,8 @@ impl Error {
     // value of type E.
     #[cold]
     unsafe fn construct<E>(
-        e
+        error: E,
+        vtable: &'static ErrorVTable,
+        backtrace: Option<Backtrace>,
+    ) -> Self
+ 
