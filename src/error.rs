@@ -231,4 +231,6 @@ impl Error {
             vtable,
             backtrace,
             _object: error,
-        })
+        });
+        // Erase the concrete type of E from the compile-time type system. This
+        // is equivalent to the
