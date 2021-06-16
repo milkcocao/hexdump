@@ -233,4 +233,5 @@ impl Error {
             _object: error,
         });
         // Erase the concrete type of E from the compile-time type system. This
-        // is equivalent to the
+        // is equivalent to the safe unsize coercion from Box<ErrorImpl<E>> to
+        // Box<ErrorImpl<dyn StdError + Send + Sync + 's
