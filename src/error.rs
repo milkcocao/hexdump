@@ -234,4 +234,6 @@ impl Error {
         });
         // Erase the concrete type of E from the compile-time type system. This
         // is equivalent to the safe unsize coercion from Box<ErrorImpl<E>> to
-        // Box<ErrorImpl<dyn StdError + Send + Sync + 's
+        // Box<ErrorImpl<dyn StdError + Send + Sync + 'static>> except that the
+        // result is a thin pointer. The necessary behavior for manipulating the
+     
