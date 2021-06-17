@@ -237,4 +237,6 @@ impl Error {
         // Box<ErrorImpl<dyn StdError + Send + Sync + 'static>> except that the
         // result is a thin pointer. The necessary behavior for manipulating the
         // underlying ErrorImpl<E> is preserved in the vtable provided by the
-        // caller rathe
+        // caller rather than a builtin fat pointer vtable.
+        let inner = Own::new(inner).cast::<ErrorImpl>();
+        Error { inn
