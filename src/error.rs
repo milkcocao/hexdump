@@ -239,4 +239,9 @@ impl Error {
         // underlying ErrorImpl<E> is preserved in the vtable provided by the
         // caller rather than a builtin fat pointer vtable.
         let inner = Own::new(inner).cast::<ErrorImpl>();
-        Error { inn
+        Error { inner }
+    }
+
+    /// Wrap the error value with additional context.
+    ///
+    /// For attaching context t
