@@ -245,4 +245,7 @@ impl Error {
     /// Wrap the error value with additional context.
     ///
     /// For attaching context to a `Result` as it is propagated, the
-    /// [`Context`][crate::Context] extension trait may be m
+    /// [`Context`][crate::Context] extension trait may be more convenient than
+    /// this function.
+    ///
+    /// The primary reason to use `er
