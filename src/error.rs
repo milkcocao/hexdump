@@ -248,4 +248,6 @@ impl Error {
     /// [`Context`][crate::Context] extension trait may be more convenient than
     /// this function.
     ///
-    /// The primary reason to use `er
+    /// The primary reason to use `error.context(...)` instead of
+    /// `result.context(...)` via the `Context` trait would be if the context
+    //
