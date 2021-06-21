@@ -250,4 +250,7 @@ impl Error {
     ///
     /// The primary reason to use `error.context(...)` instead of
     /// `result.context(...)` via the `Context` trait would be if the context
-    //
+    /// needs to depend on some data held by the underlying error:
+    ///
+    /// ```
+    /// # use std::fmt
