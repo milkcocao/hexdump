@@ -257,4 +257,6 @@ impl Error {
     /// #
     /// # type T = ();
     /// #
-    /// # impl std::error::
+    /// # impl std::error::Error for ParseError {}
+    /// # impl Debug for ParseError {
+    /// #     fn fmt(&s
