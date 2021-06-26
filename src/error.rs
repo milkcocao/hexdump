@@ -253,4 +253,8 @@ impl Error {
     /// needs to depend on some data held by the underlying error:
     ///
     /// ```
-    /// # use std::fmt
+    /// # use std::fmt::{self, Debug, Display};
+    /// #
+    /// # type T = ();
+    /// #
+    /// # impl std::error::
