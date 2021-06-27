@@ -259,4 +259,6 @@ impl Error {
     /// #
     /// # impl std::error::Error for ParseError {}
     /// # impl Debug for ParseError {
-    /// #     fn fmt(&s
+    /// #     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+    /// #         unimplemented!()
+    /// #   
