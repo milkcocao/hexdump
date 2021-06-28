@@ -261,4 +261,7 @@ impl Error {
     /// # impl Debug for ParseError {
     /// #     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
     /// #         unimplemented!()
-    /// #   
+    /// #     }
+    /// # }
+    /// # impl Display for ParseError {
+    /// #     fn fmt(&self, forma
