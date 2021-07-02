@@ -276,3 +276,7 @@ impl Error {
     /// struct ParseError {
     ///     line: usize,
     ///     column: usize,
+    /// }
+    ///
+    /// fn parse_impl(file: File) -> Result<T, ParseError> {
+    ///     # const IGNOR
