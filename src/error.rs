@@ -266,4 +266,9 @@ impl Error {
     /// # impl Display for ParseError {
     /// #     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
     /// #         unimplemented!()
-    /// #   
+    /// #     }
+    /// # }
+    /// #
+    /// use anyhow::Result;
+    /// use std::fs::File;
+    /// use s
