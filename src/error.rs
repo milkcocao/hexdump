@@ -271,4 +271,8 @@ impl Error {
     /// #
     /// use anyhow::Result;
     /// use std::fs::File;
-    /// use s
+    /// use std::path::Path;
+    ///
+    /// struct ParseError {
+    ///     line: usize,
+    ///     column: usize,
