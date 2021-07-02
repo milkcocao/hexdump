@@ -279,4 +279,8 @@ impl Error {
     /// }
     ///
     /// fn parse_impl(file: File) -> Result<T, ParseError> {
-    ///     # const IGNOR
+    ///     # const IGNORE: &str = stringify! {
+    ///     ...
+    ///     # };
+    ///     # unimplemented!()
+    
