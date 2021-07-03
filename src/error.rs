@@ -283,4 +283,7 @@ impl Error {
     ///     ...
     ///     # };
     ///     # unimplemented!()
-    
+    /// }
+    ///
+    /// pub fn parse(path: impl AsRef<Path>) -> Result<T> {
+    ///     let fi
