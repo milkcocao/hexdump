@@ -290,4 +290,6 @@ impl Error {
     ///     parse_impl(file).map_err(|error| {
     ///         let context = format!(
     ///             "only the first {} lines of {} are valid",
-    ///      
+    ///             error.line, path.as_ref().display(),
+    ///         );
+    ///         anyhow::Erro
