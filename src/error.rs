@@ -288,4 +288,6 @@ impl Error {
     /// pub fn parse(path: impl AsRef<Path>) -> Result<T> {
     ///     let file = File::open(&path)?;
     ///     parse_impl(file).map_err(|error| {
-    ///         let contex
+    ///         let context = format!(
+    ///             "only the first {} lines of {} are valid",
+    ///      
