@@ -286,4 +286,6 @@ impl Error {
     /// }
     ///
     /// pub fn parse(path: impl AsRef<Path>) -> Result<T> {
-    ///     let fi
+    ///     let file = File::open(&path)?;
+    ///     parse_impl(file).map_err(|error| {
+    ///         let contex
