@@ -298,4 +298,8 @@ impl Error {
     /// ```
     #[cold]
     #[must_use]
- 
+    pub fn context<C>(self, context: C) -> Self
+    where
+        C: Display + Send + Sync + 'static,
+    {
+        let er
