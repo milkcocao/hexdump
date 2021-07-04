@@ -292,4 +292,10 @@ impl Error {
     ///             "only the first {} lines of {} are valid",
     ///             error.line, path.as_ref().display(),
     ///         );
-    ///         anyhow::Erro
+    ///         anyhow::Error::new(error).context(context)
+    ///     })
+    /// }
+    /// ```
+    #[cold]
+    #[must_use]
+ 
