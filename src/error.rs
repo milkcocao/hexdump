@@ -302,4 +302,7 @@ impl Error {
     where
         C: Display + Send + Sync + 'static,
     {
-        let er
+        let error: ContextError<C, Error> = ContextError {
+            context,
+            error: self,
+   
