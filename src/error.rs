@@ -310,4 +310,6 @@ impl Error {
         let vtable = &ErrorVTable {
             object_drop: object_drop::<ContextError<C, Error>>,
             object_ref: object_ref::<ContextError<C, Error>>,
-            #[cfg(all(f
+            #[cfg(all(feature = "std", anyhow_no_ptr_addr_of))]
+            object_mut: object_mut::<ContextError<C, Error>>,
+           
