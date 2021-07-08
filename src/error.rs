@@ -308,4 +308,6 @@ impl Error {
         };
 
         let vtable = &ErrorVTable {
-            object_drop: object_drop::<ContextError<C
+            object_drop: object_drop::<ContextError<C, Error>>,
+            object_ref: object_ref::<ContextError<C, Error>>,
+            #[cfg(all(f
