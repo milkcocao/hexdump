@@ -315,4 +315,5 @@ impl Error {
             object_boxed: object_boxed::<ContextError<C, Error>>,
             object_downcast: context_chain_downcast::<C>,
             #[cfg(anyhow_no_ptr_addr_of)]
-            object_downcast_mut: contex
+            object_downcast_mut: context_chain_downcast_mut::<C>,
+            object_drop_rest: context_chain_drop_rest::<C>,
