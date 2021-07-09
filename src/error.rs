@@ -313,4 +313,6 @@ impl Error {
             #[cfg(all(feature = "std", anyhow_no_ptr_addr_of))]
             object_mut: object_mut::<ContextError<C, Error>>,
             object_boxed: object_boxed::<ContextError<C, Error>>,
-            object_downcast: context_cha
+            object_downcast: context_chain_downcast::<C>,
+            #[cfg(anyhow_no_ptr_addr_of)]
+            object_downcast_mut: contex
