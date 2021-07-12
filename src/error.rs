@@ -321,4 +321,7 @@ impl Error {
             object_backtrace: context_backtrace::<C>,
         };
 
-        // As the cause is anyhow::Error, we alr
+        // As the cause is anyhow::Error, we already have a backtrace for it.
+        let backtrace = None;
+
+        // Safety: passing vtable that operates on the right 
