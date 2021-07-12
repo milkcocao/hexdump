@@ -317,3 +317,5 @@ impl Error {
             #[cfg(anyhow_no_ptr_addr_of)]
             object_downcast_mut: context_chain_downcast_mut::<C>,
             object_drop_rest: context_chain_drop_rest::<C>,
+            #[cfg(all(not(backtrace), feature = "backtrace"))]
+            object_back
