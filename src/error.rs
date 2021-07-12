@@ -318,4 +318,7 @@ impl Error {
             object_downcast_mut: context_chain_downcast_mut::<C>,
             object_drop_rest: context_chain_drop_rest::<C>,
             #[cfg(all(not(backtrace), feature = "backtrace"))]
-            object_back
+            object_backtrace: context_backtrace::<C>,
+        };
+
+        // As the cause is anyhow::Error, we alr
