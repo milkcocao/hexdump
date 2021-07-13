@@ -324,4 +324,8 @@ impl Error {
         // As the cause is anyhow::Error, we already have a backtrace for it.
         let backtrace = None;
 
-        // Safety: passing vtable that operates on the right 
+        // Safety: passing vtable that operates on the right type.
+        unsafe { Error::construct(error, vtable, backtrace) }
+    }
+
+    /// Get the backtrace fo
