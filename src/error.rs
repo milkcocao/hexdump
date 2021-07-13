@@ -328,4 +328,6 @@ impl Error {
         unsafe { Error::construct(error, vtable, backtrace) }
     }
 
-    /// Get the backtrace fo
+    /// Get the backtrace for this Error.
+    ///
+    /// In order for the backtrace to be meaningful, one of the two environmen
