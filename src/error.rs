@@ -330,4 +330,6 @@ impl Error {
 
     /// Get the backtrace for this Error.
     ///
-    /// In order for the backtrace to be meaningful, one of the two environmen
+    /// In order for the backtrace to be meaningful, one of the two environment
+    /// variables `RUST_LIB_BACKTRACE=1` or `RUST_BACKTRACE=1` must be defined
+    /// and `RU
