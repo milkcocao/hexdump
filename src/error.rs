@@ -332,4 +332,5 @@ impl Error {
     ///
     /// In order for the backtrace to be meaningful, one of the two environment
     /// variables `RUST_LIB_BACKTRACE=1` or `RUST_BACKTRACE=1` must be defined
-    /// and `RU
+    /// and `RUST_LIB_BACKTRACE` must not be `0`. Backtraces are somewhat
+    /// expensive to capture in Rust, so we don't necessarily want t
