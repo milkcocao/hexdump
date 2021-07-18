@@ -336,4 +336,6 @@ impl Error {
     /// expensive to capture in Rust, so we don't necessarily want to be
     /// capturing them all over the place all the time.
     ///
-    /// - If you want panics and
+    /// - If you want panics and errors to both have backtraces, set
+    ///   `RUST_BACKTRACE=1`;
+    /// - If you want only errors to have
