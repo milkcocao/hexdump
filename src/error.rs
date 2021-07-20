@@ -344,3 +344,6 @@ impl Error {
     ///   `RUST_LIB_BACKTRACE=0`.
     ///
     /// # Stability
+    ///
+    /// Standard library backtraces are only available on the nightly channel.
+ 
