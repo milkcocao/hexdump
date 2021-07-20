@@ -346,4 +346,6 @@ impl Error {
     /// # Stability
     ///
     /// Standard library backtraces are only available on the nightly channel.
- 
+    /// Tracking issue: [rust-lang/rust#53487][tracking].
+    ///
+    /// On stable co
