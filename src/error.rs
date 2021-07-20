@@ -348,4 +348,5 @@ impl Error {
     /// Standard library backtraces are only available on the nightly channel.
     /// Tracking issue: [rust-lang/rust#53487][tracking].
     ///
-    /// On stable co
+    /// On stable compilers, this function is only available if the crate's
+    /// "backtrace" feature i
