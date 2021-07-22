@@ -351,4 +351,7 @@ impl Error {
     /// On stable compilers, this function is only available if the crate's
     /// "backtrace" feature is enabled, and will use the `backtrace` crate as
     /// the underlying backtrace implementation.
-    /
+    ///
+    /// ```toml
+    /// [dependencies]
+    /// anyhow = { version = "1.0", features = ["backtrace"] }
