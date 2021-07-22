@@ -349,4 +349,6 @@ impl Error {
     /// Tracking issue: [rust-lang/rust#53487][tracking].
     ///
     /// On stable compilers, this function is only available if the crate's
-    /// "backtrace" feature i
+    /// "backtrace" feature is enabled, and will use the `backtrace` crate as
+    /// the underlying backtrace implementation.
+    /
