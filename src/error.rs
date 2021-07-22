@@ -358,4 +358,5 @@ impl Error {
     /// ```
     ///
     /// [tracking]: https://github.com/rust-lang/rust/issues/53487
-  
+    #[cfg(any(backtrace, feature = "backtrace"))]
+    #[cfg_attr(doc_cfg, doc(cfg(any(nig
