@@ -361,4 +361,7 @@ impl Error {
     #[cfg(any(backtrace, feature = "backtrace"))]
     #[cfg_attr(doc_cfg, doc(cfg(any(nightly, feature = "backtrace"))))]
     pub fn backtrace(&self) -> &impl_backtrace!() {
-        uns
+        unsafe { ErrorImpl::backtrace(self.inner.by_ref()) }
+    }
+
+    /// An iterator of the ch
