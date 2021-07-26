@@ -364,4 +364,6 @@ impl Error {
         unsafe { ErrorImpl::backtrace(self.inner.by_ref()) }
     }
 
-    /// An iterator of the ch
+    /// An iterator of the chain of source errors contained by this Error.
+    ///
+    /// This iterator will 
