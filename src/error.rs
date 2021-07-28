@@ -367,4 +367,10 @@ impl Error {
     /// An iterator of the chain of source errors contained by this Error.
     ///
     /// This iterator will visit every error in the cause chain of this error
-    /// object, beginning with the error that thi
+    /// object, beginning with the error that this error object was created
+    /// from.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use any
