@@ -373,4 +373,7 @@ impl Error {
     /// # Example
     ///
     /// ```
-    /// use any
+    /// use anyhow::Error;
+    /// use std::io;
+    ///
+    /// pub fn underlying_io_error_kind(error: &Error) -> Option<io:
