@@ -386,4 +386,7 @@ impl Error {
     /// }
     /// ```
     #[cfg(feature = "std")]
-    #[cfg_attr(doc
+    #[cfg_attr(doc_cfg, doc(cfg(feature = "std")))]
+    #[cold]
+    pub fn chain(&self) -> Chain {
+        unsafe { ErrorImp
