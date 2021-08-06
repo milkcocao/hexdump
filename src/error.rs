@@ -393,3 +393,6 @@ impl Error {
     }
 
     /// The lowest level cause of this error &mdash; this error's cause's
+    /// cause's cause etc.
+    ///
+    /// The root cause is the last error in the iterator prod
