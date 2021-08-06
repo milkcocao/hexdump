@@ -389,4 +389,7 @@ impl Error {
     #[cfg_attr(doc_cfg, doc(cfg(feature = "std")))]
     #[cold]
     pub fn chain(&self) -> Chain {
-        unsafe { ErrorImp
+        unsafe { ErrorImpl::chain(self.inner.by_ref()) }
+    }
+
+    /// The lowest level cause of this error &mdash; this error's cause's
