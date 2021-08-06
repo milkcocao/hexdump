@@ -395,4 +395,7 @@ impl Error {
     /// The lowest level cause of this error &mdash; this error's cause's
     /// cause's cause etc.
     ///
-    /// The root cause is the last error in the iterator prod
+    /// The root cause is the last error in the iterator produced by
+    /// [`chain()`][Error::chain].
+    #[cfg(feature = "std")]
+    #[cfg_attr(doc_cfg, 
