@@ -398,4 +398,6 @@ impl Error {
     /// The root cause is the last error in the iterator produced by
     /// [`chain()`][Error::chain].
     #[cfg(feature = "std")]
-    #[cfg_attr(doc_cfg, 
+    #[cfg_attr(doc_cfg, doc(cfg(feature = "std")))]
+    pub fn root_cause(&self) -> &(dyn StdError + 'static) {
+     
