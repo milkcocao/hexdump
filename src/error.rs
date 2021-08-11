@@ -400,4 +400,7 @@ impl Error {
     #[cfg(feature = "std")]
     #[cfg_attr(doc_cfg, doc(cfg(feature = "std")))]
     pub fn root_cause(&self) -> &(dyn StdError + 'static) {
-     
+        self.chain().last().unwrap()
+    }
+
+    /// Returns true if `E` is the type held by this error o
