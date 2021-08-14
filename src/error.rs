@@ -403,4 +403,7 @@ impl Error {
         self.chain().last().unwrap()
     }
 
-    /// Returns true if `E` is the type held by this error o
+    /// Returns true if `E` is the type held by this error object.
+    ///
+    /// For errors with context, this method returns true if `E` matches the
+    /// type of the conte
