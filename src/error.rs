@@ -406,4 +406,5 @@ impl Error {
     /// Returns true if `E` is the type held by this error object.
     ///
     /// For errors with context, this method returns true if `E` matches the
-    /// type of the conte
+    /// type of the context `C` **or** the type of the error on which the
+    /// context has been attached. For details about t
