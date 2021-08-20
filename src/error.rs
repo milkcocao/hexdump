@@ -407,4 +407,7 @@ impl Error {
     ///
     /// For errors with context, this method returns true if `E` matches the
     /// type of the context `C` **or** the type of the error on which the
-    /// context has been attached. For details about t
+    /// context has been attached. For details about the interaction between
+    /// context and downcasting, [see here].
+    ///
+    /// [s
