@@ -415,4 +415,8 @@ impl Error {
     where
         E: Display + Debug + Send + Sync + 'static,
     {
-        self.downcast_ref::<E>
+        self.downcast_ref::<E>().is_some()
+    }
+
+    /// Attempt to downcast the error object to a concrete type.
+    pub fn downcas
