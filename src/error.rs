@@ -412,4 +412,7 @@ impl Error {
     ///
     /// [see here]: trait.Context.html#effect-on-downcasting
     pub fn is<E>(&self) -> bool
-    
+    where
+        E: Display + Debug + Send + Sync + 'static,
+    {
+        self.downcast_ref::<E>
