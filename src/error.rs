@@ -410,4 +410,6 @@ impl Error {
     /// context has been attached. For details about the interaction between
     /// context and downcasting, [see here].
     ///
-    /// [s
+    /// [see here]: trait.Context.html#effect-on-downcasting
+    pub fn is<E>(&self) -> bool
+    
