@@ -419,4 +419,8 @@ impl Error {
     }
 
     /// Attempt to downcast the error object to a concrete type.
-    pub fn downcas
+    pub fn downcast<E>(mut self) -> Result<E, Self>
+    where
+        E: Display + Debug + Send + Sync + 'static,
+    {
+ 
