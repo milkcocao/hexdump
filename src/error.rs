@@ -428,4 +428,6 @@ impl Error {
         unsafe {
             // Use vtable to find NonNull<()> which points to a value of type E
             // somewhere inside the data structure.
-            #[cfg(not(anyhow_no_ptr_addr_o
+            #[cfg(not(anyhow_no_ptr_addr_of))]
+            let addr = match (vtable(inner.ptr).object_downcast)(inner.by_ref(), target) {
+               
