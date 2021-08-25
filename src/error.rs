@@ -425,4 +425,5 @@ impl Error {
     {
         let target = TypeId::of::<E>();
         let inner = self.inner.by_mut();
-     
+        unsafe {
+            // Use vtable to find NonNull<()> which points to a value of type 
