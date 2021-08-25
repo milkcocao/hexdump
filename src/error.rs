@@ -423,4 +423,6 @@ impl Error {
     where
         E: Display + Debug + Send + Sync + 'static,
     {
- 
+        let target = TypeId::of::<E>();
+        let inner = self.inner.by_mut();
+     
