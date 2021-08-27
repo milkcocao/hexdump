@@ -430,4 +430,7 @@ impl Error {
             // somewhere inside the data structure.
             #[cfg(not(anyhow_no_ptr_addr_of))]
             let addr = match (vtable(inner.ptr).object_downcast)(inner.by_ref(), target) {
-               
+                Some(addr) => addr.by_mut().extend(),
+                None => return Err(self),
+            };
+            #[
