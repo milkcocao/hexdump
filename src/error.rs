@@ -433,4 +433,5 @@ impl Error {
                 Some(addr) => addr.by_mut().extend(),
                 None => return Err(self),
             };
-            #[
+            #[cfg(anyhow_no_ptr_addr_of)]
+            let addr = match (vtable(inner.ptr).object_downcast_mut)(inn
