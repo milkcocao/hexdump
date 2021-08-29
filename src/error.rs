@@ -440,4 +440,5 @@ impl Error {
             };
 
             // Prepare to read E out of the data structure. We'll drop the rest
-        
+            // of the data structure separately so that E is not dropped.
+            let outer = ManuallyDrop::n
