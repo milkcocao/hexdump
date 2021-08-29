@@ -436,4 +436,8 @@ impl Error {
             #[cfg(anyhow_no_ptr_addr_of)]
             let addr = match (vtable(inner.ptr).object_downcast_mut)(inner, target) {
                 Some(addr) => addr.extend(),
-                None => re
+                None => return Err(self),
+            };
+
+            // Prepare to read E out of the data structure. We'll drop the rest
+        
