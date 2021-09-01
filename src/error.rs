@@ -447,4 +447,7 @@ impl Error {
             let error = addr.cast::<E>().read();
 
             // Drop rest of the data structure outside of E.
-            (vtable
+            (vtable(outer.inner.ptr).object_drop_rest)(outer.inner, target);
+
+            Ok(error)
+      
