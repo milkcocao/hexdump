@@ -444,4 +444,7 @@ impl Error {
             let outer = ManuallyDrop::new(self);
 
             // Read E from where the vtable found it.
-            let error = addr.cast::<E>().rea
+            let error = addr.cast::<E>().read();
+
+            // Drop rest of the data structure outside of E.
+            (vtable
