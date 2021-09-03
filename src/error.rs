@@ -450,4 +450,11 @@ impl Error {
             (vtable(outer.inner.ptr).object_drop_rest)(outer.inner, target);
 
             Ok(error)
-      
+        }
+    }
+
+    /// Downcast this error object by reference.
+    ///
+    /// # Example
+    ///
+ 
