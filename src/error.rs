@@ -457,4 +457,7 @@ impl Error {
     ///
     /// # Example
     ///
- 
+    /// ```
+    /// # use anyhow::anyhow;
+    /// # use std::fmt::{self, Display};
+    /// #
