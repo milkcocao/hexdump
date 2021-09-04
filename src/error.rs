@@ -460,4 +460,8 @@ impl Error {
     /// ```
     /// # use anyhow::anyhow;
     /// # use std::fmt::{self, Display};
+    /// # use std::task::Poll;
     /// #
+    /// # #[derive(Debug)]
+    /// # enum DataStoreError {
+    /// 
