@@ -464,4 +464,8 @@ impl Error {
     /// #
     /// # #[derive(Debug)]
     /// # enum DataStoreError {
-    /// 
+    /// #     Censored(()),
+    /// # }
+    /// #
+    /// # impl Display for DataStoreError {
+    /// #     f
