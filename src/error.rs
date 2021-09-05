@@ -469,4 +469,9 @@ impl Error {
     /// #
     /// # impl Display for DataStoreError {
     /// #     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-    /// #         unimplemente
+    /// #         unimplemented!()
+    /// #     }
+    /// # }
+    /// #
+    /// # impl std::error::Error for DataStoreError {}
+    //
