@@ -474,4 +474,7 @@ impl Error {
     /// # }
     /// #
     /// # impl std::error::Error for DataStoreError {}
-    //
+    /// #
+    /// # const REDACTED_CONTENT: () = ();
+    /// #
+    /// # let error = anyhow!("...
