@@ -481,4 +481,6 @@ impl Error {
     /// # let root_cause = &error;
     /// #
     /// # let ret =
-    /// // If the error was caus
+    /// // If the error was caused by redaction, then return a tombstone instead
+    /// // of the content.
+    /// match
