@@ -484,4 +484,9 @@ impl Error {
     /// // If the error was caused by redaction, then return a tombstone instead
     /// // of the content.
     /// match root_cause.downcast_ref::<DataStoreError>() {
-    ///     Some(DataStoreError::Censored(_)) => Ok(Poll::Ready(RED
+    ///     Some(DataStoreError::Censored(_)) => Ok(Poll::Ready(REDACTED_CONTENT)),
+    ///     None => Err(error),
+    /// }
+    /// # ;
+    /// ```
+    pub fn downcast_ref<E>(&self)
