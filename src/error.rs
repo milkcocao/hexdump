@@ -489,4 +489,8 @@ impl Error {
     /// }
     /// # ;
     /// ```
-    pub fn downcast_ref<E>(&self)
+    pub fn downcast_ref<E>(&self) -> Option<&E>
+    where
+        E: Display + Debug + Send + Sync + 'static,
+    {
+        let
