@@ -483,4 +483,5 @@ impl Error {
     /// # let ret =
     /// // If the error was caused by redaction, then return a tombstone instead
     /// // of the content.
-    /// match
+    /// match root_cause.downcast_ref::<DataStoreError>() {
+    ///     Some(DataStoreError::Censored(_)) => Ok(Poll::Ready(RED
