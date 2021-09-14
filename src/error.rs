@@ -493,4 +493,6 @@ impl Error {
     where
         E: Display + Debug + Send + Sync + 'static,
     {
-        let
+        let target = TypeId::of::<E>();
+        unsafe {
+            // Use vtable to find NonNull<()> which points to 
