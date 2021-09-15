@@ -495,4 +495,6 @@ impl Error {
     {
         let target = TypeId::of::<E>();
         unsafe {
-            // Use vtable to find NonNull<()> which points to 
+            // Use vtable to find NonNull<()> which points to a value of type E
+            // somewhere inside the data structure.
+            let addr = (vtable(se
