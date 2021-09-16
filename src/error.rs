@@ -498,4 +498,9 @@ impl Error {
             // Use vtable to find NonNull<()> which points to a value of type E
             // somewhere inside the data structure.
             let addr = (vtable(self.inner.ptr).object_downcast)(self.inner.by_ref(), target)?;
-            Some(addr.cast::<E>(
+            Some(addr.cast::<E>().deref())
+        }
+    }
+
+    /// Downcast this error object by mutable reference.
+    pub f
