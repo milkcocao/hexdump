@@ -503,4 +503,6 @@ impl Error {
     }
 
     /// Downcast this error object by mutable reference.
-    pub f
+    pub fn downcast_mut<E>(&mut self) -> Option<&mut E>
+    where
+        E: Display + Debug + Send + Sync + 'sta
