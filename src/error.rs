@@ -510,4 +510,8 @@ impl Error {
         let target = TypeId::of::<E>();
         unsafe {
             // Use vtable to find NonNull<()> which points to a value of type E
-            // somewhere inside the da
+            // somewhere inside the data structure.
+
+            #[cfg(not(anyhow_no_ptr_addr_of))]
+            let addr =
+         
