@@ -505,4 +505,8 @@ impl Error {
     /// Downcast this error object by mutable reference.
     pub fn downcast_mut<E>(&mut self) -> Option<&mut E>
     where
-        E: Display + Debug + Send + Sync + 'sta
+        E: Display + Debug + Send + Sync + 'static,
+    {
+        let target = TypeId::of::<E>();
+        unsafe {
+            // Use vtable
