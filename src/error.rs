@@ -514,4 +514,6 @@ impl Error {
 
             #[cfg(not(anyhow_no_ptr_addr_of))]
             let addr =
-         
+                (vtable(self.inner.ptr).object_downcast)(self.inner.by_ref(), target)?.by_mut();
+
+          
