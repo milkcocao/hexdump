@@ -517,4 +517,10 @@ impl Error {
                 (vtable(self.inner.ptr).object_downcast)(self.inner.by_ref(), target)?.by_mut();
 
             #[cfg(anyhow_no_ptr_addr_of)]
-            let addr = (vtable(self.inner.ptr).object_downcast_mu
+            let addr = (vtable(self.inner.ptr).object_downcast_mut)(self.inner.by_mut(), target)?;
+
+            Some(addr.cast::<E>().deref_mut())
+        }
+    }
+}
+
