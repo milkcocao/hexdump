@@ -524,3 +524,6 @@ impl Error {
     }
 }
 
+#[cfg(backtrace)]
+impl std::any::Provider for Error {
+    // Called by thiserror when you have `#
