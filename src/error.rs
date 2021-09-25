@@ -530,4 +530,6 @@ impl std::any::Provider for Error {
     // implementation includes the anyhow::Error's Backtrace if any, unlike
     // deref'ing to dyn Error where the provide implementation would include
     // only the original error's Backtrace from before it got wrapped into an
-    // anyh
+    // anyhow::Error.
+    fn provide<'a>(&'a self, demand: &mut Demand<'a>) {
+        unsafe {
