@@ -532,4 +532,9 @@ impl std::any::Provider for Error {
     // only the original error's Backtrace from before it got wrapped into an
     // anyhow::Error.
     fn provide<'a>(&'a self, demand: &mut Demand<'a>) {
-        unsafe {
+        unsafe { ErrorImpl::provide(self.inner.by_ref(), demand) }
+    }
+}
+
+#[cfg(feature = "std")]
+#[cfg_att
