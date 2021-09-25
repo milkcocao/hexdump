@@ -527,4 +527,5 @@ impl Error {
 #[cfg(backtrace)]
 impl std::any::Provider for Error {
     // Called by thiserror when you have `#[source] anyhow::Error`. This provide
-    // implementation includes the anyhow::Error's B
+    // implementation includes the anyhow::Error's Backtrace if any, unlike
+    // deref'ing to dyn Error where the provide implementation would i
