@@ -540,4 +540,8 @@ impl std::any::Provider for Error {
 #[cfg_attr(doc_cfg, doc(cfg(feature = "std")))]
 impl<E> From<E> for Error
 where
-    E: StdError + Send + Sy
+    E: StdError + Send + Sync + 'static,
+{
+    #[cold]
+    fn from(error: E) -> Self {
+        let backtrace = backtr
