@@ -544,4 +544,10 @@ where
 {
     #[cold]
     fn from(error: E) -> Self {
-        let backtrace = backtr
+        let backtrace = backtrace_if_absent!(&error);
+        Error::from_std(error, backtrace)
+    }
+}
+
+#[cfg(feature = "std")]
+#[cfg_
