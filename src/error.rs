@@ -537,4 +537,7 @@ impl std::any::Provider for Error {
 }
 
 #[cfg(feature = "std")]
-#[cfg_att
+#[cfg_attr(doc_cfg, doc(cfg(feature = "std")))]
+impl<E> From<E> for Error
+where
+    E: StdError + Send + Sy
