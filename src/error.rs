@@ -550,4 +550,6 @@ where
 }
 
 #[cfg(feature = "std")]
-#[cfg_
+#[cfg_attr(doc_cfg, doc(cfg(feature = "std")))]
+impl Deref for Error {
+    type Target = dyn StdError + Send +
