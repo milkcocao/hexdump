@@ -552,4 +552,8 @@ where
 #[cfg(feature = "std")]
 #[cfg_attr(doc_cfg, doc(cfg(feature = "std")))]
 impl Deref for Error {
-    type Target = dyn StdError + Send +
+    type Target = dyn StdError + Send + Sync + 'static;
+
+    fn deref(&self) -> &Self::Target {
+        unsafe { ErrorImpl::error(self.inner.by_ref()) }
+    }
