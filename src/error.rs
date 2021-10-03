@@ -557,3 +557,8 @@ impl Deref for Error {
     fn deref(&self) -> &Self::Target {
         unsafe { ErrorImpl::error(self.inner.by_ref()) }
     }
+}
+
+#[cfg(feature = "std")]
+#[cfg_attr(doc_cfg, doc(cfg(feature = "std")))]
+impl DerefMut f
