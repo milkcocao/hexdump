@@ -561,4 +561,6 @@ impl Deref for Error {
 
 #[cfg(feature = "std")]
 #[cfg_attr(doc_cfg, doc(cfg(feature = "std")))]
-impl DerefMut f
+impl DerefMut for Error {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        unsafe { ErrorImpl
