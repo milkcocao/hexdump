@@ -568,4 +568,7 @@ impl DerefMut for Error {
 }
 
 impl Display for Error {
-    fn fmt(&self, format
+    fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        unsafe { ErrorImpl::display(self.inner.by_ref(), formatter) }
+    }
+}
