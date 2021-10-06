@@ -572,3 +572,7 @@ impl Display for Error {
         unsafe { ErrorImpl::display(self.inner.by_ref(), formatter) }
     }
 }
+
+impl Debug for Error {
+    fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+      
