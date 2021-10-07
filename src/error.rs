@@ -580,4 +580,7 @@ impl Debug for Error {
 }
 
 impl Drop for Error {
-    fn d
+    fn drop(&mut self) {
+        unsafe {
+            // Invoke the vtable's drop behavior.
+            (vtable(s
