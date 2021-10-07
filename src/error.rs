@@ -583,4 +583,10 @@ impl Drop for Error {
     fn drop(&mut self) {
         unsafe {
             // Invoke the vtable's drop behavior.
-            (vtable(s
+            (vtable(self.inner.ptr).object_drop)(self.inner);
+        }
+    }
+}
+
+struct ErrorVTable {
+    object_drop: unsafe
