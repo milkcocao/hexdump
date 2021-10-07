@@ -575,4 +575,9 @@ impl Display for Error {
 
 impl Debug for Error {
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-      
+        unsafe { ErrorImpl::debug(self.inner.by_ref(), formatter) }
+    }
+}
+
+impl Drop for Error {
+    fn d
