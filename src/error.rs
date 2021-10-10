@@ -590,4 +590,6 @@ impl Drop for Error {
 
 struct ErrorVTable {
     object_drop: unsafe fn(Own<ErrorImpl>),
-    object_ref: unsafe fn(Ref<ErrorImpl>) -> Ref<dyn StdError + Send + Syn
+    object_ref: unsafe fn(Ref<ErrorImpl>) -> Ref<dyn StdError + Send + Sync + 'static>,
+    #[cfg(all(feature = "std", anyhow_no_ptr_addr_of))]
+    object_mut: unsafe fn(Mut<
