@@ -594,4 +594,6 @@ struct ErrorVTable {
     #[cfg(all(feature = "std", anyhow_no_ptr_addr_of))]
     object_mut: unsafe fn(Mut<ErrorImpl>) -> &mut (dyn StdError + Send + Sync + 'static),
     object_boxed: unsafe fn(Own<ErrorImpl>) -> Box<dyn StdError + Send + Sync + 'static>,
-    object_downcast: unsafe fn(Ref<ErrorImpl>, TypeId) -
+    object_downcast: unsafe fn(Ref<ErrorImpl>, TypeId) -> Option<Ref<()>>,
+    #[cfg(anyhow_no_ptr_addr_of)]
+    object_downcast_mut: unsafe
