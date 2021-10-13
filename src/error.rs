@@ -598,4 +598,5 @@ struct ErrorVTable {
     #[cfg(anyhow_no_ptr_addr_of)]
     object_downcast_mut: unsafe fn(Mut<ErrorImpl>, TypeId) -> Option<Mut<()>>,
     object_drop_rest: unsafe fn(Own<ErrorImpl>, TypeId),
- 
+    #[cfg(all(not(backtrace), feature = "backtrace"))]
+    object_backtrace: unsafe fn(Ref<ErrorImp
