@@ -603,4 +603,5 @@ struct ErrorVTable {
 }
 
 // Safety: requires layout of *e to match ErrorImpl<E>.
-unsafe fn 
+unsafe fn object_drop<E>(e: Own<ErrorImpl>) {
+    // Cast back to ErrorImpl<E> so that the allocator rece
