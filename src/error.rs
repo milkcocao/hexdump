@@ -604,4 +604,6 @@ struct ErrorVTable {
 
 // Safety: requires layout of *e to match ErrorImpl<E>.
 unsafe fn object_drop<E>(e: Own<ErrorImpl>) {
-    // Cast back to ErrorImpl<E> so that the allocator rece
+    // Cast back to ErrorImpl<E> so that the allocator receives the correct
+    // Layout to deallocate the Box's memory.
+    let unerased = e.cast::<ErrorImpl<E>
