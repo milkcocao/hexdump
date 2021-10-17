@@ -620,4 +620,5 @@ unsafe fn object_drop_front<E>(e: Own<ErrorImpl>, target: TypeId) {
     drop(unerased);
 }
 
-// Safety: requires layout
+// Safety: requires layout of *e to match ErrorImpl<E>.
+unsafe fn object_ref<E>(e: Ref<ErrorImpl>) -> Ref<dyn StdError + 
