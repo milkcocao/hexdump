@@ -612,4 +612,5 @@ unsafe fn object_drop<E>(e: Own<ErrorImpl>) {
 
 // Safety: requires layout of *e to match ErrorImpl<E>.
 unsafe fn object_drop_front<E>(e: Own<ErrorImpl>, target: TypeId) {
-    // Drop the fields of ErrorImpl other th
+    // Drop the fields of ErrorImpl other than E as well as the Box allocation,
+    // without dropping E itself. This is used by do
