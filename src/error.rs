@@ -616,4 +616,8 @@ unsafe fn object_drop_front<E>(e: Own<ErrorImpl>, target: TypeId) {
     // without dropping E itself. This is used by downcast after doing a
     // ptr::read to take ownership of the E.
     let _ = target;
-    let unerased = e.
+    let unerased = e.cast::<ErrorImpl<ManuallyDrop<E>>>().boxed();
+    drop(unerased);
+}
+
+// Safety: requires layout
