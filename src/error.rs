@@ -625,4 +625,8 @@ unsafe fn object_ref<E>(e: Ref<ErrorImpl>) -> Ref<dyn StdError + Send + Sync + '
 where
     E: StdError + Send + Sync + 'static,
 {
-    // Attach E's native StdEr
+    // Attach E's native StdError vtable onto a pointer to self._object.
+
+    let unerased = e.cast::<ErrorImpl<E>>();
+
+    #[
