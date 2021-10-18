@@ -629,4 +629,6 @@ where
 
     let unerased = e.cast::<ErrorImpl<E>>();
 
-    #[
+    #[cfg(not(anyhow_no_ptr_addr_of))]
+    return Ref::from_raw(NonNull::new_unchecked(
+        ptr::addr_of!(
