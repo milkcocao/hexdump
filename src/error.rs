@@ -621,4 +621,8 @@ unsafe fn object_drop_front<E>(e: Own<ErrorImpl>, target: TypeId) {
 }
 
 // Safety: requires layout of *e to match ErrorImpl<E>.
-unsafe fn object_ref<E>(e: Ref<ErrorImpl>) -> Ref<dyn StdError + 
+unsafe fn object_ref<E>(e: Ref<ErrorImpl>) -> Ref<dyn StdError + Send + Sync + 'static>
+where
+    E: StdError + Send + Sync + 'static,
+{
+    // Attach E's native StdEr
