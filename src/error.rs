@@ -635,4 +635,7 @@ where
     ));
 
     #[cfg(anyhow_no_ptr_addr_of)]
-    return Ref::new(&uneras
+    return Ref::new(&unerased.deref()._object);
+}
+
+// Safety: requires layout of *e to match ErrorImpl<E>, and for `e` to be derived
