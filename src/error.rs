@@ -631,4 +631,8 @@ where
 
     #[cfg(not(anyhow_no_ptr_addr_of))]
     return Ref::from_raw(NonNull::new_unchecked(
-        ptr::addr_of!(
+        ptr::addr_of!((*unerased.as_ptr())._object) as *mut E,
+    ));
+
+    #[cfg(anyhow_no_ptr_addr_of)]
+    return Ref::new(&uneras
