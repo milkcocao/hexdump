@@ -643,4 +643,7 @@ where
 #[cfg(all(feature = "std", anyhow_no_ptr_addr_of))]
 unsafe fn object_mut<E>(e: Mut<ErrorImpl>) -> &mut (dyn StdError + Send + Sync + 'static)
 where
-    E: StdError + Send + Sync + 'st
+    E: StdError + Send + Sync + 'static,
+{
+    // Attach E's native StdError vtable onto a pointer to self._object.
+    &mut e.cast::<ErrorImp
