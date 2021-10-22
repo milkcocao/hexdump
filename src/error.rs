@@ -641,4 +641,6 @@ where
 // Safety: requires layout of *e to match ErrorImpl<E>, and for `e` to be derived
 // from a `&mut`
 #[cfg(all(feature = "std", anyhow_no_ptr_addr_of))]
-unsafe fn object_mut<E>(e:
+unsafe fn object_mut<E>(e: Mut<ErrorImpl>) -> &mut (dyn StdError + Send + Sync + 'static)
+where
+    E: StdError + Send + Sync + 'st
