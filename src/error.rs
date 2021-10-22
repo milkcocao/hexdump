@@ -646,4 +646,8 @@ where
     E: StdError + Send + Sync + 'static,
 {
     // Attach E's native StdError vtable onto a pointer to self._object.
-    &mut e.cast::<ErrorImp
+    &mut e.cast::<ErrorImpl<E>>().deref_mut()._object
+}
+
+// Safety: requires layout of *e to match ErrorImpl<E>.
+unsafe fn object_boxed<E>(
