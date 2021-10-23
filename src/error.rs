@@ -650,4 +650,8 @@ where
 }
 
 // Safety: requires layout of *e to match ErrorImpl<E>.
-unsafe fn object_boxed<E>(
+unsafe fn object_boxed<E>(e: Own<ErrorImpl>) -> Box<dyn StdError + Send + Sync + 'static>
+where
+    E: StdError + Send + Sync + 'static,
+{
+   
