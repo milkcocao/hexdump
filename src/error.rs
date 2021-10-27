@@ -654,4 +654,5 @@ unsafe fn object_boxed<E>(e: Own<ErrorImpl>) -> Box<dyn StdError + Send + Sync +
 where
     E: StdError + Send + Sync + 'static,
 {
-   
+    // Attach ErrorImpl<E>'s native StdError vtable. The StdError impl is below.
+    e.cast::<ErrorImpl<E>>().boxed(
