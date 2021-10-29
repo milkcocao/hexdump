@@ -655,4 +655,8 @@ where
     E: StdError + Send + Sync + 'static,
 {
     // Attach ErrorImpl<E>'s native StdError vtable. The StdError impl is below.
-    e.cast::<ErrorImpl<E>>().boxed(
+    e.cast::<ErrorImpl<E>>().boxed()
+}
+
+// Safety: requires layout of *e to match ErrorImpl<E>.
+unsafe fn object_downcast<E>(e: Re
