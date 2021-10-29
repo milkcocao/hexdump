@@ -659,4 +659,8 @@ where
 }
 
 // Safety: requires layout of *e to match ErrorImpl<E>.
-unsafe fn object_downcast<E>(e: Re
+unsafe fn object_downcast<E>(e: Ref<ErrorImpl>, target: TypeId) -> Option<Ref<()>>
+where
+    E: 'static,
+{
+    if TypeId::of::<E>() =
