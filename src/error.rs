@@ -663,4 +663,6 @@ unsafe fn object_downcast<E>(e: Ref<ErrorImpl>, target: TypeId) -> Option<Ref<()
 where
     E: 'static,
 {
-    if TypeId::of::<E>() =
+    if TypeId::of::<E>() == target {
+        // Caller is looking for an E pointer and e is ErrorImpl<E>, take a
+     
