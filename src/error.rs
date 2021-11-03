@@ -678,4 +678,10 @@ where
         );
 
         #[cfg(anyhow_no_ptr_addr_of)]
-        return Some(Ref::new(&un
+        return Some(Ref::new(&unerased.deref()._object).cast::<()>());
+    } else {
+        None
+    }
+}
+
+// Safety: requir
