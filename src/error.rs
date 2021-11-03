@@ -684,4 +684,6 @@ where
     }
 }
 
-// Safety: requir
+// Safety: requires layout of *e to match ErrorImpl<E>.
+#[cfg(anyhow_no_ptr_addr_of)]
+unsafe fn object_downcast_mut<E>(
