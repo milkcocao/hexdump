@@ -673,4 +673,9 @@ where
         return Some(
             Ref::from_raw(NonNull::new_unchecked(
                 ptr::addr_of!((*unerased.as_ptr())._object) as *mut E,
-           
+            ))
+            .cast::<()>(),
+        );
+
+        #[cfg(anyhow_no_ptr_addr_of)]
+        return Some(Ref::new(&un
