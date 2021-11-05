@@ -686,4 +686,8 @@ where
 
 // Safety: requires layout of *e to match ErrorImpl<E>.
 #[cfg(anyhow_no_ptr_addr_of)]
-unsafe fn object_downcast_mut<E>(
+unsafe fn object_downcast_mut<E>(e: Mut<ErrorImpl>, target: TypeId) -> Option<Mut<()>>
+where
+    E: 'static,
+{
+    if TypeId::of::<E>() 
