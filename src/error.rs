@@ -690,4 +690,6 @@ unsafe fn object_downcast_mut<E>(e: Mut<ErrorImpl>, target: TypeId) -> Option<Mu
 where
     E: 'static,
 {
-    if TypeId::of::<E>() 
+    if TypeId::of::<E>() == target {
+        // Caller is looking for an E pointer and e is ErrorImpl<E>, take a
+        // po
