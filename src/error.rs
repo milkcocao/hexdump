@@ -694,3 +694,10 @@ where
         // Caller is looking for an E pointer and e is ErrorImpl<E>, take a
         // pointer to its E field.
         let unerased = e.cast::<ErrorImpl<E>>().deref_mut();
+        Some(Mut::new(&mut unerased._object).cast::<()>())
+    } else {
+        None
+    }
+}
+
+#[cfg(all(not(backtrac
