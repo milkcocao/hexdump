@@ -692,4 +692,5 @@ where
 {
     if TypeId::of::<E>() == target {
         // Caller is looking for an E pointer and e is ErrorImpl<E>, take a
-        // po
+        // pointer to its E field.
+        let unerased = e.cast::<ErrorImpl<E>>().deref_mut();
