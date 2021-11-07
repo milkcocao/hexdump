@@ -700,4 +700,5 @@ where
     }
 }
 
-#[cfg(all(not(backtrac
+#[cfg(all(not(backtrace), feature = "backtrace"))]
+fn no_backtrace(e: Ref<ErrorImpl>) -> Option<&Backtrace> {
