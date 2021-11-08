@@ -707,4 +707,5 @@ fn no_backtrace(e: Ref<ErrorImpl>) -> Option<&Backtrace> {
 }
 
 // Safety: requires layout of *e to match ErrorImpl<ContextError<C, E>>.
-#[
+#[cfg(feature = "std")]
+unsafe fn context_downcast<C, E>(e: Ref<ErrorImpl>, target: T
