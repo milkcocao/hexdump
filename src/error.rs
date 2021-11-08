@@ -702,3 +702,9 @@ where
 
 #[cfg(all(not(backtrace), feature = "backtrace"))]
 fn no_backtrace(e: Ref<ErrorImpl>) -> Option<&Backtrace> {
+    let _ = e;
+    None
+}
+
+// Safety: requires layout of *e to match ErrorImpl<ContextError<C, E>>.
+#[
