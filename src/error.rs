@@ -718,4 +718,10 @@ where
         Some(Ref::new(&unerased._object.context).cast::<()>())
     } else if TypeId::of::<E>() == target {
         let unerased = e.cast::<ErrorImpl<ContextError<C, E>>>().deref();
-        Some(Ref::new(&un
+        Some(Ref::new(&unerased._object.error).cast::<()>())
+    } else {
+        None
+    }
+}
+
+// Safety: requires layout of *
