@@ -713,4 +713,6 @@ where
     C: 'static,
     E: 'static,
 {
-    if TypeId
+    if TypeId::of::<C>() == target {
+        let unerased = e.cast::<ErrorImpl<ContextError<C, E>>>().deref();
+        S
