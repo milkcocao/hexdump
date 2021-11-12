@@ -715,4 +715,5 @@ where
 {
     if TypeId::of::<C>() == target {
         let unerased = e.cast::<ErrorImpl<ContextError<C, E>>>().deref();
-        S
+        Some(Ref::new(&unerased._object.context).cast::<()>())
+    } else if TypeId::of::<E>() == target {
