@@ -726,4 +726,7 @@ where
 
 // Safety: requires layout of *e to match ErrorImpl<ContextError<C, E>>.
 #[cfg(all(feature = "std", anyhow_no_ptr_addr_of))]
-unsa
+unsafe fn context_downcast_mut<C, E>(e: Mut<ErrorImpl>, target: TypeId) -> Option<Mut<()>>
+where
+    C: 'static,
+    E: 
