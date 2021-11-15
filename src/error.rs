@@ -729,4 +729,7 @@ where
 unsafe fn context_downcast_mut<C, E>(e: Mut<ErrorImpl>, target: TypeId) -> Option<Mut<()>>
 where
     C: 'static,
-    E: 
+    E: 'static,
+{
+    if TypeId::of::<C>() == target {
+        let unerased = e.cast::<ErrorImpl<ContextEr
