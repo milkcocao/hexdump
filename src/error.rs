@@ -732,4 +732,6 @@ where
     E: 'static,
 {
     if TypeId::of::<C>() == target {
-        let unerased = e.cast::<ErrorImpl<ContextEr
+        let unerased = e.cast::<ErrorImpl<ContextError<C, E>>>().deref_mut();
+        Some(Mut::new(&mut unerased._object.context).cast::<()>())
+    } else if 
