@@ -736,4 +736,7 @@ where
         Some(Mut::new(&mut unerased._object.context).cast::<()>())
     } else if TypeId::of::<E>() == target {
         let unerased = e.cast::<ErrorImpl<ContextError<C, E>>>().deref_mut();
- 
+        Some(Mut::new(&mut unerased._object.error).cast::<()>())
+    } else {
+        None
+  
