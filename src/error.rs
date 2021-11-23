@@ -739,4 +739,9 @@ where
         Some(Mut::new(&mut unerased._object.error).cast::<()>())
     } else {
         None
-  
+    }
+}
+
+// Safety: requires layout of *e to match ErrorImpl<ContextError<C, E>>.
+#[cfg(feature = "std")]
+unsafe
