@@ -744,4 +744,9 @@ where
 
 // Safety: requires layout of *e to match ErrorImpl<ContextError<C, E>>.
 #[cfg(feature = "std")]
-unsafe
+unsafe fn context_drop_rest<C, E>(e: Own<ErrorImpl>, target: TypeId)
+where
+    C: 'static,
+    E: 'static,
+{
+    //
