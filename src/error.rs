@@ -749,4 +749,5 @@ where
     C: 'static,
     E: 'static,
 {
-    //
+    // Called after downcasting by value to either the C or the E and doing a
+    // ptr::read to take own
