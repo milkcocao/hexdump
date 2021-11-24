@@ -755,4 +755,7 @@ where
         let unerased = e
             .cast::<ErrorImpl<ContextError<ManuallyDrop<C>, E>>>()
             .boxed();
-        drop(unerase
+        drop(unerased);
+    } else {
+        let unerased = e
+            .cast::<ErrorImpl<ContextError<C, Manually
