@@ -753,4 +753,6 @@ where
     // ptr::read to take ownership of that value.
     if TypeId::of::<C>() == target {
         let unerased = e
-            
+            .cast::<ErrorImpl<ContextError<ManuallyDrop<C>, E>>>()
+            .boxed();
+        drop(unerase
