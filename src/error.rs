@@ -750,4 +750,7 @@ where
     E: 'static,
 {
     // Called after downcasting by value to either the C or the E and doing a
-    // ptr::read to take own
+    // ptr::read to take ownership of that value.
+    if TypeId::of::<C>() == target {
+        let unerased = e
+            
