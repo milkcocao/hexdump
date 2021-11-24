@@ -758,4 +758,10 @@ where
         drop(unerased);
     } else {
         let unerased = e
-            .cast::<ErrorImpl<ContextError<C, Manually
+            .cast::<ErrorImpl<ContextError<C, ManuallyDrop<E>>>>()
+            .boxed();
+        drop(unerased);
+    }
+}
+
+// Safety: requires 
