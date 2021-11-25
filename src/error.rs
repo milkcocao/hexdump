@@ -764,4 +764,5 @@ where
     }
 }
 
-// Safety: requires 
+// Safety: requires layout of *e to match ErrorImpl<ContextError<C, Error>>.
+unsafe fn context_chain_downcast
