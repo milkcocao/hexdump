@@ -769,4 +769,6 @@ unsafe fn context_chain_downcast<C>(e: Ref<ErrorImpl>, target: TypeId) -> Option
 where
     C: 'static,
 {
-    let uner
+    let unerased = e.cast::<ErrorImpl<ContextError<C, Error>>>().deref();
+    if TypeId::of::<C>() == target {
+        Som
