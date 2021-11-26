@@ -771,4 +771,6 @@ where
 {
     let unerased = e.cast::<ErrorImpl<ContextError<C, Error>>>().deref();
     if TypeId::of::<C>() == target {
-        Som
+        Some(Ref::new(&unerased._object.context).cast::<()>())
+    } else {
+        // Recurse down the context cha
