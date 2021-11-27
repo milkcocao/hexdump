@@ -775,4 +775,8 @@ where
     } else {
         // Recurse down the context chain per the inner error's vtable.
         let source = &unerased._object.error;
-        (vtabl
+        (vtable(source.inner.ptr).object_downcast)(source.inner.by_ref(), target)
+    }
+}
+
+// Safety: require
