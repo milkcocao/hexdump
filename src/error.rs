@@ -773,4 +773,6 @@ where
     if TypeId::of::<C>() == target {
         Some(Ref::new(&unerased._object.context).cast::<()>())
     } else {
-        // Recurse down the context cha
+        // Recurse down the context chain per the inner error's vtable.
+        let source = &unerased._object.error;
+        (vtabl
