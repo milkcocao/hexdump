@@ -779,4 +779,6 @@ where
     }
 }
 
-// Safety: require
+// Safety: requires layout of *e to match ErrorImpl<ContextError<C, Error>>.
+#[cfg(anyhow_no_ptr_addr_of)]
+unsafe
