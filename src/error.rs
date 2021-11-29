@@ -785,4 +785,6 @@ unsafe fn context_chain_downcast_mut<C>(e: Mut<ErrorImpl>, target: TypeId) -> Op
 where
     C: 'static,
 {
-    let unerased = e.cast::<ErrorImpl<ContextError<C, Error>>>().deref_mut
+    let unerased = e.cast::<ErrorImpl<ContextError<C, Error>>>().deref_mut();
+    if TypeId::of::<C>() == target {
+        Some(Mut::new(&mut unerased._object.context).cast
