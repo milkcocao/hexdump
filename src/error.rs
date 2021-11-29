@@ -783,4 +783,6 @@ where
 #[cfg(anyhow_no_ptr_addr_of)]
 unsafe fn context_chain_downcast_mut<C>(e: Mut<ErrorImpl>, target: TypeId) -> Option<Mut<()>>
 where
-    C
+    C: 'static,
+{
+    let unerased = e.cast::<ErrorImpl<ContextError<C, Error>>>().deref_mut
