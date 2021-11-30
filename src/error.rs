@@ -791,4 +791,8 @@ where
     } else {
         // Recurse down the context chain per the inner error's vtable.
         let source = &mut unerased._object.error;
-        (vtable(source.inner.ptr).object_downcas
+        (vtable(source.inner.ptr).object_downcast_mut)(source.inner.by_mut(), target)
+    }
+}
+
+// Safety: requires layout of *e to match ErrorImp
