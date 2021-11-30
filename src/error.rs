@@ -787,4 +787,7 @@ where
 {
     let unerased = e.cast::<ErrorImpl<ContextError<C, Error>>>().deref_mut();
     if TypeId::of::<C>() == target {
-        Some(Mut::new(&mut unerased._object.context).cast
+        Some(Mut::new(&mut unerased._object.context).cast::<()>())
+    } else {
+        // Recurse down the context chain per the inner error's vtable.
+       
