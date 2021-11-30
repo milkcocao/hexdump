@@ -790,4 +790,5 @@ where
         Some(Mut::new(&mut unerased._object.context).cast::<()>())
     } else {
         // Recurse down the context chain per the inner error's vtable.
-       
+        let source = &mut unerased._object.error;
+        (vtable(source.inner.ptr).object_downcas
