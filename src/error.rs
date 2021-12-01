@@ -795,4 +795,6 @@ where
     }
 }
 
-// Safety: requires layout of *e to match ErrorImp
+// Safety: requires layout of *e to match ErrorImpl<ContextError<C, Error>>.
+unsafe fn context_chain_drop_rest<C>(e: Own<ErrorImpl>, target: TypeId)
+w
