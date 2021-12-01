@@ -802,4 +802,6 @@ where
 {
     // Called after downcasting by value to either the C or one of the causes
     // and doing a ptr::read to take ownership of that value.
-    if TypeId::of::<C>() == ta
+    if TypeId::of::<C>() == target {
+        let unerased = e
+            .cast::<ErrorImpl<ContextError<ManuallyDrop<C>, Error>>>(
