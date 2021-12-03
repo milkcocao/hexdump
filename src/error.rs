@@ -810,4 +810,6 @@ where
         drop(unerased);
     } else {
         let unerased = e
-           
+            .cast::<ErrorImpl<ContextError<C, ManuallyDrop<Error>>>>()
+            .boxed();
+        // Read the Own<ErrorIm
