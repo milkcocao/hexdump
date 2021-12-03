@@ -806,4 +806,8 @@ where
         let unerased = e
             .cast::<ErrorImpl<ContextError<ManuallyDrop<C>, Error>>>()
             .boxed();
-        // Drop the entire rest of the data structure rooted i
+        // Drop the entire rest of the data structure rooted in the next Error.
+        drop(unerased);
+    } else {
+        let unerased = e
+           
