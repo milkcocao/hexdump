@@ -804,4 +804,6 @@ where
     // and doing a ptr::read to take ownership of that value.
     if TypeId::of::<C>() == target {
         let unerased = e
-            .cast::<ErrorImpl<ContextError<ManuallyDrop<C>, Error>>>(
+            .cast::<ErrorImpl<ContextError<ManuallyDrop<C>, Error>>>()
+            .boxed();
+        // Drop the entire rest of the data structure rooted i
