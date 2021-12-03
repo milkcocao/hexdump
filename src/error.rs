@@ -812,4 +812,7 @@ where
         let unerased = e
             .cast::<ErrorImpl<ContextError<C, ManuallyDrop<Error>>>>()
             .boxed();
-        // Read the Own<ErrorIm
+        // Read the Own<ErrorImpl> from the next error.
+        let inner = unerased._object.error.inner;
+        drop(unerased);
+        let 
