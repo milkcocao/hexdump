@@ -821,4 +821,5 @@ where
     }
 }
 
-// Safety: requires layout
+// Safety: requires layout of *e to match ErrorImpl<ContextError<C, Error>>.
+#[cfg(all(not(backtrace), feature = "ba
