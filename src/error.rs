@@ -815,4 +815,5 @@ where
         // Read the Own<ErrorImpl> from the next error.
         let inner = unerased._object.error.inner;
         drop(unerased);
-        let 
+        let vtable = vtable(inner.ptr);
+        // Recursively drop the next error using the same target typei
