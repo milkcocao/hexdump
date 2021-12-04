@@ -816,4 +816,9 @@ where
         let inner = unerased._object.error.inner;
         drop(unerased);
         let vtable = vtable(inner.ptr);
-        // Recursively drop the next error using the same target typei
+        // Recursively drop the next error using the same target typeid.
+        (vtable.object_drop_rest)(inner, target);
+    }
+}
+
+// Safety: requires layout
