@@ -822,4 +822,6 @@ where
 }
 
 // Safety: requires layout of *e to match ErrorImpl<ContextError<C, Error>>.
-#[cfg(all(not(backtrace), feature = "ba
+#[cfg(all(not(backtrace), feature = "backtrace"))]
+#[allow(clippy::unnecessary_wraps)]
+unsafe fn context_backtrace<C>(e: Ref<ErrorImpl>
