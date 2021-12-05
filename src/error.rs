@@ -824,4 +824,8 @@ where
 // Safety: requires layout of *e to match ErrorImpl<ContextError<C, Error>>.
 #[cfg(all(not(backtrace), feature = "backtrace"))]
 #[allow(clippy::unnecessary_wraps)]
-unsafe fn context_backtrace<C>(e: Ref<ErrorImpl>
+unsafe fn context_backtrace<C>(e: Ref<ErrorImpl>) -> Option<&Backtrace>
+where
+    C: 'static,
+{
+    let unerased = e.cast::<ErrorImpl<ContextError<C, Error>>>().deref
