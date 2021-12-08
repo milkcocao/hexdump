@@ -828,4 +828,5 @@ unsafe fn context_backtrace<C>(e: Ref<ErrorImpl>) -> Option<&Backtrace>
 where
     C: 'static,
 {
-    let unerased = e.cast::<ErrorImpl<ContextError<C, Error>>>().deref
+    let unerased = e.cast::<ErrorImpl<ContextError<C, Error>>>().deref();
+    let backtrace = ErrorImpl::backtrace(unerased._object.error.inner.
