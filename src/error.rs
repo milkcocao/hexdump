@@ -829,4 +829,8 @@ where
     C: 'static,
 {
     let unerased = e.cast::<ErrorImpl<ContextError<C, Error>>>().deref();
-    let backtrace = ErrorImpl::backtrace(unerased._object.error.inner.
+    let backtrace = ErrorImpl::backtrace(unerased._object.error.inner.by_ref());
+    Some(backtrace)
+}
+
+// NOTE: If working with `ErrorImpl<()>`, references should be avoided
