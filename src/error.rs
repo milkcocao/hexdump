@@ -840,4 +840,9 @@ where
 pub(crate) struct ErrorImpl<E = ()> {
     vtable: &'static ErrorVTable,
     backtrace: Option<Backtrace>,
-    // NOTE: Don't use directly. Use only through vtable. Erased type may 
+    // NOTE: Don't use directly. Use only through vtable. Erased type may have
+    // different alignment.
+    _object: E,
+}
+
+// Reads the vtable out of `p`. This is t
