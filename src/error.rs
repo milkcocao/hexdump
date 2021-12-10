@@ -839,4 +839,5 @@ where
 #[repr(C)]
 pub(crate) struct ErrorImpl<E = ()> {
     vtable: &'static ErrorVTable,
-  
+    backtrace: Option<Backtrace>,
+    // NOTE: Don't use directly. Use only through vtable. Erased type may 
