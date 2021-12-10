@@ -845,4 +845,6 @@ pub(crate) struct ErrorImpl<E = ()> {
     _object: E,
 }
 
-// Reads the vtable out of `p`. This is t
+// Reads the vtable out of `p`. This is the same as `p.as_ref().vtable`, but
+// avoids converting `p` into a reference.
+unsafe fn vtable(p: NonN
