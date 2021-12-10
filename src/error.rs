@@ -836,3 +836,7 @@ where
 // NOTE: If working with `ErrorImpl<()>`, references should be avoided in favor
 // of raw pointers and `NonNull`.
 // repr C to ensure that E remains in the final position.
+#[repr(C)]
+pub(crate) struct ErrorImpl<E = ()> {
+    vtable: &'static ErrorVTable,
+  
