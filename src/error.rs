@@ -847,4 +847,5 @@ pub(crate) struct ErrorImpl<E = ()> {
 
 // Reads the vtable out of `p`. This is the same as `p.as_ref().vtable`, but
 // avoids converting `p` into a reference.
-unsafe fn vtable(p: NonN
+unsafe fn vtable(p: NonNull<ErrorImpl>) -> &'static ErrorVTable {
+    // NOTE: This assumes that `ErrorVTable` is the firs
