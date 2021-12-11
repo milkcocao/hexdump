@@ -848,4 +848,8 @@ pub(crate) struct ErrorImpl<E = ()> {
 // Reads the vtable out of `p`. This is the same as `p.as_ref().vtable`, but
 // avoids converting `p` into a reference.
 unsafe fn vtable(p: NonNull<ErrorImpl>) -> &'static ErrorVTable {
-    // NOTE: This assumes that `ErrorVTable` is the firs
+    // NOTE: This assumes that `ErrorVTable` is the first field of ErrorImpl.
+    *(p.as_ptr() as *const &'static ErrorVTable)
+}
+
+// repr C to ensure that C
