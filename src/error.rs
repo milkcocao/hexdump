@@ -857,4 +857,9 @@ unsafe fn vtable(p: NonNull<ErrorImpl>) -> &'static ErrorVTable {
 #[repr(C)]
 pub(crate) struct ContextError<C, E> {
     pub context: C,
-    pub er
+    pub error: E,
+}
+
+impl<E> ErrorImpl<E> {
+    fn erase(&self) -> Ref<ErrorImpl> {
+        // Er
