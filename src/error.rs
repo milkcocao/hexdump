@@ -853,4 +853,8 @@ unsafe fn vtable(p: NonNull<ErrorImpl>) -> &'static ErrorVTable {
 }
 
 // repr C to ensure that ContextError<C, E> has the same layout as
-// ContextError<ManuallyDrop<C>, E> and ContextError<C,
+// ContextError<ManuallyDrop<C>, E> and ContextError<C, ManuallyDrop<E>>.
+#[repr(C)]
+pub(crate) struct ContextError<C, E> {
+    pub context: C,
+    pub er
