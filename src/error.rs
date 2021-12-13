@@ -852,4 +852,5 @@ unsafe fn vtable(p: NonNull<ErrorImpl>) -> &'static ErrorVTable {
     *(p.as_ptr() as *const &'static ErrorVTable)
 }
 
-// repr C to ensure that C
+// repr C to ensure that ContextError<C, E> has the same layout as
+// ContextError<ManuallyDrop<C>, E> and ContextError<C,
