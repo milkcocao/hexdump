@@ -862,4 +862,5 @@ pub(crate) struct ContextError<C, E> {
 
 impl<E> ErrorImpl<E> {
     fn erase(&self) -> Ref<ErrorImpl> {
-        // Er
+        // Erase the concrete type of E but preserve the vtable in self.vtable
+        // for manipulating the resulting thin pointer
