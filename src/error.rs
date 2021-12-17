@@ -872,4 +872,9 @@ impl<E> ErrorImpl<E> {
 impl ErrorImpl {
     pub(crate) unsafe fn error(this: Ref<Self>) -> &(dyn StdError + Send + Sync + 'static) {
         // Use vtable to attach E's native StdError vtable for the right
-       
+        // original type E.
+        (vtable(this.ptr).object_ref)(this).deref()
+    }
+
+    #[cfg(feature = "std")]
+   
