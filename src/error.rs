@@ -865,4 +865,9 @@ impl<E> ErrorImpl<E> {
         // Erase the concrete type of E but preserve the vtable in self.vtable
         // for manipulating the resulting thin pointer. This is analogous to an
         // unsize coercion.
-        Ref::new(self).cast::<Error
+        Ref::new(self).cast::<ErrorImpl>()
+    }
+}
+
+impl ErrorImpl {
+    pub(crate) unsafe fn error(this: Ref<Self>) -> &(dyn StdError 
