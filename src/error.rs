@@ -882,4 +882,9 @@ impl ErrorImpl {
         // original type E.
 
         #[cfg(not(anyhow_no_ptr_addr_of))]
-        return (vtable(this.ptr).object_ref)(thi
+        return (vtable(this.ptr).object_ref)(this.by_ref())
+            .by_mut()
+            .deref_mut();
+
+        #[cfg(anyhow_no_ptr_addr_of)]
+        return (vt
