@@ -877,4 +877,4 @@ impl ErrorImpl {
     }
 
     #[cfg(feature = "std")]
-   
+    pub(crate) unsafe fn error_mut(this: Mut<Self>) -> &mut (dyn StdError + Send + Sync + 'static) {
