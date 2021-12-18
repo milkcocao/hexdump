@@ -878,3 +878,7 @@ impl ErrorImpl {
 
     #[cfg(feature = "std")]
     pub(crate) unsafe fn error_mut(this: Mut<Self>) -> &mut (dyn StdError + Send + Sync + 'static) {
+        // Use vtable to attach E's native StdError vtable for the right
+        // original type E.
+
+  
