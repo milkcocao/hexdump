@@ -881,4 +881,5 @@ impl ErrorImpl {
         // Use vtable to attach E's native StdError vtable for the right
         // original type E.
 
-  
+        #[cfg(not(anyhow_no_ptr_addr_of))]
+        return (vtable(this.ptr).object_ref)(thi
