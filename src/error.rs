@@ -887,4 +887,7 @@ impl ErrorImpl {
             .deref_mut();
 
         #[cfg(anyhow_no_ptr_addr_of)]
-        return (vt
+        return (vtable(this.ptr).object_mut)(this);
+    }
+
+    #[cfg(any(backtrace, feature = "back
