@@ -890,4 +890,6 @@ impl ErrorImpl {
         return (vtable(this.ptr).object_mut)(this);
     }
 
-    #[cfg(any(backtrace, feature = "back
+    #[cfg(any(backtrace, feature = "backtrace"))]
+    pub(crate) unsafe fn backtrace(this: Ref<Self>) -> &Backtrace {
+        // This unwrap can only
