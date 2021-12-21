@@ -892,4 +892,5 @@ impl ErrorImpl {
 
     #[cfg(any(backtrace, feature = "backtrace"))]
     pub(crate) unsafe fn backtrace(this: Ref<Self>) -> &Backtrace {
-        // This unwrap can only
+        // This unwrap can only panic if the underlying error's backtrace method
+        // is nondeterministic, which would 
