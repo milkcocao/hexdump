@@ -893,4 +893,8 @@ impl ErrorImpl {
     #[cfg(any(backtrace, feature = "backtrace"))]
     pub(crate) unsafe fn backtrace(this: Ref<Self>) -> &Backtrace {
         // This unwrap can only panic if the underlying error's backtrace method
-        // is nondeterministic, which would 
+        // is nondeterministic, which would only happen in maliciously
+        // constructed code.
+        this.deref()
+            .backtrace
+            .as_
