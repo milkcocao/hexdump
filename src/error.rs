@@ -902,4 +902,6 @@ impl ErrorImpl {
                 #[cfg(backtrace)]
                 return Self::error(this).request_ref::<Backtrace>();
                 #[cfg(not(backtrace))]
-         
+                return (vtable(this.ptr).object_backtrace)(this);
+            })
+            .expect("backtrace capture 
