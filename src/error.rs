@@ -897,4 +897,7 @@ impl ErrorImpl {
         // constructed code.
         this.deref()
             .backtrace
-            .as_
+            .as_ref()
+            .or_else(|| {
+                #[cfg(backtrace)]
+                return Self::er
