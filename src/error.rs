@@ -900,4 +900,6 @@ impl ErrorImpl {
             .as_ref()
             .or_else(|| {
                 #[cfg(backtrace)]
-                return Self::er
+                return Self::error(this).request_ref::<Backtrace>();
+                #[cfg(not(backtrace))]
+         
