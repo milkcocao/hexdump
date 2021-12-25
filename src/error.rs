@@ -904,4 +904,8 @@ impl ErrorImpl {
                 #[cfg(not(backtrace))]
                 return (vtable(this.ptr).object_backtrace)(this);
             })
-            .expect("backtrace capture 
+            .expect("backtrace capture failed")
+    }
+
+    #[cfg(backtrace)]
+    unsafe fn provide<'a>(this: Ref<'a, Sel
