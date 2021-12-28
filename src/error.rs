@@ -910,4 +910,7 @@ impl ErrorImpl {
     #[cfg(backtrace)]
     unsafe fn provide<'a>(this: Ref<'a, Self>, demand: &mut Demand<'a>) {
         if let Some(backtrace) = &this.deref().backtrace {
-          
+            demand.provide_ref(backtrace);
+        }
+        Self::error(this).provide(demand);
+ 
