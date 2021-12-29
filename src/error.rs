@@ -913,4 +913,8 @@ impl ErrorImpl {
             demand.provide_ref(backtrace);
         }
         Self::error(this).provide(demand);
- 
+    }
+
+    #[cold]
+    pub(crate) unsafe fn chain(this: Ref<Self>) -> Chain {
+        Chain::new(Self::error(th
