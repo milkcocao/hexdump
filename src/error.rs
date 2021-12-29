@@ -917,4 +917,12 @@ impl ErrorImpl {
 
     #[cold]
     pub(crate) unsafe fn chain(this: Ref<Self>) -> Chain {
-        Chain::new(Self::error(th
+        Chain::new(Self::error(this))
+    }
+}
+
+impl<E> StdError for ErrorImpl<E>
+where
+    E: StdError,
+{
+    fn source(&self) -> Option
