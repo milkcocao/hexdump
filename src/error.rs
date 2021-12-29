@@ -925,4 +925,8 @@ impl<E> StdError for ErrorImpl<E>
 where
     E: StdError,
 {
-    fn source(&self) -> Option
+    fn source(&self) -> Option<&(dyn StdError + 'static)> {
+        unsafe { ErrorImpl::error(self.erase()).source() }
+    }
+
+ 
