@@ -929,4 +929,6 @@ where
         unsafe { ErrorImpl::error(self.erase()).source() }
     }
 
- 
+    #[cfg(backtrace)]
+    fn provide<'a>(&'a self, demand: &mut Demand<'a>) {
+        unsafe { ErrorI
