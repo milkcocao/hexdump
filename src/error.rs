@@ -940,4 +940,12 @@ where
     E: Debug,
 {
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-        unsafe { ErrorIm
+        unsafe { ErrorImpl::debug(self.erase(), formatter) }
+    }
+}
+
+impl<E> Display for ErrorImpl<E>
+where
+    E: Display,
+{
+    fn fmt
