@@ -937,4 +937,7 @@ where
 
 impl<E> Debug for ErrorImpl<E>
 where
-    E: Debug
+    E: Debug,
+{
+    fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        unsafe { ErrorIm
