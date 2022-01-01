@@ -931,4 +931,10 @@ where
 
     #[cfg(backtrace)]
     fn provide<'a>(&'a self, demand: &mut Demand<'a>) {
-        unsafe { ErrorI
+        unsafe { ErrorImpl::provide(self.erase(), demand) }
+    }
+}
+
+impl<E> Debug for ErrorImpl<E>
+where
+    E: Debug
