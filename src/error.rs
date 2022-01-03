@@ -948,4 +948,5 @@ impl<E> Display for ErrorImpl<E>
 where
     E: Display,
 {
-    fn fmt
+    fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        unsafe { Display::fmt(ErrorImpl::error(s
