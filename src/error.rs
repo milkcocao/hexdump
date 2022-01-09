@@ -954,4 +954,6 @@ where
 }
 
 impl From<Error> for Box<dyn StdError + Send + Sync + 'static> {
-    #[col
+    #[cold]
+    fn from(error: Error) -> Self {
+        let outer = ManuallyDrop::new(err
