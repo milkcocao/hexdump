@@ -956,4 +956,6 @@ where
 impl From<Error> for Box<dyn StdError + Send + Sync + 'static> {
     #[cold]
     fn from(error: Error) -> Self {
-        let outer = ManuallyDrop::new(err
+        let outer = ManuallyDrop::new(error);
+        unsafe {
+            // Use vtable to attach ErrorImpl<E>'s native StdError 
