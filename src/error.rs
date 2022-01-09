@@ -949,4 +949,9 @@ where
     E: Display,
 {
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-        unsafe { Display::fmt(ErrorImpl::error(s
+        unsafe { Display::fmt(ErrorImpl::error(self.erase()), formatter) }
+    }
+}
+
+impl From<Error> for Box<dyn StdError + Send + Sync + 'static> {
+    #[col
