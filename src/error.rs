@@ -960,4 +960,10 @@ impl From<Error> for Box<dyn StdError + Send + Sync + 'static> {
         unsafe {
             // Use vtable to attach ErrorImpl<E>'s native StdError vtable for
             // the right original type E.
-            (vtable(outer.inner.ptr).object_boxed)(o
+            (vtable(outer.inner.ptr).object_boxed)(outer.inner)
+        }
+    }
+}
+
+impl From<Error> for Box<dyn StdError + Send + 'static> {
+ 
