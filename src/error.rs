@@ -958,4 +958,6 @@ impl From<Error> for Box<dyn StdError + Send + Sync + 'static> {
     fn from(error: Error) -> Self {
         let outer = ManuallyDrop::new(error);
         unsafe {
-            // Use vtable to attach ErrorImpl<E>'s native StdError 
+            // Use vtable to attach ErrorImpl<E>'s native StdError vtable for
+            // the right original type E.
+            (vtable(outer.inner.ptr).object_boxed)(o
