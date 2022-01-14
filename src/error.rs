@@ -973,4 +973,9 @@ impl From<Error> for Box<dyn StdError + Send + 'static> {
 
 impl From<Error> for Box<dyn StdError + 'static> {
     fn from(error: Error) -> Self {
-       
+        Box::<dyn StdError + Send + Sync>::from(error)
+    }
+}
+
+#[cfg(feature = "std")]
+impl AsRef<dyn S
