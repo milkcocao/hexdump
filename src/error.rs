@@ -971,4 +971,6 @@ impl From<Error> for Box<dyn StdError + Send + 'static> {
     }
 }
 
-impl From<E
+impl From<Error> for Box<dyn StdError + 'static> {
+    fn from(error: Error) -> Self {
+       
