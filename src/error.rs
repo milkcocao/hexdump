@@ -985,4 +985,8 @@ impl AsRef<dyn StdError + Send + Sync> for Error {
 }
 
 #[cfg(feature = "std")]
-impl AsRef<dyn StdError>
+impl AsRef<dyn StdError> for Error {
+    fn as_ref(&self) -> &(dyn StdError + 'static) {
+        &**self
+    }
+}
