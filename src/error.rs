@@ -979,4 +979,10 @@ impl From<Error> for Box<dyn StdError + 'static> {
 
 #[cfg(feature = "std")]
 impl AsRef<dyn StdError + Send + Sync> for Error {
-    fn as_ref(&self) -> &(dyn StdError + Send + Sync + 's
+    fn as_ref(&self) -> &(dyn StdError + Send + Sync + 'static) {
+        &**self
+    }
+}
+
+#[cfg(feature = "std")]
+impl AsRef<dyn StdError>
