@@ -77,3 +77,41 @@ pub struct Trait;
 pub trait TraitKind: Sized {
     #[inline]
     fn anyhow_kind(&self) -> Trait {
+        Trait
+    }
+}
+
+impl<E> TraitKind for E where E: Into<Error> {}
+
+impl Trait {
+    #[cold]
+    pub fn new<E>(self, error: E) -> Error
+    where
+        E: Into<Error>,
+    {
+        error.into()
+    }
+}
+
+#[cfg(feature = "std")]
+pub struct Boxed;
+
+#[cfg(feature = "std")]
+pub trait BoxedKind: Sized {
+    #[inline]
+    fn anyhow_kind(&self) -> Boxed {
+        Boxed
+    }
+}
+
+#[cfg(feature = "std")]
+impl BoxedKind for Box<dyn StdError + Send + Sync> {}
+
+#[cfg(feature = "std")]
+impl Boxed {
+    #[cold]
+    pub fn new(self, error: Box<dyn StdError + Send + Sync>) -> Error {
+        let backtrace = backtrace_if_absent!(&*error);
+        Error::from_boxed(error, backtrace)
+    }
+}
