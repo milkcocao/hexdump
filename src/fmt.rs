@@ -131,3 +131,26 @@ mod tests {
             number: Some(12),
             started: false,
         }
+        .write_str(input)
+        .unwrap();
+
+        assert_eq!(expected, output);
+    }
+
+    #[test]
+    fn no_digits() {
+        let input = "verify\nthis";
+        let expected = "    verify\n    this";
+        let mut output = String::new();
+
+        Indented {
+            inner: &mut output,
+            number: None,
+            started: false,
+        }
+        .write_str(input)
+        .unwrap();
+
+        assert_eq!(expected, output);
+    }
+}
