@@ -6,4 +6,7 @@
 //!
 //! <br>
 //!
-//! This library provides [`anyhow::Error`][Error], a tr
+//! This library provides [`anyhow::Error`][Error], a trait object based error
+//! type for easy idiomatic error handling in Rust applications.
+//!
+//! <
