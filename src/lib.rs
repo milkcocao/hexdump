@@ -9,4 +9,8 @@
 //! This library provides [`anyhow::Error`][Error], a trait object based error
 //! type for easy idiomatic error handling in Rust applications.
 //!
-//! <
+//! <br>
+//!
+//! # Details
+//!
+//! - Use `Result<T, anyhow::Error>`, or equivalently `anyhow
