@@ -20,4 +20,8 @@
 //!   the `std::error::Error` trait.
 //!
 //!   ```
-//!   # p
+//!   # pub trait Deserialize {}
+//!   #
+//!   # mod serde_json {
+//!   #     use super::Deserialize;
+//!   # 
