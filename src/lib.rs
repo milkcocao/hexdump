@@ -13,4 +13,7 @@
 //!
 //! # Details
 //!
-//! - Use `Result<T, anyhow::Error>`, or equivalently `anyhow
+//! - Use `Result<T, anyhow::Error>`, or equivalently `anyhow::Result<T>`, as
+//!   the return type of any fallible function.
+//!
+//!   Within the fu
