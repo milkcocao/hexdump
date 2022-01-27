@@ -16,4 +16,8 @@
 //! - Use `Result<T, anyhow::Error>`, or equivalently `anyhow::Result<T>`, as
 //!   the return type of any fallible function.
 //!
-//!   Within the fu
+//!   Within the function, use `?` to easily propagate any error that implements
+//!   the `std::error::Error` trait.
+//!
+//!   ```
+//!   # p
