@@ -24,4 +24,6 @@
 //!   #
 //!   # mod serde_json {
 //!   #     use super::Deserialize;
-//!   # 
+//!   #     use std::io;
+//!   #
+//!   #     pub fn from_str<T: Deserialize>(json: &str) -> io::Result<T>
