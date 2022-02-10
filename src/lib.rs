@@ -37,4 +37,5 @@
 //!   #
 //!   use anyhow::Result;
 //!
-//!   fn
+//!   fn get_cluster_info() -> Result<ClusterMap> {
+//!       let config = std::fs::read_to_strin
