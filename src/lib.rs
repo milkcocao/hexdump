@@ -46,4 +46,5 @@
 //!   # fn main() {}
 //!   ```
 //!
-//! - Attach context to help the person trouble
+//! - Attach context to help the person troubleshooting the error understand
+//!   where things went wrong. A low-level error like "No such file or
