@@ -48,3 +48,5 @@
 //!
 //! - Attach context to help the person troubleshooting the error understand
 //!   where things went wrong. A low-level error like "No such file or
+//!   directory" can be annoying to debug without more context about what higher
+//!   level step the application w
