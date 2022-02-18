@@ -55,4 +55,9 @@
 //!   # struct It;
 //!   #
 //!   # impl It {
-//!   #     fn d
+//!   #     fn detach(&self) -> Result<()> {
+//!   #         unimplemented!()
+//!   #     }
+//!   # }
+//!   #
+//! 
