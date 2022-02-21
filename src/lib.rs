@@ -69,4 +69,7 @@
 //!       ...
 //!       # };
 //!       #
-//!      
+//!       # let it = It;
+//!       # let path = "./path/to/instrs.json";
+//!       #
+//!       it.detach().con
