@@ -63,4 +63,10 @@
 //!   use anyhow::{Context, Result};
 //!
 //!   fn main() -> Result<()> {
-//!       # retur
+//!       # return Ok(());
+//!       #
+//!       # const _: &str = stringify! {
+//!       ...
+//!       # };
+//!       #
+//!      
