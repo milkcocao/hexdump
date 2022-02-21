@@ -60,4 +60,7 @@
 //!   #     }
 //!   # }
 //!   #
-//! 
+//!   use anyhow::{Context, Result};
+//!
+//!   fn main() -> Result<()> {
+//!       # retur
