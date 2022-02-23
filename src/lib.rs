@@ -72,4 +72,7 @@
 //!       # let it = It;
 //!       # let path = "./path/to/instrs.json";
 //!       #
-//!       it.detach().con
+//!       it.detach().context("Failed to detach the important thing")?;
+//!
+//!       let content = std::fs::read(path)
+/
