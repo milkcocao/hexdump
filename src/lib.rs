@@ -81,4 +81,10 @@
 //!       ...
 //!       # };
 //!       #
-//!       # Ok(
+//!       # Ok(())
+//!   }
+//!   ```
+//!
+//!   ```console
+//!   Error: Failed to read instrs from ./path/to/instrs.json
+//!
