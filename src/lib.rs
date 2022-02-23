@@ -76,4 +76,9 @@
 //!
 //!       let content = std::fs::read(path)
 //!           .with_context(|| format!("Failed to read instrs from {}", path))?;
-//!    
+//!       #
+//!       # const _: &str = stringify! {
+//!       ...
+//!       # };
+//!       #
+//!       # Ok(
