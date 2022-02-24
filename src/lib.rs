@@ -88,3 +88,8 @@
 //!   ```console
 //!   Error: Failed to read instrs from ./path/to/instrs.json
 //!
+//!   Caused by:
+//!       No such file or directory (os error 2)
+//!   ```
+//!
+//! - Downcasting is supporte
