@@ -92,4 +92,8 @@
 //!       No such file or directory (os error 2)
 //!   ```
 //!
-//! - Downcasting is supporte
+//! - Downcasting is supported and can be by value, by shared reference, or by
+//!   mutable reference as needed.
+//!
+//!   ```
+//!   
