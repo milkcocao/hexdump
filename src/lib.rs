@@ -100,4 +100,9 @@
 //!   # use std::fmt::{self, Display};
 //!   # use std::task::Poll;
 //!   #
-//!   # 
+//!   # #[derive(Debug)]
+//!   # enum DataStoreError {
+//!   #     Censored(()),
+//!   # }
+//!   #
+//!   # im
