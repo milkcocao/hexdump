@@ -105,4 +105,5 @@
 //!   #     Censored(()),
 //!   # }
 //!   #
-//!   # im
+//!   # impl Display for DataStoreError {
+//!   #     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result 
