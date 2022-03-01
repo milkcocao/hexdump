@@ -111,4 +111,8 @@
 //!   #     }
 //!   # }
 //!   #
-//!   # im
+//!   # impl std::error::Error for DataStoreError {}
+//!   #
+//!   # const REDACTED_CONTENT: () = ();
+//!   #
+//
