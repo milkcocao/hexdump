@@ -119,4 +119,6 @@
 //!   # let root_cause = &error;
 //!   #
 //!   # let ret =
-//!   // If the 
+//!   // If the error was caused by redaction, then return a
+//!   // tombstone instead of the content.
+//!  
