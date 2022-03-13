@@ -122,4 +122,8 @@
 //!   // If the error was caused by redaction, then return a
 //!   // tombstone instead of the content.
 //!   match root_cause.downcast_ref::<DataStoreError>() {
-//!       Some(DataStoreError::Censored(
+//!       Some(DataStoreError::Censored(_)) => Ok(Poll::Ready(REDACTED_CONTENT)),
+//!       None => Err(error),
+//!   }
+//!   # ;
+//!   
