@@ -126,4 +126,7 @@
 //!       None => Err(error),
 //!   }
 //!   # ;
-//!   
+//!   ```
+//!
+//! - If using the nightly channel, or stable with `features = ["backtrace"]`, a
+//! 
