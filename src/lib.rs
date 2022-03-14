@@ -129,4 +129,5 @@
 //!   ```
 //!
 //! - If using the nightly channel, or stable with `features = ["backtrace"]`, a
-//! 
+//!   backtrace is captured and printed with the error if the underlying error
+//!   type does not
