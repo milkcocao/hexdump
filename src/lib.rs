@@ -130,4 +130,5 @@
 //!
 //! - If using the nightly channel, or stable with `features = ["backtrace"]`, a
 //!   backtrace is captured and printed with the error if the underlying error
-//!   type does not
+//!   type does not already provide its own. In order to see backtraces, they
+//!   must be enabl
