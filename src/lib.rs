@@ -134,4 +134,6 @@
 //!   must be enabled through the environment variables described in
 //!   [`std::backtrace`]:
 //!
-//!   - If you want panics an
+//!   - If you want panics and errors to both have backtraces, set
+//!     `RUST_BACKTRACE=1`;
+//!   - If you want only err
