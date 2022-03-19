@@ -136,4 +136,5 @@
 //!
 //!   - If you want panics and errors to both have backtraces, set
 //!     `RUST_BACKTRACE=1`;
-//!   - If you want only err
+//!   - If you want only errors to have backtraces, set `RUST_LIB_BACKTRACE=1`;
+//!   - If you want only panics to ha
