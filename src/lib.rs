@@ -140,4 +140,6 @@
 //!   - If you want only panics to have backtraces, set `RUST_BACKTRACE=1` and
 //!     `RUST_LIB_BACKTRACE=0`.
 //!
-//!   The track
+//!   The tracking issue for this feature is [rust-lang/rust#53487].
+//!
+//!   [`std::backtrace`]: https://doc
