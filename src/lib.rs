@@ -143,4 +143,6 @@
 //!   The tracking issue for this feature is [rust-lang/rust#53487].
 //!
 //!   [`std::backtrace`]: https://doc.rust-lang.org/std/backtrace/index.html#environment-variables
-//!   [rust-lang/rust#53487]: https:/
+//!   [rust-lang/rust#53487]: https://github.com/rust-lang/rust/issues/53487
+//!
+//! - Anyhow works with any error type that has an impl
