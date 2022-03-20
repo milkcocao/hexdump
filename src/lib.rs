@@ -142,4 +142,5 @@
 //!
 //!   The tracking issue for this feature is [rust-lang/rust#53487].
 //!
-//!   [`std::backtrace`]: https://doc
+//!   [`std::backtrace`]: https://doc.rust-lang.org/std/backtrace/index.html#environment-variables
+//!   [rust-lang/rust#53487]: https:/
