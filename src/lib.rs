@@ -145,4 +145,6 @@
 //!   [`std::backtrace`]: https://doc.rust-lang.org/std/backtrace/index.html#environment-variables
 //!   [rust-lang/rust#53487]: https://github.com/rust-lang/rust/issues/53487
 //!
-//! - Anyhow works with any error type that has an impl
+//! - Anyhow works with any error type that has an impl of `std::error::Error`,
+//!   including ones defined in your crate. We do not bundle a `derive(Error)`
+//!   macr
