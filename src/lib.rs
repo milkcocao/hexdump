@@ -147,4 +147,7 @@
 //!
 //! - Anyhow works with any error type that has an impl of `std::error::Error`,
 //!   including ones defined in your crate. We do not bundle a `derive(Error)`
-//!   macr
+//!   macro but you can write the impls yourself or use a standalone macro like
+//!   [thiserror].
+//!
+//!
