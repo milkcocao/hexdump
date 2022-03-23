@@ -150,4 +150,7 @@
 //!   macro but you can write the impls yourself or use a standalone macro like
 //!   [thiserror].
 //!
+//!   [thiserror]: https://github.com/dtolnay/thiserror
 //!
+//!   ```
+//!   use thiserror::Error;
