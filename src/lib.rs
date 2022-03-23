@@ -154,3 +154,7 @@
 //!
 //!   ```
 //!   use thiserror::Error;
+//!
+//!   #[derive(Error, Debug)]
+//!   pub enum FormatError {
+//!       #[error("Invalid header (
