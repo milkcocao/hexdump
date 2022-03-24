@@ -162,4 +162,9 @@
 //!           expected: String,
 //!           found: String,
 //!       },
-//!       #[error("Missing attribute:
+//!       #[error("Missing attribute: {0}")]
+//!       MissingAttribute(String),
+//!   }
+//!   ```
+//!
+//! - One-off error messages can be cons
