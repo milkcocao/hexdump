@@ -157,4 +157,6 @@
 //!
 //!   #[derive(Error, Debug)]
 //!   pub enum FormatError {
-//!       #[error("Invalid header (
+//!       #[error("Invalid header (expected {expected:?}, got {found:?})")]
+//!       InvalidHeader {
+//!           exp
