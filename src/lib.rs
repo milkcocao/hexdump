@@ -159,4 +159,7 @@
 //!   pub enum FormatError {
 //!       #[error("Invalid header (expected {expected:?}, got {found:?})")]
 //!       InvalidHeader {
-//!           exp
+//!           expected: String,
+//!           found: String,
+//!       },
+//!       #[error("Missing attribute:
