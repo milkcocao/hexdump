@@ -167,4 +167,5 @@
 //!   }
 //!   ```
 //!
-//! - One-off error messages can be cons
+//! - One-off error messages can be constructed using the `anyhow!` macro, which
+//!   supports string interpolation and pr
