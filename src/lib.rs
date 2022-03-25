@@ -173,4 +173,6 @@
 //!   ```
 //!   # use anyhow::{anyhow, Result};
 //!   #
-//!   # fn demo() ->
+//!   # fn demo() -> Result<()> {
+//!   #     let missing = "...";
+//!   return Err(anyhow!("Missing attribute: {}", mi
