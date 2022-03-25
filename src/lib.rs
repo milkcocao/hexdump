@@ -168,4 +168,9 @@
 //!   ```
 //!
 //! - One-off error messages can be constructed using the `anyhow!` macro, which
-//!   supports string interpolation and pr
+//!   supports string interpolation and produces an `anyhow::Error`.
+//!
+//!   ```
+//!   # use anyhow::{anyhow, Result};
+//!   #
+//!   # fn demo() ->
