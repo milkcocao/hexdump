@@ -175,4 +175,9 @@
 //!   #
 //!   # fn demo() -> Result<()> {
 //!   #     let missing = "...";
-//!   return Err(anyhow!("Missing attribute: {}", mi
+//!   return Err(anyhow!("Missing attribute: {}", missing));
+//!   #     Ok(())
+//!   # }
+//!   ```
+//!
+//!   A `bail!` macro is provided as a
