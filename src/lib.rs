@@ -187,4 +187,11 @@
 //!   #
 //!   # fn demo() -> Result<()> {
 //!   #     let missing = "...";
-//!   bail!("Missi
+//!   bail!("Missing attribute: {}", missing);
+//!   #     Ok(())
+//!   # }
+//!   ```
+//!
+//! <br>
+//!
+//! # No-std suppor
