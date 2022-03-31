@@ -180,4 +180,9 @@
 //!   # }
 //!   ```
 //!
-//!   A `bail!` macro is provided as a
+//!   A `bail!` macro is provided as a shorthand for the same early return.
+//!
+//!   ```
+//!   # use anyhow::{bail, Result};
+//!   #
+//
