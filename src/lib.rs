@@ -185,4 +185,6 @@
 //!   ```
 //!   # use anyhow::{bail, Result};
 //!   #
-//
+//!   # fn demo() -> Result<()> {
+//!   #     let missing = "...";
+//!   bail!("Missi
