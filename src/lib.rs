@@ -194,4 +194,7 @@
 //!
 //! <br>
 //!
-//! # No-std suppor
+//! # No-std support
+//!
+//! In no_std mode, the same API is almost all available and works the same way.
+//! To depend on Anyhow i
