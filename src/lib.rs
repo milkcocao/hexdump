@@ -197,4 +197,5 @@
 //! # No-std support
 //!
 //! In no_std mode, the same API is almost all available and works the same way.
-//! To depend on Anyhow i
+//! To depend on Anyhow in no_std mode, disable our default enabled "std"
+//! feature in Cargo.toml. A global allocato
