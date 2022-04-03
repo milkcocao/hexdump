@@ -202,4 +202,8 @@
 //!
 //! ```toml
 //! [dependencies]
-//! anyhow = { version = "1.0", default-features 
+//! anyhow = { version = "1.0", default-features = false }
+//! ```
+//!
+//! Since the `?`-based error conversions would normally rely on the
+//! `std::error::Er
