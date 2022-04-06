@@ -206,4 +206,5 @@
 //! ```
 //!
 //! Since the `?`-based error conversions would normally rely on the
-//! `std::error::Er
+//! `std::error::Error` trait which is only available through std, no_std mode
+//! will require an explicit `.map_er
