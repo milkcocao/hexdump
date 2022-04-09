@@ -207,4 +207,5 @@
 //!
 //! Since the `?`-based error conversions would normally rely on the
 //! `std::error::Error` trait which is only available through std, no_std mode
-//! will require an explicit `.map_er
+//! will require an explicit `.map_err(Error::msg)` when working with a
+//! non-Anyhow error type inside a function that returns Anyhow
