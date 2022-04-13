@@ -219,4 +219,7 @@
     clippy::doc_markdown,
     clippy::enum_glob_use,
     clippy::explicit_auto_deref,
-    clippy::extra_unused_type_pa
+    clippy::extra_unused_type_parameters,
+    clippy::let_underscore_untyped,
+    clippy::missing_errors_doc,
+    clippy:
