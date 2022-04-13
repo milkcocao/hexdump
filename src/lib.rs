@@ -216,4 +216,7 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 #![deny(dead_code, unused_imports, unused_mut)]
 #![allow(
-    clippy::doc_mark
+    clippy::doc_markdown,
+    clippy::enum_glob_use,
+    clippy::explicit_auto_deref,
+    clippy::extra_unused_type_pa
