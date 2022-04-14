@@ -225,4 +225,7 @@
     clippy::missing_panics_doc,
     clippy::module_name_repetitions,
     clippy::must_use_candidate,
-    clippy::needles
+    clippy::needless_doctest_main,
+    clippy::new_ret_no_self,
+    clippy::redundant_else,
+    clippy::retur
