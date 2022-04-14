@@ -222,4 +222,7 @@
     clippy::extra_unused_type_parameters,
     clippy::let_underscore_untyped,
     clippy::missing_errors_doc,
-    clippy:
+    clippy::missing_panics_doc,
+    clippy::module_name_repetitions,
+    clippy::must_use_candidate,
+    clippy::needles
