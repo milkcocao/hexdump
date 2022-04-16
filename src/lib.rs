@@ -253,4 +253,10 @@ use crate::error::ErrorImpl;
 use crate::ptr::Own;
 use core::fmt::Display;
 
-#[cfg(not(feature = "st
+#[cfg(not(feature = "std"))]
+use core::fmt::Debug;
+
+#[cfg(feature = "std")]
+use std::error::Error as StdError;
+
+#[cfg(not(feat
