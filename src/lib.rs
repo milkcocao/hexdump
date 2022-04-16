@@ -238,4 +238,13 @@
 extern crate alloc;
 
 #[macro_use]
-mod backtrac
+mod backtrace;
+mod chain;
+mod context;
+mod ensure;
+mod error;
+mod fmt;
+mod kind;
+mod macros;
+mod ptr;
+mod wr
