@@ -247,4 +247,10 @@ mod fmt;
 mod kind;
 mod macros;
 mod ptr;
-mod wr
+mod wrapper;
+
+use crate::error::ErrorImpl;
+use crate::ptr::Own;
+use core::fmt::Display;
+
+#[cfg(not(feature = "st
