@@ -231,4 +231,11 @@
     clippy::return_self_not_must_use,
     clippy::unused_self,
     clippy::used_underscore_binding,
-    cl
+    clippy::wildcard_imports,
+    clippy::wrong_self_convention
+)]
+
+extern crate alloc;
+
+#[macro_use]
+mod backtrac
