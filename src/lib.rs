@@ -259,4 +259,6 @@ use core::fmt::Debug;
 #[cfg(feature = "std")]
 use std::error::Error as StdError;
 
-#[cfg(not(feat
+#[cfg(not(feature = "std"))]
+trait StdError: Debug + Display {
+    fn source(&self) -> Option<&(dyn StdError + 'stat
