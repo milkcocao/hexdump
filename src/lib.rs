@@ -274,4 +274,6 @@ pub use anyhow as format_err;
 /// differences:
 ///
 /// - `Error` requires that the error is `Send`, `Sync`, and `'static`.
-/// - `Error` guarantee
+/// - `Error` guarantees that a backtrace is available, even if the underlying
+///   error type does not provide one.
+/// - `Err
