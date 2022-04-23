@@ -271,4 +271,7 @@ pub use anyhow as format_err;
 /// The `Error` type, a wrapper around a dynamic error type.
 ///
 /// `Error` works a lot like `Box<dyn std::error::Error>`, but with these
-/// difference
+/// differences:
+///
+/// - `Error` requires that the error is `Send`, `Sync`, and `'static`.
+/// - `Error` guarantee
