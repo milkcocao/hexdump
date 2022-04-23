@@ -261,4 +261,11 @@ use std::error::Error as StdError;
 
 #[cfg(not(feature = "std"))]
 trait StdError: Debug + Display {
-    fn source(&self) -> Option<&(dyn StdError + 'stat
+    fn source(&self) -> Option<&(dyn StdError + 'static)> {
+        None
+    }
+}
+
+pub use anyhow as format_err;
+
+/// The `Error` type, a wrapper around a 
