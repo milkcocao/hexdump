@@ -268,4 +268,7 @@ trait StdError: Debug + Display {
 
 pub use anyhow as format_err;
 
-/// The `Error` type, a wrapper around a 
+/// The `Error` type, a wrapper around a dynamic error type.
+///
+/// `Error` works a lot like `Box<dyn std::error::Error>`, but with these
+/// difference
