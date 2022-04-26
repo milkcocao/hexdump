@@ -283,4 +283,5 @@ pub use anyhow as format_err;
 ///
 /// # Display representations
 ///
-/// When you print an error object usi
+/// When you print an error object using "{}" or to_string(), only the outermost
+/// underlying error or context is printed, not any of the l
