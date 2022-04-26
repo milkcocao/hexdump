@@ -277,4 +277,10 @@ pub use anyhow as format_err;
 /// - `Error` guarantees that a backtrace is available, even if the underlying
 ///   error type does not provide one.
 /// - `Error` is represented as a narrow pointer &mdash; exactly one word in
-///   size instead
+///   size instead of two.
+///
+/// <br>
+///
+/// # Display representations
+///
+/// When you print an error object usi
