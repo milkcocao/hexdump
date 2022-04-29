@@ -284,4 +284,6 @@ pub use anyhow as format_err;
 /// # Display representations
 ///
 /// When you print an error object using "{}" or to_string(), only the outermost
-/// underlying error or context is printed, not any of the l
+/// underlying error or context is printed, not any of the lower level causes.
+/// This is exactly as if you had called the Display impl of the error from
+/// 
