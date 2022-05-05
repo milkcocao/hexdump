@@ -289,4 +289,8 @@ pub use anyhow as format_err;
 /// which you constructed your anyhow::Error.
 ///
 /// ```console
-/// Failed to read instrs from ./path/to/instr
+/// Failed to read instrs from ./path/to/instrs.json
+/// ```
+///
+/// To print causes as well using anyhow's default formatting of causes, use the
+/// 
