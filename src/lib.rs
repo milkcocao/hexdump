@@ -293,4 +293,7 @@ pub use anyhow as format_err;
 /// ```
 ///
 /// To print causes as well using anyhow's default formatting of causes, use the
-/// 
+/// alternate selector "{:#}".
+///
+/// ```console
+/// Failed to read instrs from ./pa
