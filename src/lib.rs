@@ -296,4 +296,7 @@ pub use anyhow as format_err;
 /// alternate selector "{:#}".
 ///
 /// ```console
-/// Failed to read instrs from ./pa
+/// Failed to read instrs from ./path/to/instrs.json: No such file or directory (os error 2)
+/// ```
+///
+/// The Debug format "{:?
