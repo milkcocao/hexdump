@@ -299,4 +299,5 @@ pub use anyhow as format_err;
 /// Failed to read instrs from ./path/to/instrs.json: No such file or directory (os error 2)
 /// ```
 ///
-/// The Debug format "{:?
+/// The Debug format "{:?}" includes your backtrace if one was captured. Note
+/// that this is the representation you g
