@@ -300,4 +300,7 @@ pub use anyhow as format_err;
 /// ```
 ///
 /// The Debug format "{:?}" includes your backtrace if one was captured. Note
-/// that this is the representation you g
+/// that this is the representation you get by default if you return an error
+/// from `fn main` instead of printing it explicitly yourself.
+///
+/// 
