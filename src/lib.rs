@@ -312,4 +312,7 @@ pub use anyhow as format_err;
 ///
 /// and if there is a backtrace available:
 ///
-/
+/// ```console
+/// Error: Failed to read instrs from ./path/to/instrs.json
+///
+/// Caused 
