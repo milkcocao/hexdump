@@ -306,4 +306,10 @@ pub use anyhow as format_err;
 /// ```console
 /// Error: Failed to read instrs from ./path/to/instrs.json
 ///
-/// Caused by
+/// Caused by:
+///     No such file or directory (os error 2)
+/// ```
+///
+/// and if there is a backtrace available:
+///
+/
