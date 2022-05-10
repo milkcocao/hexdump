@@ -324,4 +324,6 @@ pub use anyhow as format_err;
 ///    1: core::result::Result<T,E>::map_err
 ///              at /git/rustc/src/libcore/result.rs:596
 ///    2: anyhow::context::<impl anyhow::Context<T,E> for core::result::Result<T,E>>::with_context
-///   
+///              at /git/anyhow/src/context.rs:58
+///    3: testing::main
+///              at sr
