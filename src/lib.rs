@@ -321,4 +321,6 @@ pub use anyhow as format_err;
 /// Stack backtrace:
 ///    0: <E as anyhow::context::ext::StdError>::ext_context
 ///              at /git/anyhow/src/backtrace.rs:26
-///    
+///    1: core::result::Result<T,E>::map_err
+///              at /git/rustc/src/libcore/result.rs:596
+///   
