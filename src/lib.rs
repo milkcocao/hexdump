@@ -319,4 +319,6 @@ pub use anyhow as format_err;
 ///     No such file or directory (os error 2)
 ///
 /// Stack backtrace:
-///    0: <E as anyhow
+///    0: <E as anyhow::context::ext::StdError>::ext_context
+///              at /git/anyhow/src/backtrace.rs:26
+///    
