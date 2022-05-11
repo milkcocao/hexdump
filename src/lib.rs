@@ -326,4 +326,6 @@ pub use anyhow as format_err;
 ///    2: anyhow::context::<impl anyhow::Context<T,E> for core::result::Result<T,E>>::with_context
 ///              at /git/anyhow/src/context.rs:58
 ///    3: testing::main
-///              at sr
+///              at src/main.rs:5
+///    4: std::rt::lang_start
+///              at /git/rustc/src/libstd/rt.r
