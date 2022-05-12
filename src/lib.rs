@@ -328,4 +328,10 @@ pub use anyhow as format_err;
 ///    3: testing::main
 ///              at src/main.rs:5
 ///    4: std::rt::lang_start
-///              at /git/rustc/src/libstd/rt.r
+///              at /git/rustc/src/libstd/rt.rs:61
+///    5: main
+///    6: __libc_start_main
+///    7: _start
+/// ```
+///
+/// To see a conven
