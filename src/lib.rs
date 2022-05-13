@@ -334,4 +334,8 @@ pub use anyhow as format_err;
 ///    7: _start
 /// ```
 ///
-/// To see a conven
+/// To see a conventional struct-style Debug representation, use "{:#?}".
+///
+/// ```console
+/// Error {
+///   
