@@ -338,4 +338,6 @@ pub use anyhow as format_err;
 ///
 /// ```console
 /// Error {
-///   
+///     context: "Failed to read instrs from ./path/to/instrs.json",
+///     source: Os {
+///         code:
