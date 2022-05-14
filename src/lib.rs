@@ -340,4 +340,9 @@ pub use anyhow as format_err;
 /// Error {
 ///     context: "Failed to read instrs from ./path/to/instrs.json",
 ///     source: Os {
-///         code:
+///         code: 2,
+///         kind: NotFound,
+///         message: "No such file or directory",
+///     },
+/// }
+/
