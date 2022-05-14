@@ -348,4 +348,6 @@ pub use anyhow as format_err;
 /// ```
 ///
 /// If none of the built-in representations are appropriate and you would prefer
-//
+/// to render the error and its cause chain yourself, it can be done something
+/// like this:
+///
