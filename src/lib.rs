@@ -345,4 +345,7 @@ pub use anyhow as format_err;
 ///         message: "No such file or directory",
 ///     },
 /// }
-/
+/// ```
+///
+/// If none of the built-in representations are appropriate and you would prefer
+//
