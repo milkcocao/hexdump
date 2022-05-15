@@ -351,3 +351,8 @@ pub use anyhow as format_err;
 /// to render the error and its cause chain yourself, it can be done something
 /// like this:
 ///
+/// ```
+/// use anyhow::{Context, Result};
+///
+/// fn main() {
+///     if let Err(err) = try_main
