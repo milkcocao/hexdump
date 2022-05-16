@@ -355,4 +355,6 @@ pub use anyhow as format_err;
 /// use anyhow::{Context, Result};
 ///
 /// fn main() {
-///     if let Err(err) = try_main
+///     if let Err(err) = try_main() {
+///         eprintln!("ERROR: {}", err);
+///         err.chain().skip(1).for_each(|cause| epr
