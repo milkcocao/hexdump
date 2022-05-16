@@ -357,4 +357,9 @@ pub use anyhow as format_err;
 /// fn main() {
 ///     if let Err(err) = try_main() {
 ///         eprintln!("ERROR: {}", err);
-///         err.chain().skip(1).for_each(|cause| epr
+///         err.chain().skip(1).for_each(|cause| eprintln!("because: {}", cause));
+///         std::process::exit(1);
+///     }
+/// }
+///
+/// fn try_main() -> Resul
