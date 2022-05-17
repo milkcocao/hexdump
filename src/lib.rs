@@ -362,4 +362,11 @@ pub use anyhow as format_err;
 ///     }
 /// }
 ///
-/// fn try_main() -> Resul
+/// fn try_main() -> Result<()> {
+///     # const IGNORE: &str = stringify! {
+///     ...
+///     # };
+///     # Ok(())
+/// }
+/// ```
+#[
