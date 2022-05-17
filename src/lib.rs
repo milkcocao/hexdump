@@ -369,4 +369,7 @@ pub use anyhow as format_err;
 ///     # Ok(())
 /// }
 /// ```
-#[
+#[cfg_attr(not(doc), repr(transparent))]
+pub struct Error {
+    inner: Own<ErrorImpl>,
+}
