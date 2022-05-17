@@ -373,3 +373,7 @@ pub use anyhow as format_err;
 pub struct Error {
     inner: Own<ErrorImpl>,
 }
+
+/// Iterator of a chain of source errors.
+///
+/// This type is the iterator returned by [`Error
