@@ -376,4 +376,12 @@ pub struct Error {
 
 /// Iterator of a chain of source errors.
 ///
-/// This type is the iterator returned by [`Error
+/// This type is the iterator returned by [`Error::chain`].
+///
+/// # Example
+///
+/// ```
+/// use anyhow::Error;
+/// use std::io;
+///
+/// pub fn underlying_io_er
