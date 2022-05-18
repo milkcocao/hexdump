@@ -384,4 +384,6 @@ pub struct Error {
 /// use anyhow::Error;
 /// use std::io;
 ///
-/// pub fn underlying_io_er
+/// pub fn underlying_io_error_kind(error: &Error) -> Option<io::ErrorKind> {
+///     for cause in error.chain() {
+///       
