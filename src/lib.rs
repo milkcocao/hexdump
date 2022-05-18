@@ -388,4 +388,10 @@ pub struct Error {
 ///     for cause in error.chain() {
 ///         if let Some(io_error) = cause.downcast_ref::<io::Error>() {
 ///             return Some(io_error.kind());
-/
+///         }
+///     }
+///     None
+/// }
+/// ```
+#[cfg(feature = "std")]
+#[cfg_attr(doc_cfg, doc(cfg
