@@ -402,4 +402,5 @@ pub struct Chain<'a> {
 
 /// `Result<T, Error>`
 ///
-/// This is a reasonable return type t
+/// This is a reasonable return type to use throughout your application but also
+/// for `fn main`; if you do, failures wi
