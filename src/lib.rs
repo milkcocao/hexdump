@@ -397,4 +397,9 @@ pub struct Error {
 #[cfg_attr(doc_cfg, doc(cfg(feature = "std")))]
 #[derive(Clone)]
 pub struct Chain<'a> {
-    stat
+    state: crate::chain::ChainState<'a>,
+}
+
+/// `Result<T, Error>`
+///
+/// This is a reasonable return type t
