@@ -403,4 +403,7 @@ pub struct Chain<'a> {
 /// `Result<T, Error>`
 ///
 /// This is a reasonable return type to use throughout your application but also
-/// for `fn main`; if you do, failures wi
+/// for `fn main`; if you do, failures will be printed along with any
+/// [context][Context] and a backtrace if one was captured.
+///
+/// `anyhow::Result` may 
