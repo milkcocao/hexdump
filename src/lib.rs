@@ -406,4 +406,9 @@ pub struct Chain<'a> {
 /// for `fn main`; if you do, failures will be printed along with any
 /// [context][Context] and a backtrace if one was captured.
 ///
-/// `anyhow::Result` may 
+/// `anyhow::Result` may be used with one *or* two type parameters.
+///
+/// ```rust
+/// use anyhow::Result;
+///
+/// # 
