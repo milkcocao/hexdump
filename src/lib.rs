@@ -413,4 +413,7 @@ pub struct Chain<'a> {
 ///
 /// # const IGNORE: &str = stringify! {
 /// fn demo1() -> Result<T> {...}
-///            // ^ equivalent
+///            // ^ equivalent to std::result::Result<T, anyhow::Error>
+///
+/// fn demo2() -> Result<T, OtherError> {...}
+///      
