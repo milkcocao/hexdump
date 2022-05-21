@@ -411,4 +411,6 @@ pub struct Chain<'a> {
 /// ```rust
 /// use anyhow::Result;
 ///
-/// # 
+/// # const IGNORE: &str = stringify! {
+/// fn demo1() -> Result<T> {...}
+///            // ^ equivalent
