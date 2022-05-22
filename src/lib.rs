@@ -422,3 +422,8 @@ pub struct Chain<'a> {
 ///
 /// # Example
 ///
+/// ```
+/// # pub trait Deserialize {}
+/// #
+/// # mod serde_json {
+/// #     use super::Des
