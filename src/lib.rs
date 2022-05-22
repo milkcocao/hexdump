@@ -426,4 +426,7 @@ pub struct Chain<'a> {
 /// # pub trait Deserialize {}
 /// #
 /// # mod serde_json {
-/// #     use super::Des
+/// #     use super::Deserialize;
+/// #     use std::io;
+/// #
+/// #     pub fn from_str<T: Deserialize>(json: &st
