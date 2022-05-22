@@ -416,4 +416,9 @@ pub struct Chain<'a> {
 ///            // ^ equivalent to std::result::Result<T, anyhow::Error>
 ///
 /// fn demo2() -> Result<T, OtherError> {...}
-///      
+///            // ^ equivalent to std::result::Result<T, OtherError>
+/// # };
+/// ```
+///
+/// # Example
+///
