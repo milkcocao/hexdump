@@ -429,4 +429,9 @@ pub struct Chain<'a> {
 /// #     use super::Deserialize;
 /// #     use std::io;
 /// #
-/// #     pub fn from_str<T: Deserialize>(json: &st
+/// #     pub fn from_str<T: Deserialize>(json: &str) -> io::Result<T> {
+/// #         unimplemented!()
+/// #     }
+/// # }
+/// #
+/// # #[derive(Debug
