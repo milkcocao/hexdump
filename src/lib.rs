@@ -439,4 +439,8 @@ pub struct Chain<'a> {
 /// #
 /// # impl Deserialize for ClusterMap {}
 /// #
-/// use anyhow::
+/// use anyhow::Result;
+///
+/// fn main() -> Result<()> {
+///     # return Ok(());
+///     let config = st
