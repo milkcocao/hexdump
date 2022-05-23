@@ -434,4 +434,9 @@ pub struct Chain<'a> {
 /// #     }
 /// # }
 /// #
-/// # #[derive(Debug
+/// # #[derive(Debug)]
+/// # struct ClusterMap;
+/// #
+/// # impl Deserialize for ClusterMap {}
+/// #
+/// use anyhow::
