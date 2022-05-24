@@ -453,4 +453,12 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 
 /// Provides the `context` method for `Result`.
 ///
-/// This t
+/// This trait is sealed and cannot be implemented for types outside of
+/// `anyhow`.
+///
+/// <br>
+///
+/// # Example
+///
+/// ```
+/// 
