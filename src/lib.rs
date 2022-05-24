@@ -449,4 +449,8 @@ pub struct Chain<'a> {
 ///     Ok(())
 /// }
 /// ```
-pub type Result<T, E
+pub type Result<T, E = Error> = core::result::Result<T, E>;
+
+/// Provides the `context` method for `Result`.
+///
+/// This t
