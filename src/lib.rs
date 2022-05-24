@@ -444,4 +444,9 @@ pub struct Chain<'a> {
 /// fn main() -> Result<()> {
 ///     # return Ok(());
 ///     let config = std::fs::read_to_string("cluster.json")?;
-///     let map: ClusterMap = serde_json::from_str(&config)
+///     let map: ClusterMap = serde_json::from_str(&config)?;
+///     println!("cluster info: {:#?}", map);
+///     Ok(())
+/// }
+/// ```
+pub type Result<T, E
