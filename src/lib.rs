@@ -461,4 +461,8 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 /// # Example
 ///
 /// ```
+/// use anyhow::{Context, Result};
+/// use std::fs;
+/// use std::path::PathBuf;
+///
 /// 
