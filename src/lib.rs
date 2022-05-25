@@ -470,4 +470,7 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 /// }
 ///
 /// impl ImportantThing {
-///     # const IGNORE: &'static s
+///     # const IGNORE: &'static str = stringify! {
+///     pub fn detach(&mut self) -> Result<()> {...}
+///     # };
+///     # fn detach(&mut self) -> 
