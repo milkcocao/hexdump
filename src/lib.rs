@@ -465,4 +465,9 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 /// use std::fs;
 /// use std::path::PathBuf;
 ///
-/// 
+/// pub struct ImportantThing {
+///     path: PathBuf,
+/// }
+///
+/// impl ImportantThing {
+///     # const IGNORE: &'static s
