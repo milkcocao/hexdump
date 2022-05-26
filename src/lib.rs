@@ -473,4 +473,9 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///     # const IGNORE: &'static str = stringify! {
 ///     pub fn detach(&mut self) -> Result<()> {...}
 ///     # };
-///     # fn detach(&mut self) -> 
+///     # fn detach(&mut self) -> Result<()> {
+///     #     unimplemented!()
+///     # }
+/// }
+///
+/// pub fn do_it(mut it: Importa
