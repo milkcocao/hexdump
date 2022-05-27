@@ -489,4 +489,5 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 /// }
 /// ```
 ///
-/// Wh
+/// When printed, the outermost context would be printed first and the lower
+/// level underlying causes
