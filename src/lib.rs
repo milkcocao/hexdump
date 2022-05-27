@@ -481,4 +481,6 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 /// pub fn do_it(mut it: ImportantThing) -> Result<Vec<u8>> {
 ///     it.detach().context("Failed to detach the important thing")?;
 ///
-///     
+///     let path = &it.path;
+///     let content = fs::read(path)
+///         .with_context(|| format!("
