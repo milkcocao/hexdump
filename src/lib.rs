@@ -478,4 +478,7 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///     # }
 /// }
 ///
-/// pub fn do_it(mut it: Importa
+/// pub fn do_it(mut it: ImportantThing) -> Result<Vec<u8>> {
+///     it.detach().context("Failed to detach the important thing")?;
+///
+///     
