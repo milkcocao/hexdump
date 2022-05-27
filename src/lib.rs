@@ -483,4 +483,10 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///
 ///     let path = &it.path;
 ///     let content = fs::read(path)
-///         .with_context(|| format!("
+///         .with_context(|| format!("Failed to read instrs from {}", path.display()))?;
+///
+///     Ok(content)
+/// }
+/// ```
+///
+/// Wh
