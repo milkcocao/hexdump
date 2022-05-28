@@ -490,4 +490,7 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 /// ```
 ///
 /// When printed, the outermost context would be printed first and the lower
-/// level underlying causes
+/// level underlying causes would be enumerated below.
+///
+/// ```console
+/// Error: Failed to read instrs from ./path/to/instrs.jso
