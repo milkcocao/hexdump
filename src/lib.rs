@@ -493,4 +493,10 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 /// level underlying causes would be enumerated below.
 ///
 /// ```console
-/// Error: Failed to read instrs from ./path/to/instrs.jso
+/// Error: Failed to read instrs from ./path/to/instrs.json
+///
+/// Caused by:
+///     No such file or directory (os error 2)
+/// ```
+///
+/// Refer to t
