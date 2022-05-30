@@ -502,4 +502,8 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 /// Refer to the [Display representations] documentation for other forms in
 /// which this context chain can be rendered.
 ///
-/
+/// [Display representations]: Error#display-representations
+///
+/// <br>
+///
+/// # Eff
