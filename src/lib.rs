@@ -509,4 +509,6 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 /// # Effect on downcasting
 ///
 /// After attaching context of type `C` onto an error of type `E`, the resulting
-/// `anyhow::E
+/// `anyhow::Error` may be downcast to `C` **or** to `E`.
+///
+/// That is, in codebases that rely on downcasting, An
