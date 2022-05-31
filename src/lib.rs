@@ -506,4 +506,7 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///
 /// <br>
 ///
-/// # Eff
+/// # Effect on downcasting
+///
+/// After attaching context of type `C` onto an error of type `E`, the resulting
+/// `anyhow::E
