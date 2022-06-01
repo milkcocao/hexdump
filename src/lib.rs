@@ -511,4 +511,7 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 /// After attaching context of type `C` onto an error of type `E`, the resulting
 /// `anyhow::Error` may be downcast to `C` **or** to `E`.
 ///
-/// That is, in codebases that rely on downcasting, An
+/// That is, in codebases that rely on downcasting, Anyhow's context supports
+/// both of the following use cases:
+///
+///   - **Attaching context whose 
