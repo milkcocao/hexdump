@@ -517,4 +517,5 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///   - **Attaching context whose type is insignificant onto errors whose type
 ///     is used in downcasts.**
 ///
-///     In other err
+///     In other error libraries whose context is not designed this way, it can
+///     be risky to introduce conte
