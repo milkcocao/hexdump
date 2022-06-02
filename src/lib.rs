@@ -518,4 +518,5 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///     is used in downcasts.**
 ///
 ///     In other error libraries whose context is not designed this way, it can
-///     be risky to introduce conte
+///     be risky to introduce context to existing code because new context might
+///     break existing working downcasts. In Anyhow, an
