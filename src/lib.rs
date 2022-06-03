@@ -520,4 +520,6 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///     In other error libraries whose context is not designed this way, it can
 ///     be risky to introduce context to existing code because new context might
 ///     break existing working downcasts. In Anyhow, any downcast that worked
-///     before adding context will continue to work after you add a context,
+///     before adding context will continue to work after you add a context, so
+///     you should freely add human-readable context to errors wherever it would
+///  
