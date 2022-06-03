@@ -522,4 +522,10 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///     break existing working downcasts. In Anyhow, any downcast that worked
 ///     before adding context will continue to work after you add a context, so
 ///     you should freely add human-readable context to errors wherever it would
-///  
+///     be helpful.
+///
+///     ```
+///     # use anyhow::bail;
+///     # use thiserror::Error;
+///     #
+///     # #[d
