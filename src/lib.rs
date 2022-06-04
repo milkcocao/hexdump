@@ -528,4 +528,8 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///     # use anyhow::bail;
 ///     # use thiserror::Error;
 ///     #
-///     # #[d
+///     # #[derive(Error, Debug)]
+///     # #[error("???")]
+///     # struct SuspiciousError;
+///     #
+///     # fn helper(
