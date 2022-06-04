@@ -532,4 +532,8 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///     # #[error("???")]
 ///     # struct SuspiciousError;
 ///     #
-///     # fn helper(
+///     # fn helper() -> Result<()> {
+///     #     bail!(SuspiciousError);
+///     # }
+///     #
+///     use anyhow::{C
