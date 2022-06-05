@@ -536,4 +536,7 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///     #     bail!(SuspiciousError);
 ///     # }
 ///     #
-///     use anyhow::{C
+///     use anyhow::{Context, Result};
+///
+///     fn do_it() -> Result<()> {
+///         helper().context("Failed to complete the work")?;
