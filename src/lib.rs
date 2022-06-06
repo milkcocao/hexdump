@@ -543,4 +543,9 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///         # const IGNORE: &str = stringify! {
 ///         ...
 ///         # };
-///         # un
+///         # unreachable!()
+///     }
+///
+///     fn main() {
+///         let err = do_it().unwrap_err();
+///       
