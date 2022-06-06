@@ -548,4 +548,5 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///
 ///     fn main() {
 ///         let err = do_it().unwrap_err();
-///       
+///         if let Some(e) = err.downcast_ref::<SuspiciousError>() {
+///             // If helper() returned Suspi
