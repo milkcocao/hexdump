@@ -540,3 +540,7 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///
 ///     fn do_it() -> Result<()> {
 ///         helper().context("Failed to complete the work")?;
+///         # const IGNORE: &str = stringify! {
+///         ...
+///         # };
+///         # un
