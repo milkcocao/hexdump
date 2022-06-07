@@ -550,4 +550,7 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///         let err = do_it().unwrap_err();
 ///         if let Some(e) = err.downcast_ref::<SuspiciousError>() {
 ///             // If helper() returned SuspiciousError, this downcast will
-///             // correctly succeed even with the context in
+///             // correctly succeed even with the context in between.
+///             # return;
+///         }
+///         # panic!("expected downcast to s
