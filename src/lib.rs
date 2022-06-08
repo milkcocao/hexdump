@@ -562,4 +562,10 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///
 ///     Some codebases prefer to use machine-readable context to categorize
 ///     lower level errors in a way that will be actionable to higher levels of
+///     the application.
 ///
+///     ```
+///     # use anyhow::bail;
+///     # use thiserror::Error;
+///     #
+//
