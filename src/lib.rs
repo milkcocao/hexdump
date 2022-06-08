@@ -553,4 +553,8 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///             // correctly succeed even with the context in between.
 ///             # return;
 ///         }
-///         # panic!("expected downcast to s
+///         # panic!("expected downcast to succeed");
+///     }
+///     ```
+///
+///   - **Attaching context whose type is used in downca
