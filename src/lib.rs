@@ -557,4 +557,7 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///     }
 ///     ```
 ///
-///   - **Attaching context whose type is used in downca
+///   - **Attaching context whose type is used in downcasts onto errors whose
+///     type is insignificant.**
+///
+///     Some codebases prefer to use machine-readable co
