@@ -572,4 +572,8 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///     # #[error("???")]
 ///     # struct HelperFailed;
 ///     #
-/
+///     # fn helper() -> Result<()> {
+///     #     bail!("no such file or directory");
+///     # }
+///     #
+///     use anyhow
