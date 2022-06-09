@@ -576,4 +576,7 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///     #     bail!("no such file or directory");
 ///     # }
 ///     #
-///     use anyhow
+///     use anyhow::{Context, Result};
+///
+///     fn do_it() -> Result<()> {
+///         helper().c
