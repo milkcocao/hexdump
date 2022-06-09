@@ -568,4 +568,8 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///     # use anyhow::bail;
 ///     # use thiserror::Error;
 ///     #
-//
+///     # #[derive(Error, Debug)]
+///     # #[error("???")]
+///     # struct HelperFailed;
+///     #
+/
