@@ -579,4 +579,6 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///     use anyhow::{Context, Result};
 ///
 ///     fn do_it() -> Result<()> {
-///         helper().c
+///         helper().context(HelperFailed)?;
+///         # const IGNORE: &str = stringify! {
+///         ...
