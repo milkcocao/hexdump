@@ -582,3 +582,9 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///         helper().context(HelperFailed)?;
 ///         # const IGNORE: &str = stringify! {
 ///         ...
+///         # };
+///         # unreachable!()
+///     }
+///
+///     fn main() {
+///         let err = do_it
