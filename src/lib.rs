@@ -597,4 +597,6 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///         # panic!("expected downcast to succeed");
 ///     }
 ///     ```
-pub trait Context<T, E
+pub trait Context<T, E>: context::private::Sealed {
+    /// Wrap the error value with additional context.
+    fn con
