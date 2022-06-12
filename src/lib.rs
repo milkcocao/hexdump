@@ -590,4 +590,8 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///         let err = do_it().unwrap_err();
 ///         if let Some(e) = err.downcast_ref::<HelperFailed>() {
 ///             // If helper failed, this downcast will succeed because
-///             // HelperFailed is the context that h
+///             // HelperFailed is the context that has been attached to
+///             // that error.
+///             # return;
+///         }
+///
