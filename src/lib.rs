@@ -594,4 +594,7 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///             // that error.
 ///             # return;
 ///         }
-///
+///         # panic!("expected downcast to succeed");
+///     }
+///     ```
+pub trait Context<T, E
