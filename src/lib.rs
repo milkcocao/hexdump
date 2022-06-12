@@ -599,4 +599,8 @@ pub type Result<T, E = Error> = core::result::Result<T, E>;
 ///     ```
 pub trait Context<T, E>: context::private::Sealed {
     /// Wrap the error value with additional context.
-    fn con
+    fn context<C>(self, context: C) -> Result<T, Error>
+    where
+        C: Display + Send + Sync + 'static;
+
+    ///
