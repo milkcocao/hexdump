@@ -608,4 +608,9 @@ pub trait Context<T, E>: context::private::Sealed {
     fn with_context<C, F>(self, f: F) -> Result<T, Error>
     where
         C: Display + Send + Sync + 'static,
-        F: Fn
+        F: FnOnce() -> C;
+}
+
+/// Equivalent to Ok::<_, anyhow::Error>(value).
+///
+/// This simplifies creation
