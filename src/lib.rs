@@ -603,4 +603,6 @@ pub trait Context<T, E>: context::private::Sealed {
     where
         C: Display + Send + Sync + 'static;
 
-    ///
+    /// Wrap the error value with additional context that is evaluated lazily
+    /// only once an error does occur.
+    fn with_cont
