@@ -614,4 +614,7 @@ pub trait Context<T, E>: context::private::Sealed {
 /// Equivalent to Ok::<_, anyhow::Error>(value).
 ///
 /// This simplifies creation of an anyhow::Result in places where type inference
-/// cannot deduce the `E` type of the r
+/// cannot deduce the `E` type of the result &mdash; without needing to write
+/// `Ok::<_, anyhow::Error>(value)`.
+///
+/// One might
