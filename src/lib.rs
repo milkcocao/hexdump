@@ -620,4 +620,6 @@ pub trait Context<T, E>: context::private::Sealed {
 /// One might think that `anyhow::Result::Ok(value)` would work in such cases
 /// but it does not.
 ///
-//
+/// ```console
+/// error[E0282]: type annotations needed for `std::result::Result<i32, E>`
+///   --> src
