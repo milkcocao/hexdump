@@ -625,4 +625,5 @@ pub trait Context<T, E>: context::private::Sealed {
 ///   --> src/main.rs:11:13
 ///    |
 /// 11 |     let _ = anyhow::Result::Ok(1);
-///    |         -   ^^^^^^^^^^^
+///    |         -   ^^^^^^^^^^^^^^^^^^ cannot infer type for type parameter `E` declared on the enum `Result`
+///    | 
