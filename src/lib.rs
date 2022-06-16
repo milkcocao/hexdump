@@ -622,4 +622,7 @@ pub trait Context<T, E>: context::private::Sealed {
 ///
 /// ```console
 /// error[E0282]: type annotations needed for `std::result::Result<i32, E>`
-///   --> src
+///   --> src/main.rs:11:13
+///    |
+/// 11 |     let _ = anyhow::Result::Ok(1);
+///    |         -   ^^^^^^^^^^^
