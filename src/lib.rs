@@ -627,4 +627,7 @@ pub trait Context<T, E>: context::private::Sealed {
 /// 11 |     let _ = anyhow::Result::Ok(1);
 ///    |         -   ^^^^^^^^^^^^^^^^^^ cannot infer type for type parameter `E` declared on the enum `Result`
 ///    |         |
-///    |         consider giving this pattern the explicit type `std::result::Result<i32, E>
+///    |         consider giving this pattern the explicit type `std::result::Result<i32, E>`, where the type parameter `E` is specified
+/// ```
+#[allow(non_snake_case)]
+pub fn Ok<T>(t: T) -> Re
