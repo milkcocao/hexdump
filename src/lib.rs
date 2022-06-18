@@ -630,4 +630,9 @@ pub trait Context<T, E>: context::private::Sealed {
 ///    |         consider giving this pattern the explicit type `std::result::Result<i32, E>`, where the type parameter `E` is specified
 /// ```
 #[allow(non_snake_case)]
-pub fn Ok<T>(t: T) -> Re
+pub fn Ok<T>(t: T) -> Result<T> {
+    Result::Ok(t)
+}
+
+// Not public API. Referenced by macro-generated code.
+#[do
