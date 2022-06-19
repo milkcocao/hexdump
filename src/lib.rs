@@ -643,4 +643,8 @@ pub mod __private {
 
     pub use crate::ensure::{BothDebug, NotBothDebug};
     pub use alloc::format;
-    pub use core::result::
+    pub use core::result::Result::Err;
+    pub use core::{concat, format_args, stringify};
+
+    #[doc(hidden)]
+    
