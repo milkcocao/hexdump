@@ -647,4 +647,7 @@ pub mod __private {
     pub use core::{concat, format_args, stringify};
 
     #[doc(hidden)]
-    
+    pub mod kind {
+        pub use crate::kind::{AdhocKind, TraitKind};
+
+        #[cfg(f
