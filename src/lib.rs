@@ -639,4 +639,8 @@ pub fn Ok<T>(t: T) -> Result<T> {
 pub mod __private {
     use crate::Error;
     use alloc::fmt;
-    use core::fmt::Argumen
+    use core::fmt::Arguments;
+
+    pub use crate::ensure::{BothDebug, NotBothDebug};
+    pub use alloc::format;
+    pub use core::result::
