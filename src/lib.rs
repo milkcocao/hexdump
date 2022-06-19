@@ -635,4 +635,8 @@ pub fn Ok<T>(t: T) -> Result<T> {
 }
 
 // Not public API. Referenced by macro-generated code.
-#[do
+#[doc(hidden)]
+pub mod __private {
+    use crate::Error;
+    use alloc::fmt;
+    use core::fmt::Argumen
