@@ -655,4 +655,7 @@ pub mod __private {
     }
 
     #[doc(hidden)]
-    #[inli
+    #[inline]
+    #[cold]
+    pub fn format_err(args: Arguments) -> Error {
+        #[cfg(anyhow_no_fmt_argum
