@@ -650,4 +650,9 @@ pub mod __private {
     pub mod kind {
         pub use crate::kind::{AdhocKind, TraitKind};
 
-        #[cfg(f
+        #[cfg(feature = "std")]
+        pub use crate::kind::BoxedKind;
+    }
+
+    #[doc(hidden)]
+    #[inli
