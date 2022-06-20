@@ -660,4 +660,7 @@ pub mod __private {
     pub fn format_err(args: Arguments) -> Error {
         #[cfg(anyhow_no_fmt_arguments_as_str)]
         let fmt_arguments_as_str = None::<&str>;
-        #[cfg(not(anyhow_no_fmt_argu
+        #[cfg(not(anyhow_no_fmt_arguments_as_str))]
+        let fmt_arguments_as_str = args.as_str();
+
+        if let Some(messa
