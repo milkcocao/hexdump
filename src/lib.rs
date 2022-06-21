@@ -667,4 +667,9 @@ pub mod __private {
             // anyhow!("literal"), can downcast to &'static str
             Error::msg(message)
         } else {
-            // anyhow!("interpolate
+            // anyhow!("interpolate {var}"), can downcast to String
+            Error::msg(fmt::format(args))
+        }
+    }
+
+    #[doc
