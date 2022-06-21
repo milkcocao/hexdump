@@ -665,4 +665,6 @@ pub mod __private {
 
         if let Some(message) = fmt_arguments_as_str {
             // anyhow!("literal"), can downcast to &'static str
-   
+            Error::msg(message)
+        } else {
+            // anyhow!("interpolate
