@@ -663,4 +663,6 @@ pub mod __private {
         #[cfg(not(anyhow_no_fmt_arguments_as_str))]
         let fmt_arguments_as_str = args.as_str();
 
-        if let Some(messa
+        if let Some(message) = fmt_arguments_as_str {
+            // anyhow!("literal"), can downcast to &'static str
+   
