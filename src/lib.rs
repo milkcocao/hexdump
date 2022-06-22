@@ -672,4 +672,8 @@ pub mod __private {
         }
     }
 
-    #[doc
+    #[doc(hidden)]
+    #[inline]
+    #[cold]
+    #[must_use]
+    pub fn must_use(error: Err
