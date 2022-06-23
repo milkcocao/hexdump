@@ -676,4 +676,7 @@ pub mod __private {
     #[inline]
     #[cold]
     #[must_use]
-    pub fn must_use(error: Err
+    pub fn must_use(error: Error) -> Error {
+        error
+    }
+}
