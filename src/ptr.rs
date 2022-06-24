@@ -64,3 +64,100 @@ where
 #[repr(transparent)]
 pub struct Ref<'a, T>
 where
+    T: ?Sized,
+{
+    pub ptr: NonNull<T>,
+    lifetime: PhantomData<&'a T>,
+}
+
+impl<'a, T> Copy for Ref<'a, T> where T: ?Sized {}
+
+impl<'a, T> Clone for Ref<'a, T>
+where
+    T: ?Sized,
+{
+    fn clone(&self) -> Self {
+        *self
+    }
+}
+
+impl<'a, T> Ref<'a, T>
+where
+    T: ?Sized,
+{
+    pub fn new(ptr: &'a T) -> Self {
+        Ref {
+            ptr: NonNull::from(ptr),
+            lifetime: PhantomData,
+        }
+    }
+
+    #[cfg(not(anyhow_no_ptr_addr_of))]
+    pub fn from_raw(ptr: NonNull<T>) -> Self {
+        Ref {
+            ptr,
+            lifetime: PhantomData,
+        }
+    }
+
+    pub fn cast<U: CastTo>(self) -> Ref<'a, U::Target> {
+        Ref {
+            ptr: self.ptr.cast(),
+            lifetime: PhantomData,
+        }
+    }
+
+    #[cfg(not(anyhow_no_ptr_addr_of))]
+    pub fn by_mut(self) -> Mut<'a, T> {
+        Mut {
+            ptr: self.ptr,
+            lifetime: PhantomData,
+        }
+    }
+
+    #[cfg(not(anyhow_no_ptr_addr_of))]
+    pub fn as_ptr(self) -> *const T {
+        self.ptr.as_ptr() as *const T
+    }
+
+    pub unsafe fn deref(self) -> &'a T {
+        &*self.ptr.as_ptr()
+    }
+}
+
+#[repr(transparent)]
+pub struct Mut<'a, T>
+where
+    T: ?Sized,
+{
+    pub ptr: NonNull<T>,
+    lifetime: PhantomData<&'a mut T>,
+}
+
+impl<'a, T> Copy for Mut<'a, T> where T: ?Sized {}
+
+impl<'a, T> Clone for Mut<'a, T>
+where
+    T: ?Sized,
+{
+    fn clone(&self) -> Self {
+        *self
+    }
+}
+
+impl<'a, T> Mut<'a, T>
+where
+    T: ?Sized,
+{
+    #[cfg(anyhow_no_ptr_addr_of)]
+    pub fn new(ptr: &'a mut T) -> Self {
+        Mut {
+            ptr: NonNull::from(ptr),
+            lifetime: PhantomData,
+        }
+    }
+
+    pub fn cast<U: CastTo>(self) -> Mut<'a, U::Target> {
+        Mut {
+            ptr: self.ptr.cast(),
+            lifetime: PhantomData,
