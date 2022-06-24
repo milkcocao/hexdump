@@ -161,3 +161,40 @@ where
         Mut {
             ptr: self.ptr.cast(),
             lifetime: PhantomData,
+        }
+    }
+
+    #[cfg(not(anyhow_no_ptr_addr_of))]
+    pub fn by_ref(self) -> Ref<'a, T> {
+        Ref {
+            ptr: self.ptr,
+            lifetime: PhantomData,
+        }
+    }
+
+    pub fn extend<'b>(self) -> Mut<'b, T> {
+        Mut {
+            ptr: self.ptr,
+            lifetime: PhantomData,
+        }
+    }
+
+    pub unsafe fn deref_mut(self) -> &'a mut T {
+        &mut *self.ptr.as_ptr()
+    }
+}
+
+impl<'a, T> Mut<'a, T> {
+    pub unsafe fn read(self) -> T {
+        self.ptr.as_ptr().read()
+    }
+}
+
+// Force turbofish on all calls of `.cast::<U>()`.
+pub trait CastTo {
+    type Target;
+}
+
+impl<T> CastTo for T {
+    type Target = T;
+}
