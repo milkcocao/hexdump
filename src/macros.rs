@@ -176,3 +176,57 @@ macro_rules! ensure {
 /// ```
 /// # type V = ();
 /// #
+/// use anyhow::{anyhow, Result};
+///
+/// fn lookup(key: &str) -> Result<V> {
+///     if key.len() != 16 {
+///         return Err(anyhow!("key length must be 16 characters, got {:?}", key));
+///     }
+///
+///     // ...
+///     # Ok(())
+/// }
+/// ```
+#[macro_export]
+macro_rules! anyhow {
+    ($msg:literal $(,)?) => {
+        $crate::__private::must_use({
+            let error = $crate::__private::format_err($crate::__private::format_args!($msg));
+            error
+        })
+    };
+    ($err:expr $(,)?) => {
+        $crate::__private::must_use({
+            use $crate::__private::kind::*;
+            let error = match $err {
+                error => (&error).anyhow_kind().new(error),
+            };
+            error
+        })
+    };
+    ($fmt:expr, $($arg:tt)*) => {
+        $crate::Error::msg($crate::__private::format!($fmt, $($arg)*))
+    };
+}
+
+// Not public API. This is used in the implementation of some of the other
+// macros, in which the must_use call is not needed because the value is known
+// to be used.
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __anyhow {
+    ($msg:literal $(,)?) => ({
+        let error = $crate::__private::format_err($crate::__private::format_args!($msg));
+        error
+    });
+    ($err:expr $(,)?) => ({
+        use $crate::__private::kind::*;
+        let error = match $err {
+            error => (&error).anyhow_kind().new(error),
+        };
+        error
+    });
+    ($fmt:expr, $($arg:tt)*) => {
+        $crate::Error::msg($crate::__private::format!($fmt, $($arg)*))
+    };
+}
