@@ -5,4 +5,10 @@ use core::fmt::{self, Debug, Display};
 use std::any::Demand;
 
 #[repr(transparent)]
-pub struct
+pub struct MessageError<M>(pub M);
+
+impl<M> Debug for MessageError<M>
+where
+    M: Display + Debug,
+{
+    fn fm
