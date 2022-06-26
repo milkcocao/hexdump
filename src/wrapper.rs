@@ -16,4 +16,8 @@ where
     }
 }
 
-impl<M> Dis
+impl<M> Display for MessageError<M>
+where
+    M: Display + Debug,
+{
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt
