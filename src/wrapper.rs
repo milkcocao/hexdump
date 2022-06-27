@@ -25,4 +25,9 @@ where
     }
 }
 
-impl<M> StdError for MessageError<M> where M:
+impl<M> StdError for MessageError<M> where M: Display + Debug + 'static {}
+
+#[repr(transparent)]
+pub struct DisplayError<M>(pub M);
+
+impl<M> Debug for DisplayError<M>
