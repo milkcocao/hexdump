@@ -31,3 +31,8 @@ impl<M> StdError for MessageError<M> where M: Display + Debug + 'static {}
 pub struct DisplayError<M>(pub M);
 
 impl<M> Debug for DisplayError<M>
+where
+    M: Display,
+{
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        Display::fmt
