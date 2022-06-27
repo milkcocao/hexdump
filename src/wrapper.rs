@@ -35,4 +35,12 @@ where
     M: Display,
 {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        Display::fmt
+        Display::fmt(&self.0, f)
+    }
+}
+
+impl<M> Display for DisplayError<M>
+where
+    M: Display,
+{
+    fn fmt(
