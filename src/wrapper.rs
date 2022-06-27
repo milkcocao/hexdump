@@ -20,4 +20,9 @@ impl<M> Display for MessageError<M>
 where
     M: Display + Debug,
 {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        Display::fmt(&self.0, f)
+    }
+}
+
+impl<M> StdError for MessageError<M> where M:
