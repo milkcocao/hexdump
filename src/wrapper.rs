@@ -48,4 +48,7 @@ where
     }
 }
 
-impl<M> Std
+impl<M> StdError for DisplayError<M> where M: Display + 'static {}
+
+#[cfg(feature = "std")]
+#[repr(transp
