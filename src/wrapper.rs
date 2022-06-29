@@ -51,4 +51,8 @@ where
 impl<M> StdError for DisplayError<M> where M: Display + 'static {}
 
 #[cfg(feature = "std")]
-#[repr(transp
+#[repr(transparent)]
+pub struct BoxedError(pub Box<dyn StdError + Send + Sync>);
+
+#[cfg(feature = "std")]
+impl Debug fo
