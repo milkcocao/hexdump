@@ -55,4 +55,6 @@ impl<M> StdError for DisplayError<M> where M: Display + 'static {}
 pub struct BoxedError(pub Box<dyn StdError + Send + Sync>);
 
 #[cfg(feature = "std")]
-impl Debug fo
+impl Debug for BoxedError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+     
