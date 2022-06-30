@@ -63,4 +63,8 @@ impl Debug for BoxedError {
 
 #[cfg(feature = "std")]
 impl Display for BoxedError {
-    fn f
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        Display::fmt(&self.0, f)
+    }
+}
+
