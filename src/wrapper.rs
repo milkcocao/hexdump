@@ -57,4 +57,10 @@ pub struct BoxedError(pub Box<dyn StdError + Send + Sync>);
 #[cfg(feature = "std")]
 impl Debug for BoxedError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-     
+        Debug::fmt(&self.0, f)
+    }
+}
+
+#[cfg(feature = "std")]
+impl Display for BoxedError {
+    fn f
