@@ -70,4 +70,9 @@ impl Display for BoxedError {
 
 #[cfg(feature = "std")]
 impl StdError for BoxedError {
-    fn source(&self) -> Option<&(dyn StdErro
+    fn source(&self) -> Option<&(dyn StdError + 'static)> {
+        self.0.source()
+    }
+
+    #[cfg(backtrace)]
+    fn provide<'a>(&'a self
