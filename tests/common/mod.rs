@@ -10,4 +10,5 @@ pub fn bail_fmt() -> Result<()> {
 }
 
 pub fn bail_error() -> Result<()> {
-    bail!(io::Error::n
+    bail!(io::Error::new(io::ErrorKind::Other, "oh no!"));
+}
