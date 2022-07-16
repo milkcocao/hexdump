@@ -13,4 +13,9 @@ pub struct Flag {
 impl Flag {
     pub fn new() -> Self {
         Flag {
-  
+            atomic: Arc::new(AtomicBool::new(false)),
+        }
+    }
+
+    pub fn get(&self) -> bool {
+     
