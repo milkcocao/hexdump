@@ -2,4 +2,9 @@
 
 use std::error::Error as StdError;
 use std::fmt::{self, Display};
-u
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::Arc;
+
+#[derive(Debug)]
+pub struct Flag {
+    atomic: A
