@@ -32,4 +32,12 @@ impl DetectDrop {
         DetectDrop {
             has_dropped: Flag {
                 atomic: Arc::clone(&has_dropped.atomic),
-    
+            },
+        }
+    }
+}
+
+impl StdError for DetectDrop {}
+
+impl Display for DetectDrop {
+    fn fm
