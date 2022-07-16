@@ -40,4 +40,9 @@ impl DetectDrop {
 impl StdError for DetectDrop {}
 
 impl Display for DetectDrop {
-    fn fm
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "oh no!")
+    }
+}
+
+impl Drop for DetectDro
