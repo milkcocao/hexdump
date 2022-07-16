@@ -7,4 +7,10 @@ use std::sync::Arc;
 
 #[derive(Debug)]
 pub struct Flag {
-    atomic: A
+    atomic: Arc<AtomicBool>,
+}
+
+impl Flag {
+    pub fn new() -> Self {
+        Flag {
+  
