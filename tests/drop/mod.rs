@@ -29,4 +29,7 @@ pub struct DetectDrop {
 
 impl DetectDrop {
     pub fn new(has_dropped: &Flag) -> Self {
-        Detec
+        DetectDrop {
+            has_dropped: Flag {
+                atomic: Arc::clone(&has_dropped.atomic),
+    
