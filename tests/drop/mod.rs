@@ -18,4 +18,9 @@ impl Flag {
     }
 
     pub fn get(&self) -> bool {
-     
+        self.atomic.load(Ordering::Relaxed)
+    }
+}
+
+#[derive(Debug)]
+pub struct Detect
