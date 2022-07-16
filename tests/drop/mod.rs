@@ -23,4 +23,10 @@ impl Flag {
 }
 
 #[derive(Debug)]
-pub struct Detect
+pub struct DetectDrop {
+    has_dropped: Flag,
+}
+
+impl DetectDrop {
+    pub fn new(has_dropped: &Flag) -> Self {
+        Detec
