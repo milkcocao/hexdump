@@ -48,4 +48,6 @@ impl Display for DetectDrop {
 impl Drop for DetectDrop {
     fn drop(&mut self) {
         let already_dropped = self.has_dropped.atomic.swap(true, Ordering::Relaxed);
- 
+        assert!(!already_dropped);
+    }
+}
