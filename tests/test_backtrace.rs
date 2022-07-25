@@ -5,4 +5,9 @@
 #[test]
 fn test_backtrace() {}
 
-#[rus
+#[rustversion::nightly]
+#[test]
+fn test_backtrace() {
+    use anyhow::anyhow;
+
+    let error = anyhow!("oh no!"
