@@ -10,4 +10,6 @@ fn test_backtrace() {}
 fn test_backtrace() {
     use anyhow::anyhow;
 
-    let error = anyhow!("oh no!"
+    let error = anyhow!("oh no!");
+    let _ = error.backtrace();
+}
