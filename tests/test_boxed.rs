@@ -4,4 +4,10 @@
 )]
 
 use anyhow::anyhow;
-use std::error::Error as StdErr
+use std::error::Error as StdError;
+use std::io;
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+#[error("outer")]
+struct
