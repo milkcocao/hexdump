@@ -10,4 +10,10 @@ use thiserror::Error;
 
 #[derive(Error, Debug)]
 #[error("outer")]
-struct
+struct MyError {
+    source: io::Error,
+}
+
+#[test]
+fn test_boxed_str() {
+    let error = Box::<dyn StdEr
