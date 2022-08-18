@@ -18,4 +18,8 @@ struct MyError {
 fn test_boxed_str() {
     let error = Box::<dyn StdError + Send + Sync>::from("oh no!");
     let error = anyhow!(error);
-    assert_eq!("oh no
+    assert_eq!("oh no!", error.to_string());
+    assert_eq!(
+        "oh no!",
+        error
+            .downcast_
