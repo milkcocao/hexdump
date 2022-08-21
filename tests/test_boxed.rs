@@ -22,4 +22,7 @@ fn test_boxed_str() {
     assert_eq!(
         "oh no!",
         error
-            .downcast_
+            .downcast_ref::<Box<dyn StdError + Send + Sync>>()
+            .unwrap()
+            .to_string()
+    );
