@@ -26,3 +26,9 @@ fn test_boxed_str() {
             .unwrap()
             .to_string()
     );
+}
+
+#[test]
+fn test_boxed_thiserror() {
+    let error = MyError {
+        source: io::Error::new(io::ErrorKind::Other, "oh no!")
