@@ -39,4 +39,6 @@ fn test_boxed_thiserror() {
 
 #[test]
 fn test_boxed_anyhow() {
-    let error = anyhow!("oh no!").context("it failed")
+    let error = anyhow!("oh no!").context("it failed");
+    let error = anyhow!(error);
+    assert_eq!("oh no!", error.source().unwrap().to_string())
