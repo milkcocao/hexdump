@@ -34,4 +34,9 @@ fn test_boxed_thiserror() {
         source: io::Error::new(io::ErrorKind::Other, "oh no!"),
     };
     let error = anyhow!(error);
-    assert_eq!("oh no!", error.source().unwrap().t
+    assert_eq!("oh no!", error.source().unwrap().to_string());
+}
+
+#[test]
+fn test_boxed_anyhow() {
+    let error = anyhow!("oh no!").context("it failed")
