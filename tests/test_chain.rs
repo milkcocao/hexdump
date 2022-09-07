@@ -9,4 +9,6 @@ fn test_iter() {
     let e = error();
     let mut chain = e.chain();
     assert_eq!("3", chain.next().unwrap().to_string());
-    assert_eq!("2", chain.next().unwrap().to_st
+    assert_eq!("2", chain.next().unwrap().to_string());
+    assert_eq!("1", chain.next().unwrap().to_string());
+    assert_eq!("0", chain
