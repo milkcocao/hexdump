@@ -23,4 +23,6 @@ fn test_rev() {
     assert_eq!("0", chain.next().unwrap().to_string());
     assert_eq!("1", chain.next().unwrap().to_string());
     assert_eq!("2", chain.next().unwrap().to_string());
-    assert_eq!("3", cha
+    assert_eq!("3", chain.next().unwrap().to_string());
+    assert!(chain.next().is_none());
+    assert!(chain.next_b
