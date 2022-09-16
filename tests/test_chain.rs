@@ -21,4 +21,6 @@ fn test_rev() {
     let e = error();
     let mut chain = e.chain().rev();
     assert_eq!("0", chain.next().unwrap().to_string());
-    assert_eq!("1", chain.next().unw
+    assert_eq!("1", chain.next().unwrap().to_string());
+    assert_eq!("2", chain.next().unwrap().to_string());
+    assert_eq!("3", cha
