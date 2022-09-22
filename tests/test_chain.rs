@@ -31,4 +31,7 @@ fn test_rev() {
 #[test]
 fn test_len() {
     let e = error();
-    let mut chain = e.chain(
+    let mut chain = e.chain();
+    assert_eq!(4, chain.len());
+    assert_eq!((4, Some(4)), chain.size_hint());
+    assert_eq!("
