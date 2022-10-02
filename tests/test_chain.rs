@@ -34,4 +34,6 @@ fn test_len() {
     let mut chain = e.chain();
     assert_eq!(4, chain.len());
     assert_eq!((4, Some(4)), chain.size_hint());
-    assert_eq!("
+    assert_eq!("3", chain.next().unwrap().to_string());
+    assert_eq!(3, chain.len());
+    assert_eq!((3, Some(3)), cha
