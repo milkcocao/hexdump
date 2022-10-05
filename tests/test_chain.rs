@@ -56,4 +56,7 @@ fn test_default() {
 }
 
 #[test]
-#[allow(clippy
+#[allow(clippy::redundant_clone)]
+fn test_clone() {
+    let e = error();
+    let mut chain = e.chain().clo
