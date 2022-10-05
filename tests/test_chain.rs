@@ -42,4 +42,7 @@ fn test_len() {
     assert_eq!((2, Some(2)), chain.size_hint());
     assert_eq!("2", chain.next().unwrap().to_string());
     assert_eq!(1, chain.len());
-    assert_eq!((1, Some(1)), chain.size_hint()
+    assert_eq!((1, Some(1)), chain.size_hint());
+    assert_eq!("1", chain.next_back().unwrap().to_string());
+    assert_eq!(0, chain.len());
+   
