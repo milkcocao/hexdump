@@ -50,4 +50,10 @@ fn test_len() {
 }
 
 #[test]
-fn test_de
+fn test_default() {
+    let mut c = Chain::default();
+    assert!(c.next().is_none());
+}
+
+#[test]
+#[allow(clippy
