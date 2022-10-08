@@ -84,3 +84,90 @@ fn make_chain() -> (Error, Dropped) {
         .unwrap_err();
 
     // impl Context for Result<T, Error>
+    let high = Err::<(), Error>(mid)
+        .context(HighLevel {
+            message: "failed to start server",
+            drop: DetectDrop::new(&dropped.high),
+        })
+        .unwrap_err();
+
+    (high, dropped)
+}
+
+#[test]
+fn test_downcast_ref() {
+    let (err, dropped) = make_chain();
+
+    assert!(!err.is::<String>());
+    assert!(err.downcast_ref::<String>().is_none());
+
+    assert!(err.is::<HighLevel>());
+    let high = err.downcast_ref::<HighLevel>().unwrap();
+    assert_eq!(high.to_string(), "failed to start server");
+
+    assert!(err.is::<MidLevel>());
+    let mid = err.downcast_ref::<MidLevel>().unwrap();
+    assert_eq!(mid.to_string(), "failed to load config");
+
+    assert!(err.is::<LowLevel>());
+    let low = err.downcast_ref::<LowLevel>().unwrap();
+    assert_eq!(low.to_string(), "no such file or directory");
+
+    assert!(dropped.none());
+    drop(err);
+    assert!(dropped.all());
+}
+
+#[test]
+fn test_downcast_high() {
+    let (err, dropped) = make_chain();
+
+    let err = err.downcast::<HighLevel>().unwrap();
+    assert!(!dropped.high.get());
+    assert!(dropped.low.get() && dropped.mid.get());
+
+    drop(err);
+    assert!(dropped.all());
+}
+
+#[test]
+fn test_downcast_mid() {
+    let (err, dropped) = make_chain();
+
+    let err = err.downcast::<MidLevel>().unwrap();
+    assert!(!dropped.mid.get());
+    assert!(dropped.low.get() && dropped.high.get());
+
+    drop(err);
+    assert!(dropped.all());
+}
+
+#[test]
+fn test_downcast_low() {
+    let (err, dropped) = make_chain();
+
+    let err = err.downcast::<LowLevel>().unwrap();
+    assert!(!dropped.low.get());
+    assert!(dropped.mid.get() && dropped.high.get());
+
+    drop(err);
+    assert!(dropped.all());
+}
+
+#[test]
+fn test_unsuccessful_downcast() {
+    let (err, dropped) = make_chain();
+
+    let err = err.downcast::<String>().unwrap_err();
+    assert!(dropped.none());
+
+    drop(err);
+    assert!(dropped.all());
+}
+
+#[test]
+fn test_root_cause() {
+    let (err, _) = make_chain();
+
+    assert_eq!(err.root_cause().to_string(), "no such file or directory");
+}
