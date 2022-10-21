@@ -3,4 +3,9 @@
 mod drop;
 
 use self::drop::{DetectDrop, Flag};
-use any
+use anyhow::{Error, Result};
+use std::error::Error as StdError;
+
+#[test]
+fn test_convert() {
+    let has_dr
