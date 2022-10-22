@@ -8,4 +8,6 @@ use std::error::Error as StdError;
 
 #[test]
 fn test_convert() {
-    let has_dr
+    let has_dropped = Flag::new();
+    let error = Error::new(DetectDrop::new(&has_dropped));
+    let box_dyn 
