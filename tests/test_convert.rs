@@ -13,4 +13,9 @@ fn test_convert() {
     let box_dyn = Box::<dyn StdError>::from(error);
     assert_eq!("oh no!", box_dyn.to_string());
     drop(box_dyn);
-    as
+    assert!(has_dropped.get());
+}
+
+#[test]
+fn test_convert_send() {
+    let has_dropped = Flag:
