@@ -18,4 +18,6 @@ fn test_convert() {
 
 #[test]
 fn test_convert_send() {
-    let has_dropped = Flag:
+    let has_dropped = Flag::new();
+    let error = Error::new(DetectDrop::new(&has_dropped));
+    let box_dyn = 
