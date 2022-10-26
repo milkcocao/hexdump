@@ -37,4 +37,10 @@ fn test_convert_send_sync() {
 }
 
 #[test]
-fn test_question_mark() -> Resu
+fn test_question_mark() -> Result<(), Box<dyn StdError>> {
+    fn f() -> Result<()> {
+        Ok(())
+    }
+    f()?;
+    Ok(())
+}
