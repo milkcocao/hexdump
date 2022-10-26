@@ -29,4 +29,5 @@ fn test_convert_send() {
 #[test]
 fn test_convert_send_sync() {
     let has_dropped = Flag::new();
-    let 
+    let error = Error::new(DetectDrop::new(&has_dropped));
+    let box_dyn = Box::<dyn
