@@ -86,3 +86,117 @@ fn test_recursion() {
     // Must not blow the default #[recursion_limit], which is 128.
     #[rustfmt::skip]
     let test = || Ok(ensure!(
+        false | false | false | false | false | false | false | false | false |
+        false | false | false | false | false | false | false | false | false |
+        false | false | false | false | false | false | false | false | false |
+        false | false | false | false | false | false | false | false | false |
+        false | false | false | false | false | false | false | false | false |
+        false | false | false | false | false | false | false | false | false |
+        false | false | false | false | false | false | false | false | false
+    ));
+
+    test().unwrap_err();
+}
+
+#[test]
+fn test_low_precedence_control_flow() {
+    #[allow(unreachable_code)]
+    let test = || {
+        let val = loop {
+            // Break has lower precedence than the comparison operators so the
+            // expression here is `S + (break (1 == 1))`. It would be bad if the
+            // ensure macro partitioned this input into `(S + break 1) == (1)`
+            // because that means a different thing than what was written.
+            ensure!(S + break 1 == 1);
+        };
+        Ok(val)
+    };
+
+    assert!(test().unwrap());
+}
+
+#[test]
+fn test_low_precedence_binary_operator() {
+    // Must not partition as `false == (true && false)`.
+    let test = || Ok(ensure!(false == true && false));
+    assert_err(test, "Condition failed: `false == true && false`");
+
+    // But outside the root level, it is fine.
+    let test = || Ok(ensure!(while false == true && false {} < ()));
+    assert_err(
+        test,
+        "Condition failed: `while false == true && false {} < ()` (() vs ())",
+    );
+}
+
+#[test]
+fn test_closure() {
+    // Must not partition as `(S + move) || (1 == 1)` by treating move as an
+    // identifier, nor as `(S + move || 1) == (1)` by misinterpreting the
+    // closure precedence.
+    let test = || Ok(ensure!(S + move || 1 == 1));
+    assert_err(test, "Condition failed: `S + (move || 1 == 1)`");
+
+    let test = || Ok(ensure!(S + || 1 == 1));
+    assert_err(test, "Condition failed: `S + (|| 1 == 1)`");
+
+    // Must not partition as `S + ((move | ()) | 1) == 1` by treating those
+    // pipes as bitwise-or.
+    let test = || Ok(ensure!(S + move |()| 1 == 1));
+    assert_err(test, "Condition failed: `S + (move |()| 1 == 1)`");
+
+    let test = || Ok(ensure!(S + |()| 1 == 1));
+    assert_err(test, "Condition failed: `S + (|()| 1 == 1)`");
+}
+
+#[test]
+fn test_unary() {
+    let mut x = &1;
+    let test = || Ok(ensure!(*x == 2));
+    assert_err(test, "Condition failed: `*x == 2` (1 vs 2)");
+
+    let test = || Ok(ensure!(!x == 1));
+    assert_err(test, "Condition failed: `!x == 1` (-2 vs 1)");
+
+    let test = || Ok(ensure!(-x == 1));
+    assert_err(test, "Condition failed: `-x == 1` (-1 vs 1)");
+
+    let test = || Ok(ensure!(&x == &&2));
+    assert_err(test, "Condition failed: `&x == &&2` (1 vs 2)");
+
+    let test = || Ok(ensure!(&mut x == *&&mut &2));
+    assert_err(test, "Condition failed: `&mut x == *&&mut &2` (1 vs 2)");
+}
+
+#[test]
+fn test_if() {
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(if false {}.t(1) == 2));
+    assert_err(test, "Condition failed: `if false {}.t(1) == 2` (1 vs 2)");
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(if false {} else {}.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `if false {} else {}.t(1) == 2` (1 vs 2)",
+    );
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(if false {} else if false {}.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `if false {} else if false {}.t(1) == 2` (1 vs 2)",
+    );
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(if let 1 = 2 {}.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `if let 1 = 2 {}.t(1) == 2` (1 vs 2)",
+    );
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(if let 1 | 2 = 2 {}.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `if let 1 | 2 = 2 {}.t(1) == 2` (1 vs 2)",
