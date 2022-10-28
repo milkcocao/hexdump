@@ -320,3 +320,101 @@ fn test_path() {
         test,
         "Condition failed: `Error::msg::<&str>.t(1) == 2` (1 vs 2)",
     );
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(Error::msg::<&str,>.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `Error::msg::<&str>.t(1) == 2` (1 vs 2)",
+    );
+
+    let test = || Ok(ensure!(Error::msg::<<str as ToOwned>::Owned>.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `Error::msg::<<str as ToOwned>::Owned>.t(1) == 2` (1 vs 2)",
+    );
+
+    let test = || Ok(ensure!(Chain::<'static>::new.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `Chain::<'static>::new.t(1) == 2` (1 vs 2)",
+    );
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(Chain::<'static,>::new.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `Chain::<'static>::new.t(1) == 2` (1 vs 2)",
+    );
+
+    fn f<const I: isize>() {}
+    let test = || Ok(ensure!(f::<1>() != ()));
+    assert_err(test, "Condition failed: `f::<1>() != ()` (() vs ())");
+    let test = || Ok(ensure!(f::<-1>() != ()));
+    assert_err(test, "Condition failed: `f::<-1>() != ()` (() vs ())");
+
+    fn g<T, const I: isize>() {}
+    let test = || Ok(ensure!(g::<u8, 1>() != ()));
+    assert_err(test, "Condition failed: `g::<u8, 1>() != ()` (() vs ())");
+    let test = || Ok(ensure!(g::<u8, -1>() != ()));
+    assert_err(test, "Condition failed: `g::<u8, -1>() != ()` (() vs ())");
+
+    #[derive(PartialOrd, PartialEq, Debug)]
+    enum E<'a, T> {
+        #[allow(dead_code)]
+        T(&'a T),
+        U,
+    }
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(E::U::<>>E::U::<u8>));
+    assert_err(test, "Condition failed: `E::U::<> > E::U::<u8>` (U vs U)");
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(E::U::<u8>>E::U));
+    assert_err(test, "Condition failed: `E::U::<u8> > E::U` (U vs U)");
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(E::U::<u8,>>E::U));
+    assert_err(test, "Condition failed: `E::U::<u8> > E::U` (U vs U)");
+
+    let test = || Ok(ensure!(Generic::<dyn Debug + Sync> != Generic));
+    assert_err(
+        test,
+        "Condition failed: `Generic::<dyn Debug + Sync> != Generic` (Generic vs Generic)",
+    );
+
+    let test = || Ok(ensure!(Generic::<dyn Fn() + Sync> != Generic));
+    assert_err(
+        test,
+        "Condition failed: `Generic::<dyn Fn() + Sync> != Generic` (Generic vs Generic)",
+    );
+
+    #[rustfmt::skip]
+    let test = || {
+        Ok(ensure!(
+            Generic::<dyn Fn::() + ::std::marker::Sync> != Generic
+        ))
+    };
+    assert_err(
+        test,
+        "Condition failed: `Generic::<dyn Fn() + ::std::marker::Sync> != Generic` (Generic vs Generic)",
+    );
+}
+
+#[test]
+fn test_macro() {
+    let test = || Ok(ensure!(anyhow!("...").to_string().len() <= 1));
+    assert_err(
+        test,
+        "Condition failed: `anyhow!(\"...\").to_string().len() <= 1` (3 vs 1)",
+    );
+
+    let test = || Ok(ensure!(vec![1].len() < 1));
+    assert_err(test, "Condition failed: `vec![1].len() < 1` (1 vs 1)");
+
+    let test = || Ok(ensure!(stringify! {} != ""));
+    assert_err(
+        test,
+        "Condition failed: `stringify! {} != \"\"` (\"\" vs \"\")",
+    );
