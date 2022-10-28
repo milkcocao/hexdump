@@ -200,3 +200,123 @@ fn test_if() {
     assert_err(
         test,
         "Condition failed: `if let 1 | 2 = 2 {}.t(1) == 2` (1 vs 2)",
+    );
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(if let | 1 | 2 = 2 {}.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `if let 1 | 2 = 2 {}.t(1) == 2` (1 vs 2)",
+    );
+}
+
+#[test]
+fn test_loop() {
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(1 + loop { break 1 } == 1));
+    assert_err(
+        test,
+        "Condition failed: `1 + loop { break 1 } == 1` (2 vs 1)",
+    );
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(1 + 'a: loop { break 'a 1 } == 1));
+    assert_err(
+        test,
+        "Condition failed: `1 + 'a: loop { break 'a 1 } == 1` (2 vs 1)",
+    );
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(while false {}.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `while false {}.t(1) == 2` (1 vs 2)",
+    );
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(while let None = Some(1) {}.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `while let None = Some(1) {}.t(1) == 2` (1 vs 2)",
+    );
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(for _x in iter::once(0) {}.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `for _x in iter::once(0) {}.t(1) == 2` (1 vs 2)",
+    );
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(for | _x in iter::once(0) {}.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `for _x in iter::once(0) {}.t(1) == 2` (1 vs 2)",
+    );
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(for true | false in iter::empty() {}.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `for true | false in iter::empty() {}.t(1) == 2` (1 vs 2)",
+    );
+}
+
+#[test]
+fn test_match() {
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(match 1 == 1 { true => 1, false => 0 } == 2));
+    assert_err(
+        test,
+        "Condition failed: `match 1 == 1 { true => 1, false => 0, } == 2` (1 vs 2)",
+    );
+}
+
+#[test]
+fn test_atom() {
+    let test = || Ok(ensure!([false, false].len() > 3));
+    assert_err(
+        test,
+        "Condition failed: `[false, false].len() > 3` (2 vs 3)",
+    );
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!({ let x = 1; x } >= 3));
+    assert_err(test, "Condition failed: `{ let x = 1; x } >= 3` (1 vs 3)");
+
+    let test = || Ok(ensure!(S + async { 1 } == true));
+    assert_err(
+        test,
+        "Condition failed: `S + async { 1 } == true` (false vs true)",
+    );
+
+    let test = || Ok(ensure!(S + async move { 1 } == true));
+    assert_err(
+        test,
+        "Condition failed: `S + async move { 1 } == true` (false vs true)",
+    );
+
+    let x = &1;
+    let test = || Ok(ensure!(S + unsafe { ptr::read(x) } == true));
+    assert_err(
+        test,
+        "Condition failed: `S + unsafe { ptr::read(x) } == true` (false vs true)",
+    );
+}
+
+#[test]
+fn test_path() {
+    let test = || Ok(ensure!(crate::S.t(1) == 2));
+    assert_err(test, "Condition failed: `crate::S.t(1) == 2` (1 vs 2)");
+
+    let test = || Ok(ensure!(::anyhow::Error::root_cause.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `::anyhow::Error::root_cause.t(1) == 2` (1 vs 2)",
+    );
+
+    let test = || Ok(ensure!(Error::msg::<&str>.t(1) == 2));
+    assert_err(
+        test,
+        "Condition failed: `Error::msg::<&str>.t(1) == 2` (1 vs 2)",
+    );
