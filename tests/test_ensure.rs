@@ -418,3 +418,93 @@ fn test_macro() {
         test,
         "Condition failed: `stringify! {} != \"\"` (\"\" vs \"\")",
     );
+}
+
+#[test]
+fn test_trailer() {
+    let test = || Ok(ensure!((|| 1)() == 2));
+    assert_err(test, "Condition failed: `(|| 1)() == 2` (1 vs 2)");
+
+    let test = || Ok(ensure!(b"hmm"[1] == b'c'));
+    assert_err(test, "Condition failed: `b\"hmm\"[1] == b'c'` (109 vs 99)");
+
+    let test = || Ok(ensure!(PhantomData::<u8> {} != PhantomData));
+    assert_err(
+        test,
+        "Condition failed: `PhantomData::<u8> {} != PhantomData` (PhantomData<u8> vs PhantomData<u8>)",
+    );
+
+    let result = Ok::<_, Error>(1);
+    let test = || Ok(ensure!(result? == 2));
+    assert_err(test, "Condition failed: `result? == 2` (1 vs 2)");
+
+    let test = || Ok(ensure!((2, 3).1 == 2));
+    assert_err(test, "Condition failed: `(2, 3).1 == 2` (3 vs 2)");
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!((2, (3, 4)). 1.1 == 2));
+    assert_err(test, "Condition failed: `(2, (3, 4)).1.1 == 2` (4 vs 2)");
+
+    let err = anyhow!("");
+    let test = || Ok(ensure!(err.is::<&str>() == false));
+    assert_err(
+        test,
+        "Condition failed: `err.is::<&str>() == false` (true vs false)",
+    );
+
+    let test = || Ok(ensure!(err.is::<<str as ToOwned>::Owned>() == true));
+    assert_err(
+        test,
+        "Condition failed: `err.is::<<str as ToOwned>::Owned>() == true` (false vs true)",
+    );
+}
+
+#[test]
+fn test_whitespace() {
+    #[derive(Debug)]
+    pub struct Point {
+        pub x: i32,
+        pub y: i32,
+    }
+
+    let point = Point { x: 0, y: 0 };
+    let test = || Ok(ensure!("" == format!("{:#?}", point)));
+    assert_err(
+        test,
+        "Condition failed: `\"\" == format!(\"{:#?}\", point)`",
+    );
+}
+
+#[test]
+fn test_too_long() {
+    let test = || Ok(ensure!("" == "x".repeat(10)));
+    assert_err(
+        test,
+        "Condition failed: `\"\" == \"x\".repeat(10)` (\"\" vs \"xxxxxxxxxx\")",
+    );
+
+    let test = || Ok(ensure!("" == "x".repeat(80)));
+    assert_err(test, "Condition failed: `\"\" == \"x\".repeat(80)`");
+}
+
+#[test]
+fn test_as() {
+    let test = || Ok(ensure!('\0' as u8 > 1));
+    assert_err(test, "Condition failed: `'\\0' as u8 > 1` (0 vs 1)");
+
+    let test = || Ok(ensure!('\0' as ::std::primitive::u8 > 1));
+    assert_err(
+        test,
+        "Condition failed: `'\\0' as ::std::primitive::u8 > 1` (0 vs 1)",
+    );
+
+    let test = || Ok(ensure!(&[0] as &[i32] == [1]));
+    assert_err(
+        test,
+        "Condition failed: `&[0] as &[i32] == [1]` ([0] vs [1])",
+    );
+
+    let test = || Ok(ensure!(0 as *const () as *mut _ == 1 as *mut ()));
+    assert_err(
+        test,
+        "Condition failed: `0 as *const () as *mut _ == 1 as *mut ()` (0x0 vs 0x1)",
