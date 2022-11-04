@@ -508,3 +508,118 @@ fn test_as() {
     assert_err(
         test,
         "Condition failed: `0 as *const () as *mut _ == 1 as *mut ()` (0x0 vs 0x1)",
+    );
+
+    let s = "";
+    let test = || Ok(ensure!(s as &str != s));
+    assert_err(test, "Condition failed: `s as &str != s` (\"\" vs \"\")");
+
+    let test = || Ok(ensure!(&s as &&str != &s));
+    assert_err(test, "Condition failed: `&s as &&str != &s` (\"\" vs \"\")");
+
+    let test = || Ok(ensure!(s as &'static str != s));
+    assert_err(
+        test,
+        "Condition failed: `s as &'static str != s` (\"\" vs \"\")",
+    );
+
+    let test = || Ok(ensure!(&s as &&'static str != &s));
+    assert_err(
+        test,
+        "Condition failed: `&s as &&'static str != &s` (\"\" vs \"\")",
+    );
+
+    let m: &mut str = Default::default();
+    let test = || Ok(ensure!(m as &mut str != s));
+    assert_err(
+        test,
+        "Condition failed: `m as &mut str != s` (\"\" vs \"\")",
+    );
+
+    let test = || Ok(ensure!(&m as &&mut str != &s));
+    assert_err(
+        test,
+        "Condition failed: `&m as &&mut str != &s` (\"\" vs \"\")",
+    );
+
+    let test = || Ok(ensure!(&m as &&'static mut str != &s));
+    assert_err(
+        test,
+        "Condition failed: `&m as &&'static mut str != &s` (\"\" vs \"\")",
+    );
+
+    let f = || {};
+    let test = || Ok(ensure!(f as fn() as usize * 0 != 0));
+    assert_err(
+        test,
+        "Condition failed: `f as fn() as usize * 0 != 0` (0 vs 0)",
+    );
+
+    let test = || Ok(ensure!(f as fn() -> () as usize * 0 != 0));
+    assert_err(
+        test,
+        "Condition failed: `f as fn() -> () as usize * 0 != 0` (0 vs 0)",
+    );
+
+    let test = || Ok(ensure!(f as for<'a> fn() as usize * 0 != 0));
+    assert_err(
+        test,
+        "Condition failed: `f as for<'a> fn() as usize * 0 != 0` (0 vs 0)",
+    );
+
+    let test = || Ok(ensure!(f as unsafe fn() as usize * 0 != 0));
+    assert_err(
+        test,
+        "Condition failed: `f as unsafe fn() as usize * 0 != 0` (0 vs 0)",
+    );
+
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(f as extern "Rust" fn() as usize * 0 != 0));
+    assert_err(
+        test,
+        "Condition failed: `f as extern \"Rust\" fn() as usize * 0 != 0` (0 vs 0)",
+    );
+
+    extern "C" fn extern_fn() {}
+    #[rustfmt::skip]
+    let test = || Ok(ensure!(extern_fn as extern fn() as usize * 0 != 0));
+    assert_err(
+        test,
+        "Condition failed: `extern_fn as extern fn() as usize * 0 != 0` (0 vs 0)",
+    );
+
+    let f = || -> ! { panic!() };
+    let test = || Ok(ensure!(f as fn() -> ! as usize * 0 != 0));
+    assert_err(
+        test,
+        "Condition failed: `f as fn() -> ! as usize * 0 != 0` (0 vs 0)",
+    );
+
+    trait EqDebug<T>: PartialEq<T> + Debug {
+        type Assoc;
+    }
+
+    impl<S, T> EqDebug<T> for S
+    where
+        S: PartialEq<T> + Debug,
+    {
+        type Assoc = bool;
+    }
+
+    let test = || Ok(ensure!(&0 as &dyn EqDebug<i32, Assoc = bool> != &0));
+    assert_err(
+        test,
+        "Condition failed: `&0 as &dyn EqDebug<i32, Assoc = bool> != &0` (0 vs 0)",
+    );
+
+    let test = || {
+        Ok(ensure!(
+            PhantomData as PhantomData<<i32 as ToOwned>::Owned> != PhantomData
+        ))
+    };
+    assert_err(
+        test,
+        "Condition failed: `PhantomData as PhantomData<<i32 as ToOwned>::Owned> != PhantomData` (PhantomData<i32> vs PhantomData<i32>)",
+    );
+
+    macro_rules! int {
