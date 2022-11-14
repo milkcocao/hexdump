@@ -15,4 +15,6 @@ use std::cell::Cell;
 use std::future;
 
 #[test]
-fn test_messages
+fn test_messages() {
+    assert_eq!("oh no!", bail_literal().unwrap_err().to_string());
+    assert_eq!("oh no!", bail_fmt().u
