@@ -8,4 +8,8 @@ pub extern "C" fn anyhow1(err: anyhow::Error) {
 }
 
 #[no_mangle]
-pub extern "C" fn 
+pub extern "C" fn anyhow2(err: &mut Option<anyhow::Error>) {
+    *err = Some(anyhow!("ffi error"));
+}
+
+#[no_mangle]
