@@ -1,0 +1,2 @@
+#![allow(
+    clippy::assert
