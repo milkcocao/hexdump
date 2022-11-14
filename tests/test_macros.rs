@@ -2,4 +2,11 @@
     clippy::assertions_on_result_states,
     clippy::eq_op,
     clippy::items_after_statements,
-    clippy::needle
+    clippy::needless_pass_by_value,
+    clippy::shadow_unrelated,
+    clippy::wildcard_imports
+)]
+
+mod common;
+
+use
