@@ -24,4 +24,10 @@ fn test_messages() {
 #[test]
 fn test_ensure() {
     let f = || {
-        ensure!(1 + 1 == 2
+        ensure!(1 + 1 == 2, "This is correct");
+        Ok(())
+    };
+    assert!(f().is_ok());
+
+    let v = 1;
+    let f 
