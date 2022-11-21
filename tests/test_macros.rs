@@ -18,4 +18,10 @@ use std::future;
 fn test_messages() {
     assert_eq!("oh no!", bail_literal().unwrap_err().to_string());
     assert_eq!("oh no!", bail_fmt().unwrap_err().to_string());
-    assert_eq!("oh no!", bail_error().unwrap_err
+    assert_eq!("oh no!", bail_error().unwrap_err().to_string());
+}
+
+#[test]
+fn test_ensure() {
+    let f = || {
+        ensure!(1 + 1 == 2
