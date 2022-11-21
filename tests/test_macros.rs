@@ -37,4 +37,10 @@ fn test_ensure() {
     assert!(f().is_ok());
 
     let f = || {
-        ensure!(v + v == 1, "This is not correct, v: 
+        ensure!(v + v == 1, "This is not correct, v: {}", v);
+        Ok(())
+    };
+    assert!(f().is_err());
+
+    let f = || {
+        ensure!(v + v =
