@@ -17,4 +17,5 @@ use std::future;
 #[test]
 fn test_messages() {
     assert_eq!("oh no!", bail_literal().unwrap_err().to_string());
-    assert_eq!("oh no!", bail_fmt().u
+    assert_eq!("oh no!", bail_fmt().unwrap_err().to_string());
+    assert_eq!("oh no!", bail_error().unwrap_err
