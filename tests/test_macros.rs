@@ -43,4 +43,9 @@ fn test_ensure() {
     assert!(f().is_err());
 
     let f = || {
-        ensure!(v + v =
+        ensure!(v + v == 1);
+        Ok(())
+    };
+    assert_eq!(
+        f().unwrap_err().to_string(),
+        
