@@ -30,4 +30,8 @@ fn test_ensure() {
     assert!(f().is_ok());
 
     let v = 1;
-    let f 
+    let f = || {
+        ensure!(v + v == 2, "This is correct, v: {}", v);
+        Ok(())
+    };
+  
