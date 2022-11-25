@@ -48,4 +48,10 @@ fn test_ensure() {
     };
     assert_eq!(
         f().unwrap_err().to_string(),
-        
+        "Condition failed: `v + v == 1` (2 vs 1)",
+    );
+}
+
+#[test]
+fn test_temporaries() {
+    fn require_send_s
