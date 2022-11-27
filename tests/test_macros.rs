@@ -57,4 +57,5 @@ fn test_temporaries() {
     fn require_send_sync(_: impl Send + Sync) {}
 
     require_send_sync(async {
-        // If anyhow hasn't dr
+        // If anyhow hasn't dropped any temporary format_args it creates by the
+        // time it's done evaluating, tho
