@@ -54,4 +54,7 @@ fn test_ensure() {
 
 #[test]
 fn test_temporaries() {
-    fn require_send_s
+    fn require_send_sync(_: impl Send + Sync) {}
+
+    require_send_sync(async {
+        // If anyhow hasn't dr
