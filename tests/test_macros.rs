@@ -59,4 +59,6 @@ fn test_temporaries() {
     require_send_sync(async {
         // If anyhow hasn't dropped any temporary format_args it creates by the
         // time it's done evaluating, those will stick around until the
-        // semicolon, which is on the other side of the await point, m
+        // semicolon, which is on the other side of the await point, making the
+        // enclosing future non-Send.
+        future::ready(anyhow!("...")).
