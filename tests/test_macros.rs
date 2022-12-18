@@ -61,4 +61,11 @@ fn test_temporaries() {
         // time it's done evaluating, those will stick around until the
         // semicolon, which is on the other side of the await point, making the
         // enclosing future non-Send.
-        future::ready(anyhow!("...")).
+        future::ready(anyhow!("...")).await;
+    });
+
+    fn message(cell: Cell<&str>) -> &str {
+        cell.get()
+    }
+
+    require_send_sync(async {
