@@ -69,3 +69,10 @@ fn test_temporaries() {
     }
 
     require_send_sync(async {
+        future::ready(anyhow!(message(Cell::new("...")))).await;
+    });
+}
+
+#[test]
+fn test_brace_escape() {
+   
