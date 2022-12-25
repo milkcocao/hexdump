@@ -76,4 +76,5 @@ fn test_temporaries() {
 #[test]
 fn test_brace_escape() {
     let err = anyhow!("unterminated ${{..}} expression");
-    assert_eq!("unterminated ${..} expression", err.to_strin
+    assert_eq!("unterminated ${..} expression", err.to_string());
+}
