@@ -8,4 +8,6 @@ enum TestError {
     Io(io::Error),
 }
 
-impl
+impl Display for TestError {
+    fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+  
