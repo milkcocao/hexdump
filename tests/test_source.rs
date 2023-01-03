@@ -10,4 +10,10 @@ enum TestError {
 
 impl Display for TestError {
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-  
+        match self {
+            TestError::Io(e) => Display::fmt(e, formatter),
+        }
+    }
+}
+
+impl StdEr
