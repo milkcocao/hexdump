@@ -16,4 +16,6 @@ impl Display for TestError {
     }
 }
 
-impl StdEr
+impl StdError for TestError {
+    fn source(&self) -> Option<&(dyn StdError + 'static)> {
+        match self
