@@ -18,4 +18,12 @@ impl Display for TestError {
 
 impl StdError for TestError {
     fn source(&self) -> Option<&(dyn StdError + 'static)> {
-        match self
+        match self {
+            TestError::Io(io) => Some(io),
+        }
+    }
+}
+
+#[test]
+fn test_literal_source() {
+    let 
