@@ -26,4 +26,9 @@ impl StdError for TestError {
 
 #[test]
 fn test_literal_source() {
-    let 
+    let error = anyhow!("oh no!");
+    assert!(error.source().is_none());
+}
+
+#[test]
+fn test_variable_so
