@@ -31,4 +31,9 @@ fn test_literal_source() {
 }
 
 #[test]
-fn test_variable_so
+fn test_variable_source() {
+    let msg = "oh no!";
+    let error = anyhow!(msg);
+    assert!(error.source().is_none());
+
+    let msg = ms
