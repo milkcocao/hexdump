@@ -42,4 +42,6 @@ fn test_variable_source() {
 }
 
 #[test]
-fn tes
+fn test_fmt_source() {
+    let error = anyhow!("{} {}!", "oh", "no");
+    assert!(error.source()
