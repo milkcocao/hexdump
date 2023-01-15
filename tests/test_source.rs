@@ -36,4 +36,10 @@ fn test_variable_source() {
     let error = anyhow!(msg);
     assert!(error.source().is_none());
 
-    let msg = ms
+    let msg = msg.to_owned();
+    let error = anyhow!(msg);
+    assert!(error.source().is_none());
+}
+
+#[test]
+fn tes
