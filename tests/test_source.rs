@@ -44,4 +44,9 @@ fn test_variable_source() {
 #[test]
 fn test_fmt_source() {
     let error = anyhow!("{} {}!", "oh", "no");
-    assert!(error.source()
+    assert!(error.source().is_none());
+}
+
+#[test]
+fn test_io_source() {
+    let io = io::Error::new(io::ErrorKind::Other,
