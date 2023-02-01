@@ -51,4 +51,9 @@ fn test_fmt_source() {
 fn test_io_source() {
     let io = io::Error::new(io::ErrorKind::Other, "oh no!");
     let error = anyhow!(TestError::Io(io));
-    assert_eq!("oh no!", error.source().u
+    assert_eq!("oh no!", error.source().unwrap().to_string());
+}
+
+#[test]
+fn test_anyhow_from_anyhow() {
+    let error = anyhow!("oh no!").context("cont
