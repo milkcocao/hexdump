@@ -56,4 +56,7 @@ fn test_io_source() {
 
 #[test]
 fn test_anyhow_from_anyhow() {
-    let error = anyhow!("oh no!").context("cont
+    let error = anyhow!("oh no!").context("context");
+    let error = anyhow!(error);
+    assert_eq!("oh no!", error.source().unwrap().to_string());
+}
