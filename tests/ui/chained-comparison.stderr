@@ -6,4 +6,5 @@ error: comparison operators cannot be chained
   |
 help: split the comparison into two
   |
-6 |     ensure!(false == fals
+6 |     ensure!(false == false && false == true);
+  |                            ++++++++
