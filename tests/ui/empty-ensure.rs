@@ -1,3 +1,6 @@
 use anyhow::{ensure, Result};
 
-fn m
+fn main() -> Result<()> {
+    ensure!();
+    Ok(())
+}
