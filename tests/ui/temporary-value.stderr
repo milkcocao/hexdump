@@ -3,4 +3,5 @@ error[E0716]: temporary value dropped while borrowed
   |
 4 |     let _ = anyhow!(&String::new());
   |             ---------^^^^^^^^^^^^^-
-  |       
+  |             |        |
+  |             |        creates a temporary value which is freed while still
