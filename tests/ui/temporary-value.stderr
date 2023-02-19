@@ -1,2 +1,6 @@
 error[E0716]: temporary value dropped while borrowed
  --> tests/ui/temporary-value.rs:4:22
+  |
+4 |     let _ = anyhow!(&String::new());
+  |             ---------^^^^^^^^^^^^^-
+  |       
