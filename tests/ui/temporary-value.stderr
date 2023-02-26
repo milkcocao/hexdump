@@ -6,4 +6,4 @@ error[E0716]: temporary value dropped while borrowed
   |             |        |
   |             |        creates a temporary value which is freed while still in use
   |             temporary value is freed at the end of this statement
-  |             argume
+  |             argument requires that borrow lasts for `'static`
