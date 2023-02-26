@@ -1,3 +1,5 @@
 use anyhow::{bail, Result};
 
-fn main() -> Resu
+fn main() -> Result<()> {
+    bail!("{} not found");
+}
